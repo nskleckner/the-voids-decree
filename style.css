@@ -1,19 +1,16 @@
 :root {
     --bg-dark: #0b0b0f;
-    --card-bg: #141419;
-    --text-main: #c0c0c0;
+    --card-bg: #15151a;
+    --text-main: #e0e0e0;
     --gold: #c8aa6e;
     --gold-dim: #8a7344;
-    --void-purple: #9b59b6;
-    --vaal-red: #a83232;
-    --border: 1px solid rgba(200, 170, 110, 0.2);
+    --void-purple: #7d3c98;
+    --border-color: #4a3b59; /* Unified mystic border */
 }
 
 body {
     background-color: var(--bg-dark);
-    background-image: 
-        radial-gradient(circle at 50% 30%, #1f1f25 0%, #0b0b0f 70%),
-        url('https://www.transparenttextures.com/patterns/stardust.png'); /* Subtle noise texture */
+    background-image: radial-gradient(circle at 50% 30%, #1f1f25 0%, #0b0b0f 70%);
     color: var(--text-main);
     font-family: 'Lato', sans-serif;
     margin: 0;
@@ -22,14 +19,6 @@ body {
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-}
-
-.overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 60%, #000 150%);
-    pointer-events: none;
-    z-index: 0;
 }
 
 .container {
@@ -46,229 +35,232 @@ h1 {
     font-family: 'Cinzel', serif;
     color: var(--gold);
     font-size: 3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     text-transform: uppercase;
     letter-spacing: 4px;
-    text-shadow: 0 0 15px rgba(200, 170, 110, 0.4);
+    /* Reduced bloom */
+    text-shadow: 0 0 5px rgba(200, 170, 110, 0.3);
+}
+
+.sub-header {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-dim);
+    font-size: 1.2rem;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .subtitle {
     color: #666;
     font-style: italic;
-    margin-bottom: 3rem;
-    font-family: 'Cinzel', serif;
+    margin-bottom: 2rem;
+    font-family: 'Lato', serif;
+    font-size: 0.9rem;
 }
 
 /* Controls */
 .controls {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    background: rgba(0,0,0,0.2);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
 }
 
-/* Toggle Switch */
-.toggle-wrapper {
-    display: inline-block;
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.toggle-checkbox {
-    display: none;
+.group-label {
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
 }
 
-.toggle-label {
+/* Radio Buttons */
+.radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+.radio-group label {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1.1rem;
-    color: var(--text-main);
+    gap: 5px;
+    color: #888;
+    transition: 0.2s;
 }
 
-.toggle-switch {
-    width: 40px;
-    height: 20px;
-    background: #333;
-    border-radius: 20px;
-    position: relative;
-    transition: 0.3s;
-    border: 1px solid #555;
+.radio-group input {
+    accent-color: var(--void-purple);
+    transform: scale(1.2);
 }
 
-.toggle-switch::after {
-    content: '';
-    position: absolute;
-    top: 2px; left: 2px;
-    width: 14px; height: 14px;
-    background: #888;
-    border-radius: 50%;
-    transition: 0.3s;
+.radio-group label:hover, .radio-group input:checked + span {
+    color: var(--gold);
 }
 
-.toggle-checkbox:checked + .toggle-label .toggle-switch {
-    background: var(--void-purple);
-    border-color: var(--void-purple);
-}
+/* Toggle Switch */
+.toggle-wrapper { display: inline-block; }
+.toggle-checkbox { display: none; }
+.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1rem; color: var(--text-main); }
+.toggle-switch { width: 40px; height: 20px; background: #333; border-radius: 20px; position: relative; transition: 0.3s; border: 1px solid #555; }
+.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; background: #888; border-radius: 50%; transition: 0.3s; }
+.toggle-checkbox:checked + .toggle-label .toggle-switch { background: var(--void-purple); border-color: var(--void-purple); }
+.toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(20px); background: #fff; }
 
-.toggle-checkbox:checked + .toggle-label .toggle-switch::after {
-    transform: translateX(20px);
-    background: #fff;
-}
-
-/* Button */
+/* Main Button */
 button {
     background: transparent;
-    border: 2px solid var(--gold);
+    border: 1px solid var(--gold);
     color: var(--gold);
-    padding: 18px 50px;
+    padding: 15px 60px;
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-top: 10px;
 }
 
 button:hover {
     background: rgba(200, 170, 110, 0.1);
-    box-shadow: 0 0 20px rgba(200, 170, 110, 0.4);
-    text-shadow: 0 0 8px var(--gold);
+    box-shadow: 0 0 15px rgba(200, 170, 110, 0.3);
+    transform: translateY(-2px);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: translateY(1px);
 }
 
-/* Results */
+/* Results Grid */
 .fate-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: scale(0.95);
+    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .fate-grid.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
 }
 
 .fate-card {
     background: var(--card-bg);
-    border: var(--border);
-    padding: 5px; /* For double border effect */
+    border: 1px solid var(--border-color); /* Synchronized borders */
+    border-radius: 4px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.3s;
 }
 
 .card-inner {
-    border: 1px solid rgba(255,255,255,0.05);
     padding: 2rem 1.5rem;
     height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .fate-card.highlight {
     border-color: var(--void-purple);
-    box-shadow: 0 0 20px rgba(155, 89, 182, 0.1);
+    box-shadow: 0 0 15px rgba(125, 60, 152, 0.15);
+}
+
+/* Links & Clickables */
+.result-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transition: transform 0.2s;
+}
+
+.result-link:hover {
+    transform: translateY(-3px);
+}
+
+.result-link:hover .fate-value {
+    color: var(--gold);
 }
 
 .fate-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #666;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .fate-value {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     font-family: 'Cinzel', serif;
+    transition: color 0.3s;
 }
 
 .fate-sub {
     font-size: 0.9rem;
     color: var(--gold-dim);
-    margin-bottom: 1rem;
 }
 
-.keystone-item {
-    font-size: 1.2rem;
-    color: #e0e0e0;
-    margin: 5px 0;
-    font-weight: bold;
+.wiki-hint {
+    font-size: 0.7rem;
+    color: #444;
+    margin-top: 10px;
+    border-bottom: 1px solid #333;
 }
 
-.keystone-item:nth-child(2) {
-    color: var(--vaal-red); /* Second keystone is "cursed" red */
-    font-size: 1rem;
-}
-
-.wiki-link {
-    font-size: 0.8rem;
-    color: #666;
-    text-decoration: none;
-    border-bottom: 1px solid #444;
-    transition: 0.2s;
-    margin-top: auto;
-}
-
-.wiki-link:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-}
-
-/* Animation Classes */
-.loading {
-    animation: flicker 1.5s infinite alternate;
-}
-
-@keyframes flicker {
-    0% { opacity: 0.8; }
-    100% { opacity: 0.3; }
-}
-
-/* Add to style.css */
-
+/* Images */
 .main-icon {
     width: 64px;
     height: 64px;
-    margin: 10px auto;
+    margin-bottom: 15px;
     display: block;
-    filter: drop-shadow(0 0 10px rgba(200, 170, 110, 0.3));
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
 }
 
 .portrait {
-    width: 100px;
-    height: auto;
-    border-radius: 50%; /* Circular portrait */
-    border: 2px solid var(--gold-dim);
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
 }
 
 .keystone-row {
     display: flex;
+    flex-direction: row; /* Horizontal for keystones */
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin: 10px 0;
     width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.keystone-row:hover {
+    background: rgba(255,255,255,0.03);
 }
 
 .keystone-icon {
-    width: 48px;
-    height: 48px;
-    border: 2px solid #333;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #333;
     border-radius: 50%;
     background: #000;
 }

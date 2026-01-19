@@ -13,21 +13,41 @@
     <div class="container">
         <header>
             <h1>The Void's Decree</h1>
-            <p class="subtitle">"The Atlas shifts. Your fate is sealed."</p>
+            <h2 class="sub-header">Path of Exile Build Randomizer</h2>
+            <p class="subtitle">Your fate is sealed.</p>
         </header>
 
         <section class="controls">
-            <div class="toggle-wrapper">
-                <input type="checkbox" id="phreciaToggle" class="toggle-checkbox">
-                <label for="phreciaToggle" class="toggle-label">
-                    <span class="toggle-text">Legacy of Phrecia Mode</span>
-                    <span class="toggle-switch"></span>
-                </label>
+            <div class="control-group">
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="phreciaToggle" class="toggle-checkbox">
+                    <label for="phreciaToggle" class="toggle-label">
+                        <span class="toggle-text">Legacy of Phrecia Mode</span>
+                        <span class="toggle-switch"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="group-label">Keystones:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="keystoneCount" value="0">
+                        <span>0</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="keystoneCount" value="1" checked>
+                        <span>1</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="keystoneCount" value="2">
+                        <span>2</span>
+                    </label>
+                </div>
             </div>
             
             <button id="rollBtn" onclick="castFate()">
-                <span class="btn-text">Consult the Oracle</span>
-                <span class="btn-glitch"></span>
+                <span class="btn-text">Roll Fate</span>
             </button>
         </section>
 
@@ -36,34 +56,45 @@
             <div class="fate-card">
                 <div class="card-inner">
                     <div class="fate-label">Ascendancy</div>
-                    <img id="img-asc" class="main-icon portrait" src="" alt="Ascendancy Art">
-                    <div class="fate-value" id="res-asc-name">?</div>
-                    <div class="fate-sub" id="res-asc-class">Class</div>
+                    <a id="link-asc" href="#" target="_blank" class="result-link">
+                        <img id="img-asc" class="main-icon portrait" src="" alt="Ascendancy Art">
+                        <div class="fate-value" id="res-asc-name">?</div>
+                        <div class="fate-sub" id="res-asc-class">Class</div>
+                        <span class="wiki-hint">Wiki &rarr;</span>
+                    </a>
                 </div>
             </div>
 
             <div class="fate-card highlight">
                 <div class="card-inner">
                     <div class="fate-label">Main Skill Gem</div>
-                    <img id="img-skill" class="main-icon" src="" alt="Skill Gem">
-                    <div class="fate-value" id="res-skill-name">?</div>
-                    <div class="fate-sub" id="res-skill-type">Gem Type</div>
-                    <a id="link-skill" href="#" target="_blank" class="wiki-link">Wiki Data &rarr;</a>
+                    <a id="link-skill" href="#" target="_blank" class="result-link">
+                        <img id="img-skill" class="main-icon" src="" alt="Skill Gem">
+                        <div class="fate-value" id="res-skill-name">?</div>
+                        <div class="fate-sub" id="res-skill-type">Gem Type</div>
+                        <span class="wiki-hint">Wiki &rarr;</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="fate-card">
+            <div class="fate-card" id="card-keystones">
                 <div class="card-inner">
                     <div class="fate-label">Keystones</div>
                     
-                    <div class="keystone-row" id="res-key1-container">
-                        <img id="img-key1" class="keystone-icon" src="" alt="Keystone">
-                        <span id="res-key1-name" class="keystone-text">?</span>
-                    </div>
+                    <div id="keystone-results">
+                        <a id="link-key1" href="#" target="_blank" class="keystone-row result-link">
+                            <img id="img-key1" class="keystone-icon" src="" alt="Keystone">
+                            <span id="res-key1-name" class="keystone-text">?</span>
+                        </a>
 
-                    <div class="keystone-row" id="res-key2-container" style="display:none">
-                        <img id="img-key2" class="keystone-icon" src="" alt="Keystone">
-                        <span id="res-key2-name" class="keystone-text">?</span>
+                        <a id="link-key2" href="#" target="_blank" class="keystone-row result-link" style="display:none">
+                            <img id="img-key2" class="keystone-icon" src="" alt="Keystone">
+                            <span id="res-key2-name" class="keystone-text">?</span>
+                        </a>
+                        
+                        <div id="no-keystones" style="display:none; color: #555; font-style: italic;">
+                            None Selected
+                        </div>
                     </div>
                 </div>
             </div>
