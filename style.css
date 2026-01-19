@@ -1,272 +1,337 @@
 :root {
-    --bg-dark: #0b0b0f;
-    --card-bg: #15151a;
-    --text-main: #e0e0e0;
+    --bg-dark: #050508;
+    --card-bg: #0f0f12;
+    --text-main: #dfcfb8; /* PoE Tooltip Beige */
     --gold: #c8aa6e;
     --gold-dim: #8a7344;
-    --void-purple: #7d3c98;
-    --border-color: #4a3b59; /* Unified mystic border */
+    --void-purple: #9b59b6;
+    --void-glow: #bd93f9;
+    --border-color: #2a2a30; 
 }
 
 body {
     background-color: var(--bg-dark);
-    background-image: radial-gradient(circle at 50% 30%, #1f1f25 0%, #0b0b0f 70%);
+    /* Layered Background: Dark Vignette on top of The Void Art */
+    background-image: 
+        radial-gradient(circle at center, rgba(5, 5, 8, 0.6) 20%, #050508 100%),
+        url('https://www.poewiki.net/wiki/Special:FilePath/The_Void_card_art.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    
     color: var(--text-main);
-    font-family: 'Lato', sans-serif;
+    font-family: 'Alegreya', serif; 
+    font-size: 18px;
     margin: 0;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+}
+
+/* Full screen overlay to darken the art further if needed */
+.void-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .container {
     position: relative;
     z-index: 1;
-    max-width: 900px;
-    width: 90%;
+    max-width: 1000px;
+    width: 95%;
     text-align: center;
     padding: 2rem 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* Typography */
 h1 {
-    font-family: 'Cinzel', serif;
-    color: var(--gold);
-    font-size: 3rem;
-    margin-bottom: 0.2rem;
+    font-family: 'Alegreya SC', serif; 
+    color: var(--text-main);
+    font-size: 4rem;
+    margin: 0;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    /* Reduced bloom */
-    text-shadow: 0 0 5px rgba(200, 170, 110, 0.3);
-}
-
-.sub-header {
-    font-family: 'Cinzel', serif;
-    color: var(--gold-dim);
-    font-size: 1.2rem;
-    margin: 0 0 1rem 0;
-    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0,0,0,0.9), 0 0 30px var(--void-purple);
     letter-spacing: 2px;
 }
 
 .subtitle {
-    color: #666;
+    color: var(--gold-dim);
     font-style: italic;
+    margin-top: 0.5rem;
     margin-bottom: 2rem;
-    font-family: 'Lato', serif;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px #000;
 }
 
-/* Controls */
-.controls {
-    margin-bottom: 3rem;
-    display: flex;
-    flex-direction: column;
+/* Config Panel (Map Device Look) */
+.config-panel {
+    background: rgba(10, 10, 12, 0.8);
+    border: 1px solid var(--gold-dim);
+    border-radius: 4px;
+    padding: 15px 30px;
+    display: inline-flex;
+    gap: 3rem;
+    justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-    background: rgba(0,0,0,0.2);
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    margin: 0 auto 3rem auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
 }
 
-.control-group {
+.config-row {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.group-label {
+.config-label {
+    font-family: 'Alegreya SC', serif;
     color: var(--gold);
-    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
 }
 
-/* Radio Buttons */
-.radio-group {
-    display: flex;
-    gap: 10px;
-}
+/* Switches & Radios */
+.radio-group { display: flex; gap: 15px; }
+.radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #888; font-family: 'Alegreya SC', serif; transition: 0.2s; }
+.radio-group input { accent-color: var(--gold); transform: scale(1.2); }
+.radio-group label:hover, .radio-group input:checked + span { color: var(--gold); text-shadow: 0 0 8px var(--gold); }
 
-.radio-group label {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #888;
-    transition: 0.2s;
-}
-
-.radio-group input {
-    accent-color: var(--void-purple);
-    transform: scale(1.2);
-}
-
-.radio-group label:hover, .radio-group input:checked + span {
-    color: var(--gold);
-}
-
-/* Toggle Switch */
-.toggle-wrapper { display: inline-block; }
+.toggle-wrapper { display: flex; align-items: center; }
 .toggle-checkbox { display: none; }
-.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1rem; color: var(--text-main); }
-.toggle-switch { width: 40px; height: 20px; background: #333; border-radius: 20px; position: relative; transition: 0.3s; border: 1px solid #555; }
-.toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; background: #888; border-radius: 50%; transition: 0.3s; }
-.toggle-checkbox:checked + .toggle-label .toggle-switch { background: var(--void-purple); border-color: var(--void-purple); }
-.toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(20px); background: #fff; }
+.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: #888; font-family: 'Alegreya SC', serif; }
+.toggle-switch { width: 36px; height: 18px; background: #111; border: 1px solid #444; position: relative; transition: 0.3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 1px; left: 1px; width: 14px; height: 14px; background: #666; transition: 0.3s; }
+.toggle-checkbox:checked + .toggle-label .toggle-switch { border-color: var(--gold); background: #222; }
+.toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(18px); background: var(--gold); }
+.toggle-checkbox:checked + .toggle-label .toggle-text { color: var(--gold); text-shadow: 0 0 8px var(--gold); }
 
-/* Main Button */
-button {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 15px 60px;
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 10px;
+/* --- THE EXCHANGE ZONE (The Card Animation) --- */
+.exchange-zone {
+    height: 350px; /* Space for the card animation */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    transition: 0.5s;
 }
 
-button:hover {
-    background: rgba(200, 170, 110, 0.1);
-    box-shadow: 0 0 15px rgba(200, 170, 110, 0.3);
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(1px);
-}
-
-/* Results Grid */
-.fate-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+.exchange-zone.collapsed {
+    height: 0;
     opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    margin-bottom: 0;
 }
 
-.fate-grid.visible {
+.deck-container {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.deck-container:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.deck-container:hover .glow-effect {
     opacity: 1;
-    transform: scale(1);
+}
+
+/* Stack effect behind the main card */
+.div-card-stack {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #111;
+    border: 1px solid #444;
+    transform: rotate(-2deg) translate(-5px, -5px);
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.div-card-stack:nth-child(2) {
+    transform: rotate(2deg) translate(5px, -3px);
+    z-index: 2;
+}
+
+/* The Main Void Card */
+.div-card-main {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10;
+    background: #000;
+    border: 2px solid #333;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.div-card-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.click-instruction {
+    font-family: 'Alegreya SC', serif;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    border: 1px solid var(--text-main);
+    padding: 5px 15px;
+    background: rgba(0,0,0,0.6);
+    letter-spacing: 2px;
+}
+
+.glow-effect {
+    position: absolute;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background: radial-gradient(circle, rgba(189, 147, 249, 0.4) 0%, transparent 70%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: void-pulse 2s infinite;
+}
+
+/* Animation Classes */
+.deck-container.dealing {
+    animation: shake-and-fade 0.6s forwards ease-in;
+}
+
+@keyframes shake-and-fade {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.1) rotate(-3deg); }
+    40% { transform: scale(1.1) rotate(3deg); }
+    60% { transform: scale(1.2) rotate(0deg); opacity: 1; filter: brightness(2); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes void-pulse {
+    0% { transform: scale(0.9); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+    100% { transform: scale(0.9); opacity: 0.3; }
+}
+
+/* --- RESULTS TABLE --- */
+.fate-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 0; /* Starts hidden via logic */
 }
 
 .fate-card {
     background: var(--card-bg);
-    border: 1px solid var(--border-color); /* Synchronized borders */
-    border-radius: 4px;
-    position: relative;
-    transition: 0.3s;
+    border: 1px solid var(--border-color);
+    width: 300px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: none; /* Hidden until dealt */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.fate-card.revealed {
+    display: block;
+    animation: card-slam 0.5s forwards;
+}
+
+.card-header {
+    background: linear-gradient(90deg, transparent, rgba(200, 170, 110, 0.1), transparent);
+    color: var(--gold);
+    font-family: 'Alegreya SC', serif;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    text-shadow: 0 0 10px rgba(200, 170, 110, 0.2);
 }
 
 .card-inner {
-    padding: 2rem 1.5rem;
-    height: 100%;
-    box-sizing: border-box;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
 
 .fate-card.highlight {
     border-color: var(--void-purple);
-    box-shadow: 0 0 15px rgba(125, 60, 152, 0.15);
+    box-shadow: 0 0 25px rgba(155, 89, 182, 0.15);
 }
 
-/* Links & Clickables */
-.result-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    transition: transform 0.2s;
+.fate-card.highlight .card-header {
+    color: var(--void-glow);
+    background: linear-gradient(90deg, transparent, rgba(155, 89, 182, 0.1), transparent);
 }
 
-.result-link:hover {
-    transform: translateY(-3px);
+/* Delays for the "Dealing" effect */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+
+@keyframes card-slam {
+    0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+    70% { opacity: 1; transform: translateY(-10px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.result-link:hover .fate-value {
-    color: var(--gold);
-}
-
-.fate-label {
-    font-size: 0.75rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
-}
-
-.fate-value {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.2rem;
-    font-family: 'Cinzel', serif;
-    transition: color 0.3s;
-}
-
-.fate-sub {
-    font-size: 0.9rem;
+/* --- Reset Button --- */
+.reset-btn {
+    margin-top: 40px;
+    background: transparent;
+    border: 1px solid var(--gold-dim);
     color: var(--gold-dim);
+    padding: 10px 30px;
+    font-family: 'Alegreya SC', serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 1;
 }
 
-.wiki-hint {
-    font-size: 0.7rem;
-    color: #444;
-    margin-top: 10px;
-    border-bottom: 1px solid #333;
+.reset-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(200, 170, 110, 0.05);
 }
 
-/* Images */
-.main-icon {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 15px;
-    display: block;
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+.reset-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.portrait {
-    border-radius: 50%;
-    border: 2px solid var(--border-color);
-}
+/* Result Content Styling */
+.fate-value { font-family: 'Alegreya SC', serif; font-size: 1.6rem; color: #fff; margin: 10px 0 5px 0; }
+.fate-sub { color: #888; font-style: italic; }
+.main-icon { width: 64px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.8)); }
+.portrait { border-radius: 50%; border: 2px solid var(--gold-dim); }
+.result-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; width: 100%; transition: transform 0.2s; }
+.result-link:hover { transform: translateY(-3px); }
+.result-link:hover .fate-value { color: var(--gold); text-shadow: 0 0 15px rgba(200, 170, 110, 0.5); }
 
-.keystone-row {
-    display: flex;
-    flex-direction: row; /* Horizontal for keystones */
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin: 10px 0;
-    width: 100%;
-    padding: 5px;
-    border-radius: 4px;
-}
-
-.keystone-row:hover {
-    background: rgba(255,255,255,0.03);
-}
-
-.keystone-icon {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #333;
-    border-radius: 50%;
-    background: #000;
-}
-
-.keystone-text {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-main);
-}
+/* Keystones */
+.keystone-row { display: flex; align-items: center; gap: 15px; margin: 10px 0; width: 100%; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid transparent; }
+.keystone-row:hover { border-color: #333; background: rgba(255,255,255,0.05); }
+.keystone-icon { width: 40px; height: 40px; }
+.keystone-text { font-family: 'Alegreya SC', serif; font-size: 1.2rem; }
