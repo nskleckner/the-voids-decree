@@ -1,0 +1,280 @@
+:root {
+    --bg-dark: #0b0b0f;
+    --card-bg: #141419;
+    --text-main: #c0c0c0;
+    --gold: #c8aa6e;
+    --gold-dim: #8a7344;
+    --void-purple: #9b59b6;
+    --vaal-red: #a83232;
+    --border: 1px solid rgba(200, 170, 110, 0.2);
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 50% 30%, #1f1f25 0%, #0b0b0f 70%),
+        url('https://www.transparenttextures.com/patterns/stardust.png'); /* Subtle noise texture */
+    color: var(--text-main);
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 60%, #000 150%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px rgba(200, 170, 110, 0.4);
+}
+
+.subtitle {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 3rem;
+    font-family: 'Cinzel', serif;
+}
+
+/* Controls */
+.controls {
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Toggle Switch */
+.toggle-wrapper {
+    display: inline-block;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.toggle-switch {
+    width: 40px;
+    height: 20px;
+    background: #333;
+    border-radius: 20px;
+    position: relative;
+    transition: 0.3s;
+    border: 1px solid #555;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: #888;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch {
+    background: var(--void-purple);
+    border-color: var(--void-purple);
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch::after {
+    transform: translateX(20px);
+    background: #fff;
+}
+
+/* Button */
+button {
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    padding: 18px 50px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+button:hover {
+    background: rgba(200, 170, 110, 0.1);
+    box-shadow: 0 0 20px rgba(200, 170, 110, 0.4);
+    text-shadow: 0 0 8px var(--gold);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Results */
+.fate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fate-grid.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fate-card {
+    background: var(--card-bg);
+    border: var(--border);
+    padding: 5px; /* For double border effect */
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card-inner {
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 2rem 1.5rem;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.fate-card.highlight {
+    border-color: var(--void-purple);
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.1);
+}
+
+.fate-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.fate-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+.fate-sub {
+    font-size: 0.9rem;
+    color: var(--gold-dim);
+    margin-bottom: 1rem;
+}
+
+.keystone-item {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.keystone-item:nth-child(2) {
+    color: var(--vaal-red); /* Second keystone is "cursed" red */
+    font-size: 1rem;
+}
+
+.wiki-link {
+    font-size: 0.8rem;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    transition: 0.2s;
+    margin-top: auto;
+}
+
+.wiki-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+/* Animation Classes */
+.loading {
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.8; }
+    100% { opacity: 0.3; }
+}
+
+/* Add to style.css */
+
+.main-icon {
+    width: 64px;
+    height: 64px;
+    margin: 10px auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(200, 170, 110, 0.3));
+}
+
+.portrait {
+    width: 100px;
+    height: auto;
+    border-radius: 50%; /* Circular portrait */
+    border: 2px solid var(--gold-dim);
+}
+
+.keystone-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.keystone-icon {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    background: #000;
+}
+
+.keystone-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-main);
+}
