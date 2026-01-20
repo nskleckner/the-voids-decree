@@ -248,7 +248,7 @@ a:visited { color: inherit; }
     width: 64px;
     height: 64px;
     margin-bottom: 15px;
-    background: transparent; /* FIXED: Removed background */
+    background: transparent;
     border-radius: 4px;
     display: flex;
     justify-content: center;
@@ -285,7 +285,7 @@ a:visited { color: inherit; }
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 8px; margin: 10px 0; width: 100%; padding: 10px; 
     background: transparent; 
-    border-bottom: none; /* FIXED: Removed border */
+    border-bottom: none;
     transition: 0.2s; flex-grow: 1;
 }
 

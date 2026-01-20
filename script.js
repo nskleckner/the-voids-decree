@@ -162,7 +162,6 @@ function getKeystoneImage(name) {
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    // Fallback: Remove spaces
     filename = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
