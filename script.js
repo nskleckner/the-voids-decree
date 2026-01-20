@@ -83,7 +83,7 @@ const KEYSTONE_FILENAME_MAP = {
 };
 
 const SKILLS_DB = {
-    "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Crossfire", "of Focus"],
+    "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Cross Strafe", "of Focus Fire"],
     "Ball Lightning": ["of Orbiting", "of Static"], "Bane": ["of Condemnation"], "Barrage": ["of Volley Fire"],
     "Blade Blast": ["of Dagger Detonation", "of Unloading"], "Blade Flurry": ["of Incision"], "Blade Trap": ["of Greatswords", "of Laceration"],
     "Blade Vortex": ["of the Scythe"], "Bladefall": ["of Impaling", "of Volleys"], "Bladestorm": ["of Uncertainty"], "Blast Rain": [],
