@@ -35,7 +35,7 @@ const KEYSTONES = [
 // MANUAL FILENAME MAP (User Verified)
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
-    "Ancestral Bond": "TotemMax_passive_skill_icon",
+    "Ancestral Bond": "Totemmax_passive_skill_icon",
     "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
     "Arsenal of Vengeance": "RetaliationKeystone_passive_skill_icon",
     "Avatar of Fire": "KeystoneAvatarOfFire_passive_skill_icon",

@@ -123,10 +123,54 @@
 
         </section>
         
-        <button id="resetBtn" class="reset-btn hidden" onclick="resetDeck()">Draw Another Set</button>
+        <div class="action-bar">
+            <button id="inspireBtn" class="action-btn inspire-btn hidden" onclick="openInspirationModal()">
+                Seek Inspiration
+            </button>
+            <button id="resetBtn" class="action-btn reset-btn hidden" onclick="resetDeck()">
+                Draw Another Set
+            </button>
+        </div>
+
+        <div id="inspiration-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeInspirationModal()">&times;</span>
+                
+                <h2 class="modal-title">Forbidden Knowledge</h2>
+                <p class="modal-subtitle">The Void reveals existing paths for:</p>
+                <div id="modal-build-summary" class="build-summary-text">Ascendancy + Skill</div>
+
+                <div class="modal-grid">
+                    <a id="btn-ninja" href="#" target="_blank" class="modal-option">
+                        <div class="option-icon">📊</div>
+                        <div class="option-text">
+                            <h3>The Evidence</h3>
+                            <p>See who survives with this build on <strong>poe.ninja</strong>.</p>
+                        </div>
+                    </a>
+
+                    <a id="btn-youtube" href="#" target="_blank" class="modal-option">
+                        <div class="option-icon">▶️</div>
+                        <div class="option-text">
+                            <h3>The Archives</h3>
+                            <p>Watch gameplay records on <strong>YouTube</strong>.</p>
+                        </div>
+                    </a>
+
+                    <a id="btn-google" href="#" target="_blank" class="modal-option">
+                        <div class="option-icon">📜</div>
+                        <div class="option-text">
+                            <h3>The Theory</h3>
+                            <p>Search standard scrolls on <strong>Google</strong>.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </div>
 
     <script src="script.js"></script>
+    <script src="inspiration.js"></script>
 </body>
 </html>
