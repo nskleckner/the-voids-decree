@@ -1,21 +1,21 @@
 :root {
     --bg-dark: #050508;
-    --card-bg: #131318;
-    --text-main: #dfcfb8;
+    --card-bg: #111116; /* Slightly darker to make parchment pop */
+    --text-parchment: #e3d4b5; /* Soft Parchment */
+    --text-dim: #9a8c73;
     --gold: #c8aa6e;
-    --gold-dim: #8a7344;
+    --gold-glow: #ebdcb2;
     --void-purple: #9b59b6;
     --void-glow: #bd93f9;
-    --border-color: #33333a; 
+    --border-color: #2a2a30; 
 }
 
 body {
     background-color: var(--bg-dark);
-    /* High quality CSS gradient background instead of pixelated image */
     background: radial-gradient(circle at 50% -20%, #1a1a24 0%, #050508 60%),
                 radial-gradient(circle at 80% 80%, #0e0e12 0%, transparent 40%);
     
-    color: var(--text-main);
+    color: var(--text-parchment);
     font-family: 'Alegreya', serif; 
     font-size: 18px;
     margin: 0;
@@ -39,7 +39,7 @@ body {
     background-size: 200px 200px;
     opacity: 0.1;
     z-index: -1;
-    animation: twinkle 10s infinite linear;
+    animation: twinkle 15s infinite linear;
 }
 
 @keyframes twinkle {
@@ -50,7 +50,8 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 1000px;
+    /* Increased width to fit 3 cards side-by-side */
+    max-width: 1200px; 
     width: 95%;
     text-align: center;
     padding: 2rem 0;
@@ -63,26 +64,37 @@ body {
 /* Typography */
 h1 {
     font-family: 'Alegreya SC', serif; 
-    color: var(--text-main);
+    color: var(--text-parchment);
     font-size: 4rem;
     margin: 0;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+    text-shadow: 0 0 25px rgba(155, 89, 182, 0.5); /* Purple/Void glow on Title */
     letter-spacing: 2px;
 }
 
 .subtitle {
-    color: var(--gold-dim);
-    font-style: normal; /* Removed italics for readability */
+    color: var(--text-dim);
+    font-style: normal;
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     font-size: 1.2rem;
     letter-spacing: 0.5px;
 }
 
+/* Link Resets - Fixing the "wonky colors" */
+a {
+    color: inherit; /* Forces link to use parent text color */
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:visited {
+    color: inherit;
+}
+
 /* Config Panel */
 .config-panel {
-    background: rgba(19, 19, 24, 0.9);
+    background: rgba(19, 19, 24, 0.95);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 15px 30px;
@@ -99,18 +111,18 @@ h1 {
     font-family: 'Alegreya SC', serif;
     color: var(--gold);
     font-size: 1.1rem;
-    font-weight: 700; /* Bolded */
+    font-weight: 700;
 }
 
 /* Inputs */
-.radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #888; font-family: 'Alegreya SC', serif; transition: 0.2s; }
+.radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: var(--text-dim); font-family: 'Alegreya SC', serif; transition: 0.2s; }
 .radio-group input { accent-color: var(--gold); transform: scale(1.2); }
 .radio-group label:hover, .radio-group input:checked + span { color: var(--gold); text-shadow: 0 0 8px var(--gold); }
 
 .toggle-wrapper { display: flex; align-items: center; }
 .toggle-checkbox { display: none; }
-.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: #888; font-family: 'Alegreya SC', serif; }
-.toggle-switch { width: 36px; height: 18px; background: #111; border: 1px solid #444; position: relative; transition: 0.3s; }
+.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: var(--text-dim); font-family: 'Alegreya SC', serif; }
+.toggle-switch { width: 36px; height: 18px; background: #000; border: 1px solid #444; position: relative; transition: 0.3s; }
 .toggle-switch::after { content: ''; position: absolute; top: 1px; left: 1px; width: 14px; height: 14px; background: #666; transition: 0.3s; }
 .toggle-checkbox:checked + .toggle-label .toggle-switch { border-color: var(--gold); background: #222; }
 .toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(18px); background: var(--gold); }
@@ -123,7 +135,7 @@ h1 {
     justify-content: center;
     align-items: center;
     perspective: 1000px;
-    transition: 0.6s cubic-bezier(0.65, 0, 0.35, 1); /* Smoother transition */
+    transition: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .exchange-zone.collapsed {
@@ -131,13 +143,13 @@ h1 {
     opacity: 0;
     pointer-events: none;
     margin-bottom: 0;
-    transform: scale(0.9); /* Adds a shrinking effect when leaving */
+    transform: scale(0.9);
 }
 
 .deck-container {
     position: relative;
-    width: 200px;
-    height: 300px;
+    width: 220px; /* Slightly wider deck */
+    height: 330px;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -179,22 +191,22 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.2);
-    pointer-events: none; /* Crucial for clicking */
+    background: rgba(0,0,0,0.3);
+    pointer-events: none;
 }
 
 .click-instruction {
     font-family: 'Alegreya SC', serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--text-main);
-    border: 1px solid var(--text-main);
+    color: var(--gold-glow);
+    border: 1px solid var(--gold);
     padding: 8px 16px;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-/* Animations */
 .deck-container.dealing {
     animation: deal-anim 0.8s forwards cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
@@ -205,12 +217,14 @@ h1 {
     100% { transform: scale(0) translateY(200px); opacity: 0; }
 }
 
-/* --- RESULTS (Taller Cards) --- */
+/* --- RESULTS (Desktop Layout) --- */
 .fate-grid {
     display: flex;
+    flex-direction: row; /* Force Row */
+    flex-wrap: nowrap;   /* Prevent Wrapping on desktop */
     justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
     width: 100%;
     min-height: 0; 
 }
@@ -218,18 +232,30 @@ h1 {
 .fate-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    width: 320px;
-    /* Taller card height */
-    min-height: 420px; 
+    /* Flexible width for row layout */
+    flex: 1;
+    max-width: 360px; /* Don't get too wide */
+    min-width: 280px; /* Don't get too small */
+    min-height: 450px; 
     opacity: 0;
     transform: translateY(40px);
     display: none;
     box-shadow: 0 15px 50px rgba(0,0,0,0.7);
     border-radius: 4px;
+    position: relative;
+}
+
+.fate-card::before {
+    /* Top accent line */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity: 0.5;
 }
 
 .fate-card.revealed {
-    display: block;
+    display: block; /* Required for layout */
     animation: card-reveal 0.8s forwards cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -254,40 +280,45 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Items start at top */
     height: 100%;
 }
 
 .fate-card.highlight {
     border-color: var(--void-purple);
-    box-shadow: 0 0 30px rgba(120, 50, 150, 0.1);
+    box-shadow: 0 0 30px rgba(120, 50, 150, 0.15);
+}
+
+.fate-card.highlight .card-header {
+    color: var(--void-glow);
 }
 
 .delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.3s; }
-.delay-3 { animation-delay: 0.5s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
 
 /* Content Styling */
 .fate-value { 
     font-family: 'Alegreya SC', serif; 
     font-size: 1.8rem; 
-    font-weight: 700; /* Bold */
-    color: #fff; 
+    font-weight: 700; 
+    color: var(--text-parchment); 
     margin: 15px 0 5px 0; 
-    line-height: 1.2;
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .fate-sub { 
-    color: #999; 
+    color: var(--text-dim); 
     font-size: 1.1rem;
     font-weight: 400;
 }
 
 .main-icon { 
-    width: 80px; /* Slightly larger icons */
+    width: 80px;
     height: auto; 
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.8));
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s;
 }
 
 .portrait { 
@@ -295,9 +326,18 @@ h1 {
     border: 3px solid var(--border-color);
 }
 
+/* Link Hover Effects */
+.result-link:hover .main-icon {
+    transform: scale(1.1);
+}
+
 .result-link:hover .fate-value { 
     color: var(--gold); 
     text-shadow: 0 0 15px rgba(200, 170, 110, 0.5); 
+}
+
+.result-link:hover .portrait {
+    border-color: var(--gold);
 }
 
 /* Keystones */
@@ -305,23 +345,37 @@ h1 {
     display: flex; 
     align-items: center; 
     gap: 15px; 
-    margin: 15px 0; 
+    margin: 10px 0; 
     width: 100%; 
     padding: 15px; 
     background: rgba(255,255,255,0.02); 
     border: 1px solid transparent; 
-    transition: 0.2s;
+    border-radius: 4px;
+    transition: 0.3s;
 }
 
 .keystone-row:hover { 
     background: rgba(255,255,255,0.05); 
-    border-color: #444; 
+    border-color: var(--gold-dim); 
+}
+
+.keystone-row:hover .keystone-text {
+    color: var(--gold);
 }
 
 .keystone-text { 
     font-family: 'Alegreya SC', serif; 
-    font-size: 1.3rem; 
+    font-size: 1.2rem; 
     font-weight: 700;
+    color: var(--text-parchment);
+    text-align: left;
+    line-height: 1.2;
+}
+
+.keystone-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px; /* Prevent shrinking */
 }
 
 /* Reset Button */
@@ -330,7 +384,7 @@ h1 {
     background: transparent;
     border: 1px solid var(--gold-dim);
     color: var(--gold-dim);
-    padding: 12px 35px;
+    padding: 12px 40px;
     font-family: 'Alegreya SC', serif;
     font-size: 1.3rem;
     cursor: pointer;
@@ -341,7 +395,41 @@ h1 {
 .reset-btn:hover {
     border-color: var(--gold);
     color: var(--gold);
-    box-shadow: 0 0 15px rgba(200, 170, 110, 0.2);
+    background: rgba(200, 170, 110, 0.05);
+    box-shadow: 0 0 20px rgba(200, 170, 110, 0.1);
 }
 
 .reset-btn.hidden { opacity: 0; pointer-events: none; }
+
+/* --- MOBILE STYLING --- */
+@media (max-width: 950px) {
+    h1 { font-size: 2.5rem; }
+    
+    .config-panel {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 15px;
+        width: 80%;
+    }
+
+    /* Force Stack on Mobile */
+    .fate-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .fate-card {
+        width: 90%; /* Use full width on mobile */
+        max-width: 400px;
+        min-height: auto;
+    }
+    
+    .exchange-zone {
+        height: 300px;
+    }
+    
+    .deck-container {
+        width: 180px;
+        height: 270px;
+    }
+}
