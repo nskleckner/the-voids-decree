@@ -27,9 +27,7 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
-// --- MASTER FILE NAME MAP ---
-// Manually mapped to the exact internal name used by the Wiki.
-// Excludes ".png" extension.
+// MANUAL FILENAME MAP: Exact file names from the Wiki (excluding .png)
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "TotemMax_passive_skill_icon",
@@ -38,17 +36,17 @@ const KEYSTONE_FILENAME_MAP = {
     "Blood Magic": "BloodMagic_passive_skill_icon",
     "Chaos Inoculation": "ChaosInoculation_passive_skill_icon",
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
-    "Divine Shield": "Divine_Shield_passive_skill_icon",
+    "Divine Shield": "EnergisedFortress_passive_skill_icon",
     "Eldritch Battery": "KeystoneEldritchBattery_passive_skill_icon",
     "Elemental Overload": "KeystoneElementalOverload_passive_skill_icon",
     "Ghost Reaver": "GhostReaver_passive_skill_icon",
     "Glancing Blows": "Glancing_Blows_passive_skill_icon",
     "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
-    "Imbalanced Guard": "SacredBastionKeystone", // Found via search
+    "Imbalanced Guard": "Imbalanced_Guard_passive_skill_icon",
     "Iron Grip": "IronGrip_passive_skill_icon",
     "Iron Reflexes": "IronReflexes_passive_skill_icon",
-    "Iron Will": "KeystoneIronWill", // Found via search
-    "Lethe Shade": "MomentofRespite", // Found via search
+    "Iron Will": "IronWill_passive_skill_icon",
+    "Lethe Shade": "Lethe_Shade_passive_skill_icon",
     "Magebane": "Magebane_passive_skill_icon",
     "Mind Over Matter": "Heroicspirit_passive_skill_icon",
     "Minion Instability": "MinionInstability_passive_skill_icon",
@@ -59,7 +57,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Precise Technique": "Precise_Technique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
     "Runebinder": "KeystoneRunebinder_passive_skill_icon",
-    "Solipsism": "Resilience", // Found via search
+    "Solipsism": "Solipsism_passive_skill_icon",
     "Supreme Ego": "Supreme_Ego_passive_skill_icon",
     "The Agnostic": "The_Agnostic_passive_skill_icon",
     "The Impaler": "The_Impaler_passive_skill_icon",
@@ -144,13 +142,14 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// FIX: Uses manual map to guarantee correct filename
+// LOOKUP FUNCTION: Uses the manual map to guarantee success
 function getKeystoneImage(name) {
     let filename = KEYSTONE_FILENAME_MAP[name];
-    if (!filename) {
-        // Fallback: Remove spaces
-        filename = name.replace(/ /g, "");
+    if (filename) {
+        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
+    // Fallback: Remove spaces
+    filename = name.replace(/ /g, "");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
 }
 
