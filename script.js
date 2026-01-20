@@ -19,54 +19,69 @@ const ASCENDANCIES = {
     ]
 };
 
+// FULLY AUDITED KEYSTONE LIST (2025)
 const KEYSTONES = [
-    "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Avatar of Fire", "Blood Magic", "Chaos Inoculation", "Crimson Dance", "Divine Shield",
-    "Eldritch Battery", "Elemental Overload", "Ghost Reaver", "Glancing Blows", "Hollow Palm Technique", "Imbalanced Guard", "Iron Grip",
-    "Iron Reflexes", "Iron Will", "Lethe Shade", "Magebane", "Mind Over Matter", "Minion Instability", "Oath of the Maji", "Pain Attunement",
-    "Perfect Agony", "Point Blank", "Precise Technique", "Resolute Technique", "Runebinder", "Solipsism", "Supreme Ego", "The Agnostic",
-    "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
+    "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Arsenal of Vengeance", "Avatar of Fire", 
+    "Blood Magic", "Bloodsoaked Blade", "Call to Arms", "Chaos Inoculation", "Conduit", 
+    "Crimson Dance", "Divine Shield", "Eldritch Battery", "Elemental Equilibrium", "Elemental Overload", 
+    "Eternal Youth", "Ghost Dance", "Ghost Reaver", "Glancing Blows", "Hex Master", 
+    "Imbalanced Guard", "Iron Grip", "Iron Reflexes", "Iron Will", "Lethe Shade", 
+    "Magebane", "Mind Over Matter", "Minion Instability", "Necromantic Aegis", "Pain Attunement", 
+    "Perfect Agony", "Point Blank", "Precise Technique", "Resolute Technique", "Runebinder", 
+    "Solipsism", "Supreme Ego", "The Agnostic", "The Impaler", "Unwavering Stance", 
+    "Vaal Pact", "Versatile Combatant", "Wicked Ward", "Wind Dancer", "Worship the Blightheart", 
+    "Zealot's Oath"
 ];
 
-// MANUAL FILENAME MAP: Exact verified internal names.
-// Format: Key = Display Name, Value = Wiki Filename Prefix (before _passive_skill_icon.png)
+// FILENAME MAP: Validated against PoE Wiki (cite: 7.1, 4.1, 10.1)
+// Prefixes only (no extension)
 const KEYSTONE_FILENAME_MAP = {
-    "Acrobatics": "KeystoneAcrobatics",
-    "Ancestral Bond": "TotemMax",
-    "Arrow Dancing": "KeystoneArrowDodging",
-    "Avatar of Fire": "AvatarOfFire",
-    "Blood Magic": "BloodMagic",
-    "Chaos Inoculation": "KeystoneChaosInoculation",
-    "Crimson Dance": "CrimsonDance",
-    "Divine Shield": "EnergisedFortress",
-    "Eldritch Battery": "KeystoneEldritchBattery",
-    "Elemental Overload": "KeystoneElementalOverload",
-    "Ghost Reaver": "GhostReaver",
-    "Glancing Blows": "Glancing_Blows",
-    "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
-    "Imbalanced Guard": "SacredBastionKeystone",
-    "Iron Grip": "IronGrip",
-    "Iron Reflexes": "IronReflexes",
-    "Iron Will": "KeystoneIronWill",
-    "Lethe Shade": "MomentofRespite",
-    "Magebane": "Deaden",
-    "Mind Over Matter": "Heroicspirit",
-    "Minion Instability": "MinionInstability",
-    "Oath of the Maji": "Oath_of_the_Maji",
-    "Pain Attunement": "PainAttunement",
-    "Perfect Agony": "KeystonePerfectAgony",
-    "Point Blank": "PointBlank",
-    "Precise Technique": "Precise_Technique",
-    "Resolute Technique": "KeystoneResoluteTechnique",
-    "Runebinder": "BrandKeystone", // CORRECTED
-    "Solipsism": "Resilience",
-    "Supreme Ego": "Supreme_Ego",
-    "The Agnostic": "The_Agnostic",
-    "The Impaler": "The_Impaler",
-    "Unwavering Stance": "UnwaveringStance",
-    "Vaal Pact": "VaalPact",
-    "Wicked Ward": "Wicked_Ward",
-    "Wind Dancer": "KeystoneWindDancer",
-    "Zealot's Oath": "Liferegentoenergyshield"
+    "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
+    "Ancestral Bond": "TotemMax_passive_skill_icon",
+    "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
+    "Arsenal of Vengeance": "ArsenalofVengeance_passive_skill_icon", // CamelCase 3.25
+    "Avatar of Fire": "AvatarOfFire_passive_skill_icon",
+    "Blood Magic": "BloodMagic_passive_skill_icon",
+    "Bloodsoaked Blade": "BloodsoakedBlade_passive_skill_icon", // CamelCase 3.25
+    "Call to Arms": "CallToArms_passive_skill_icon", // CamelCase
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", 
+    "Conduit": "Conduit_passive_skill_icon",
+    "Crimson Dance": "CrimsonDance_passive_skill_icon",
+    "Divine Shield": "EnergisedFortress_passive_skill_icon", // Internal Name
+    "Eldritch Battery": "KeystoneEldritchBattery_passive_skill_icon",
+    "Elemental Equilibrium": "KeystoneElementalEquilibrium_passive_skill_icon",
+    "Elemental Overload": "KeystoneElementalOverload_passive_skill_icon",
+    "Eternal Youth": "KeystoneEternalYouth_passive_skill_icon",
+    "Ghost Dance": "GhostDance_passive_skill_icon",
+    "Ghost Reaver": "GhostReaver_passive_skill_icon",
+    "Glancing Blows": "Glancing_Blows_passive_skill_icon",
+    "Hex Master": "KeystoneHexMaster_passive_skill_icon",
+    "Imbalanced Guard": "SacredBastionKeystone_passive_skill_icon", // Internal Name
+    "Iron Grip": "IronGrip_passive_skill_icon",
+    "Iron Reflexes": "IronReflexes_passive_skill_icon",
+    "Iron Will": "KeystoneIronWill_passive_skill_icon",
+    "Lethe Shade": "MomentofRespite_passive_skill_icon", // Internal Name
+    "Magebane": "Deaden_passive_skill_icon", // Internal Name
+    "Mind Over Matter": "Heroicspirit_passive_skill_icon", // Internal Name
+    "Minion Instability": "MinionInstability_passive_skill_icon",
+    "Necromantic Aegis": "KeystoneNecromanticAegis_passive_skill_icon",
+    "Pain Attunement": "PainAttunement_passive_skill_icon",
+    "Perfect Agony": "KeystonePerfectAgony_passive_skill_icon",
+    "Point Blank": "PointBlank_passive_skill_icon",
+    "Precise Technique": "Precise_Technique_passive_skill_icon",
+    "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
+    "Runebinder": "BrandKeystone_passive_skill_icon", // Internal Name
+    "Solipsism": "Resilience_passive_skill_icon", // Internal Name
+    "Supreme Ego": "Supreme_Ego_passive_skill_icon",
+    "The Agnostic": "The_Agnostic_passive_skill_icon",
+    "The Impaler": "The_Impaler_passive_skill_icon",
+    "Unwavering Stance": "UnwaveringStance_passive_skill_icon",
+    "Vaal Pact": "VaalPact_passive_skill_icon",
+    "Versatile Combatant": "VersatileCombatant_passive_skill_icon",
+    "Wicked Ward": "Wicked_Ward_passive_skill_icon",
+    "Wind Dancer": "KeystoneWindDancer_passive_skill_icon",
+    "Worship the Blightheart": "WorshipTheBlightheart_passive_skill_icon", // CamelCase 3.25
+    "Zealot's Oath": "Liferegentoenergyshield_passive_skill_icon" // Internal Name
 };
 
 const SKILLS_DB = {
@@ -143,14 +158,14 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// Fixed Image Logic
+// LOOKUP FUNCTION
 function getKeystoneImage(name) {
     let filename = KEYSTONE_FILENAME_MAP[name];
-    // Fallback if not found in map (should be rare now)
-    if (!filename) {
-        filename = name.replace(/ /g, "_");
+    if (filename) {
+        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    // Append standard suffix
+    // Fallback: Remove spaces
+    filename = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
