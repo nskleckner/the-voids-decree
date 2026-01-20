@@ -27,15 +27,46 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
-// EXCEPTIONS MAP: Maps Keystone Name -> Specific Wiki Filename Prefix
+// MANUAL MAP: Maps Keystone Name -> Exact Wiki Filename (No .png extension)
+// This fixes the "Empty Circle" bug by ensuring we ask for the real file.
 const KEYSTONE_ICON_MAP = {
-    "Mind Over Matter": "Heroicspirit",
+    "Acrobatics": "KeystoneAcrobatics",
     "Ancestral Bond": "TotemMax",
-    "Zealot's Oath": "Liferegentoenergyshield", // Wiki redirect
-    "Chaos Inoculation": "Chaos_Inoculation",
+    "Arrow Dancing": "KeystoneArrowDodging",
+    "Avatar of Fire": "AvatarOfFire",
+    "Blood Magic": "BloodMagic",
+    "Chaos Inoculation": "ChaosInoculation",
+    "Crimson Dance": "CrimsonDance",
+    "Divine Shield": "Divine_Shield",
     "Eldritch Battery": "KeystoneEldritchBattery",
+    "Elemental Overload": "KeystoneElementalOverload",
+    "Ghost Reaver": "GhostReaver",
+    "Glancing Blows": "Glancing_Blows",
+    "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
+    "Imbalanced Guard": "Imbalanced_Guard",
+    "Iron Grip": "IronGrip",
+    "Iron Reflexes": "IronReflexes",
+    "Iron Will": "IronWill",
+    "Lethe Shade": "Lethe_Shade",
+    "Magebane": "Magebane",
+    "Mind Over Matter": "Heroicspirit", // The weirdest one
+    "Minion Instability": "MinionInstability",
+    "Oath of the Maji": "Oath_of_the_Maji",
+    "Pain Attunement": "PainAttunement",
+    "Perfect Agony": "KeystonePerfectAgony",
+    "Point Blank": "PointBlank",
+    "Precise Technique": "Precise_Technique",
     "Resolute Technique": "KeystoneResoluteTechnique",
-    "Vaal Pact": "Vaal_Pact"
+    "Runebinder": "KeystoneRunebinder",
+    "Solipsism": "Solipsism",
+    "Supreme Ego": "Supreme_Ego",
+    "The Agnostic": "The_Agnostic",
+    "The Impaler": "The_Impaler",
+    "Unwavering Stance": "UnwaveringStance",
+    "Vaal Pact": "VaalPact",
+    "Wicked Ward": "Wicked_Ward",
+    "Wind Dancer": "KeystoneWindDancer",
+    "Zealot's Oath": "Liferegentoenergyshield"
 };
 
 const SKILLS_DB = {
@@ -89,8 +120,6 @@ const SKILLS_DB = {
     "Winter Orb": [], "Wintertide Brand": []
 };
 
-// --- UTILITIES ---
-
 function getRandom(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -112,15 +141,14 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// Logic: Use Manual Map -> Else Standard Underscores
+// FIX: Uses manual map to guarantee correct filename
 function getKeystoneImage(name) {
-    if (KEYSTONE_ICON_MAP[name]) {
-        return `https://www.poewiki.net/wiki/Special:FilePath/${KEYSTONE_ICON_MAP[name]}_passive_skill_icon.png`;
+    let filename = KEYSTONE_ICON_MAP[name];
+    if (!filename) {
+        // Fallback: Remove spaces
+        filename = name.replace(/ /g, "");
     }
-    // Default: "Lethe Shade" -> "Lethe_Shade"
-    // Remove apostrophes: "Zealot's Oath" -> "Zealots_Oath" (if not in map)
-    const cleanName = name.replace(/'/g, "").replace(/ /g, "_");
-    return `https://www.poewiki.net/wiki/Special:FilePath/${cleanName}_passive_skill_icon.png`;
+    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
 function getWikiLink(name) {
@@ -172,7 +200,7 @@ function castFate() {
         document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
         
         const ascImg = document.getElementById('img-asc');
-        ascImg.classList.remove('loaded'); // Reset Fade
+        ascImg.classList.remove('loaded');
         ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
         ascImg.onload = function() { this.classList.add('loaded'); };
         ascImg.onerror = function() { 
@@ -224,7 +252,6 @@ function castFate() {
             if(chosenKeys[1]) setKey('link-key2', 'res-key2-name', 'img-key2', chosenKeys[1]);
         }
 
-        // Reveal Cards
         resultCards.forEach(card => card.classList.add('revealed'));
 
         setTimeout(() => {
