@@ -19,7 +19,6 @@ const ASCENDANCIES = {
     ]
 };
 
-// FULLY AUDITED KEYSTONE LIST (2025)
 const KEYSTONES = [
     "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Arsenal of Vengeance", "Avatar of Fire", 
     "Blood Magic", "Bloodsoaked Blade", "Call to Arms", "Chaos Inoculation", "Conduit", 
@@ -33,55 +32,54 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// FILENAME MAP: Validated against PoE Wiki (cite: 7.1, 4.1, 10.1)
-// Prefixes only (no extension)
+// MANUAL FILENAME MAP (User Verified)
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "TotemMax_passive_skill_icon",
     "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
-    "Arsenal of Vengeance": "ArsenalofVengeance_passive_skill_icon", // CamelCase 3.25
-    "Avatar of Fire": "AvatarOfFire_passive_skill_icon",
-    "Blood Magic": "BloodMagic_passive_skill_icon",
-    "Bloodsoaked Blade": "BloodsoakedBlade_passive_skill_icon", // CamelCase 3.25
-    "Call to Arms": "CallToArms_passive_skill_icon", // CamelCase
-    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", 
-    "Conduit": "Conduit_passive_skill_icon",
+    "Arsenal of Vengeance": "RetaliationKeystone_passive_skill_icon",
+    "Avatar of Fire": "KeystoneAvatarOfFire_passive_skill_icon",
+    "Blood Magic": "KeystoneBloodMagic_passive_skill_icon",
+    "Bloodsoaked Blade": "TinctureKeystone1_passive_skill_icon",
+    "Call to Arms": "CallToArms_passive_skill_icon",
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon",
+    "Conduit": "KeystoneConduit_passive_skill_icon",
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
-    "Divine Shield": "EnergisedFortress_passive_skill_icon", // Internal Name
+    "Divine Shield": "EnergisedFortress_passive_skill_icon",
     "Eldritch Battery": "KeystoneEldritchBattery_passive_skill_icon",
     "Elemental Equilibrium": "KeystoneElementalEquilibrium_passive_skill_icon",
     "Elemental Overload": "KeystoneElementalOverload_passive_skill_icon",
-    "Eternal Youth": "KeystoneEternalYouth_passive_skill_icon",
-    "Ghost Dance": "GhostDance_passive_skill_icon",
-    "Ghost Reaver": "GhostReaver_passive_skill_icon",
-    "Glancing Blows": "Glancing_Blows_passive_skill_icon",
+    "Eternal Youth": "EternalYouth_passive_skill_icon",
+    "Ghost Dance": "AcrobaticWillpower_%28Trickster%29_passive_skill_icon",
+    "Ghost Reaver": "Ghostreaver_passive_skill_icon",
+    "Glancing Blows": "GlancingBlows_passive_skill_icon",
     "Hex Master": "KeystoneHexMaster_passive_skill_icon",
-    "Imbalanced Guard": "SacredBastionKeystone_passive_skill_icon", // Internal Name
-    "Iron Grip": "IronGrip_passive_skill_icon",
-    "Iron Reflexes": "IronReflexes_passive_skill_icon",
+    "Imbalanced Guard": "SacredBastionKeystone_passive_skill_icon",
+    "Iron Grip": "KeystoneIronGrip_passive_skill_icon",
+    "Iron Reflexes": "KeystoneIronReflexes_passive_skill_icon",
     "Iron Will": "KeystoneIronWill_passive_skill_icon",
-    "Lethe Shade": "MomentofRespite_passive_skill_icon", // Internal Name
-    "Magebane": "Deaden_passive_skill_icon", // Internal Name
-    "Mind Over Matter": "Heroicspirit_passive_skill_icon", // Internal Name
-    "Minion Instability": "MinionInstability_passive_skill_icon",
+    "Lethe Shade": "MomentofRespite_passive_skill_icon",
+    "Magebane": "Deaden_passive_skill_icon",
+    "Mind Over Matter": "Heroicspirit_passive_skill_icon",
+    "Minion Instability": "KeystoneMinionInstability_passive_skill_icon",
     "Necromantic Aegis": "KeystoneNecromanticAegis_passive_skill_icon",
-    "Pain Attunement": "PainAttunement_passive_skill_icon",
-    "Perfect Agony": "KeystonePerfectAgony_passive_skill_icon",
-    "Point Blank": "PointBlank_passive_skill_icon",
-    "Precise Technique": "Precise_Technique_passive_skill_icon",
+    "Pain Attunement": "KeystonePainAttunement_passive_skill_icon",
+    "Perfect Agony": "CritAilments_passive_skill_icon",
+    "Point Blank": "KeystonePointBlank_passive_skill_icon",
+    "Precise Technique": "PreciseTechnique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
-    "Runebinder": "BrandKeystone_passive_skill_icon", // Internal Name
-    "Solipsism": "Resilience_passive_skill_icon", // Internal Name
-    "Supreme Ego": "Supreme_Ego_passive_skill_icon",
-    "The Agnostic": "The_Agnostic_passive_skill_icon",
-    "The Impaler": "The_Impaler_passive_skill_icon",
-    "Unwavering Stance": "UnwaveringStance_passive_skill_icon",
-    "Vaal Pact": "VaalPact_passive_skill_icon",
+    "Runebinder": "BrandKeystone_passive_skill_icon",
+    "Solipsism": "Resilience_passive_skill_icon",
+    "Supreme Ego": "SupremeEgo_passive_skill_icon",
+    "The Agnostic": "MiracleMaker_passive_skill_icon",
+    "The Impaler": "ImpaleKeystone_passive_skill_icon",
+    "Unwavering Stance": "KeystoneUnwaveringStance_passive_skill_icon",
+    "Vaal Pact": "Vaalpact_passive_skill_icon",
     "Versatile Combatant": "VersatileCombatant_passive_skill_icon",
-    "Wicked Ward": "Wicked_Ward_passive_skill_icon",
-    "Wind Dancer": "KeystoneWindDancer_passive_skill_icon",
-    "Worship the Blightheart": "WorshipTheBlightheart_passive_skill_icon", // CamelCase 3.25
-    "Zealot's Oath": "Liferegentoenergyshield_passive_skill_icon" // Internal Name
+    "Wicked Ward": "EldrichBarrier_%28Occultist%29_passive_skill_icon",
+    "Wind Dancer": "WindDancer_passive_skill_icon",
+    "Worship the Blightheart": "AnointOnlyKeystone_passive_skill_icon",
+    "Zealot's Oath": "Liferegentoenergyshield_passive_skill_icon"
 };
 
 const SKILLS_DB = {
@@ -158,14 +156,14 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// LOOKUP FUNCTION
+// LOOKUP FUNCTION: Uses the verified map
 function getKeystoneImage(name) {
     let filename = KEYSTONE_FILENAME_MAP[name];
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    // Fallback: Remove spaces
-    filename = name.replace(/ /g, "_");
+    // Fallback: Remove spaces (Safe default)
+    filename = name.replace(/ /g, "");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 

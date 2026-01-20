@@ -193,7 +193,7 @@ a:visited { color: inherit; }
     max-width: 340px; 
     min-width: 260px;
     
-    /* OVERFLOW FIX */
+    /* CRITICAL FIX: Allow height to adapt, but fill flex container */
     height: auto;
     min-height: 100%;
     
@@ -235,6 +235,7 @@ a:visited { color: inherit; }
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Centers content vertically if short, allows expansion if long */
     justify-content: center;
     flex-grow: 1; 
 }
@@ -254,8 +255,9 @@ a:visited { color: inherit; }
 .result-link:hover .fate-value { color: var(--gold); text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
 .result-link:hover .portrait { border-color: var(--gold); }
 
-/* --- KEYSTONES --- */
-/* Default: Centered for 1 Item */
+/* --- KEYSTONES (RESTYLED) --- */
+
+/* Default Container Logic */
 .keystone-container {
     display: flex;
     flex-direction: column;
@@ -264,47 +266,37 @@ a:visited { color: inherit; }
     height: 100%;
 }
 
-/* Dual Mode: Distributes 2 items */
+/* When 2 items are present (Dual Mode) */
 .keystone-container.dual-mode {
     justify-content: space-between;
     gap: 5px;
 }
 
+/* Individual Row */
 .keystone-row { 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
-    gap: 8px; 
-    margin: 10px 0; 
+    gap: 5px; 
     width: 100%; 
-    padding: 10px; 
+    padding: 10px 0; 
     background: transparent; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: 0.2s;
-    flex-grow: 1;
+    /* Ensures separators look good */
+    border-bottom: 1px solid transparent; 
 }
 
-.keystone-row:last-child { border-bottom: none; }
-
-/* Dual Mode Specifics */
-.dual-mode .keystone-row {
-    margin: 5px 0;
-    padding: 8px;
-}
-.dual-mode .keystone-text {
-    font-size: 1.3rem;
-}
-.dual-mode .keystone-frame {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
+/* Separator line ONLY in dual mode and ONLY on the first item */
+.dual-mode .keystone-row:first-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 15px;
 }
 
 .keystone-row:hover .keystone-text { color: var(--gold); text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
 .keystone-row:hover .keystone-frame { box-shadow: 0 0 15px var(--gold); border-color: var(--gold); transform: scale(1.1); transition: transform 0.2s; }
 
-.keystone-text { font-family: 'Alegreya SC', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-parchment); text-align: center; line-height: 1.1; margin-top: 5px; }
+.keystone-text { font-family: 'Alegreya SC', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-parchment); text-align: center; line-height: 1.1; margin-top: 5px; }
 .keystone-frame { width: 50px; height: 50px; min-width: 50px; position: relative; border-radius: 50%; border: 2px solid #c8aa6e; box-shadow: 0 0 5px rgba(0,0,0,0.8), inset 0 0 5px rgba(0,0,0,0.8); background: #000; overflow: hidden; margin-bottom: 5px; }
 .keystone-icon { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; }
 .keystone-icon.loaded { opacity: 1; }
