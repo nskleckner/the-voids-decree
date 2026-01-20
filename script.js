@@ -32,7 +32,7 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// FILENAME MAP: Validated against PoE Wiki Source
+// FILENAME MAP
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "Totemmax_passive_skill_icon",
@@ -192,6 +192,7 @@ function castFate() {
 
     deck.classList.add('dealing');
 
+    // 1. Wait for Deal Animation (300ms)
     setTimeout(() => {
         exchangeZone.classList.add('collapsed');
 
@@ -265,14 +266,20 @@ function castFate() {
 
         resultCards.forEach(card => card.classList.add('revealed'));
 
-        setTimeout(() => {
-            resetBtn.classList.remove('hidden');
-            inspireBtn.classList.remove('hidden');
-        }, 800);
+        // Update Inspiration Button
+        if(typeof updatePoeNinjaLink === "function") {
+            updatePoeNinjaLink(chosenAsc.name, chosenSkill.name);
+        }
 
-    }, 500);
+        // 2. Reveal Buttons (Wait 700ms total)
+        setTimeout(() => {
+            document.getElementById('resetBtn').classList.remove('hidden');
+        }, 700); 
+
+    }, 300); // Wait for initial deal
 }
 
+// RESET DECK
 function resetDeck() {
     const deck = document.getElementById('deck-container');
     const exchangeZone = document.querySelector('.exchange-zone');
@@ -282,10 +289,24 @@ function resetDeck() {
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    inspireBtn.classList.add('hidden');
+    
+    // Hide Ninja Button
+    if(typeof hidePoeNinjaLink === "function") {
+        hidePoeNinjaLink();
+    }
 
+    // 3. Reset Deck Return Time (400ms)
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');
         deck.classList.remove('dealing');
-    }, 500);
+    }, 400);
+}
+
+// REROLL (Resets + Deals Automatically)
+function rerollFate() {
+    resetDeck();
+    // 4. Wait for reset animation (600ms)
+    setTimeout(() => {
+        castFate();
+    }, 600); 
 }
