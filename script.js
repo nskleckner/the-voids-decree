@@ -19,38 +19,51 @@ const ASCENDANCIES = {
     ]
 };
 
+// FULLY AUDITED LIST FROM WIKI (2025)
 const KEYSTONES = [
-    "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Avatar of Fire", "Blood Magic", "Chaos Inoculation", "Crimson Dance", "Divine Shield",
-    "Eldritch Battery", "Elemental Overload", "Ghost Reaver", "Glancing Blows", "Hollow Palm Technique", "Imbalanced Guard", "Iron Grip",
-    "Iron Reflexes", "Iron Will", "Lethe Shade", "Magebane", "Mind Over Matter", "Minion Instability", "Oath of the Maji", "Pain Attunement",
-    "Perfect Agony", "Point Blank", "Precise Technique", "Resolute Technique", "Runebinder", "Solipsism", "Supreme Ego", "The Agnostic",
-    "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
+    "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Arsenal of Vengeance", "Avatar of Fire", 
+    "Blood Magic", "Bloodsoaked Blade", "Call to Arms", "Chaos Inoculation", "Conduit", 
+    "Crimson Dance", "Divine Shield", "Eldritch Battery", "Elemental Equilibrium", "Elemental Overload", 
+    "Eternal Youth", "Ghost Dance", "Ghost Reaver", "Glancing Blows", "Hex Master", 
+    "Imbalanced Guard", "Iron Grip", "Iron Reflexes", "Iron Will", "Lethe Shade", 
+    "Magebane", "Mind Over Matter", "Minion Instability", "Necromantic Aegis", "Pain Attunement", 
+    "Perfect Agony", "Point Blank", "Precise Technique", "Resolute Technique", "Runebinder", 
+    "Solipsism", "Supreme Ego", "The Agnostic", "The Impaler", "Unwavering Stance", 
+    "Vaal Pact", "Versatile Combatant", "Wicked Ward", "Wind Dancer", "Worship the Blightheart", 
+    "Zealot's Oath"
 ];
 
-// FILENAME MAP: Validated against PoE Wiki (cite: 7.1, 4.1, 10.1)
+// MANUAL FILENAME MAP: Exact file names from the Wiki (excluding .png)
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "TotemMax_passive_skill_icon",
     "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
+    "Arsenal of Vengeance": "ArsenalofVengeance_passive_skill_icon",
     "Avatar of Fire": "AvatarOfFire_passive_skill_icon",
     "Blood Magic": "BloodMagic_passive_skill_icon",
-    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", // CORRECTED
+    "Bloodsoaked Blade": "BloodsoakedBlade_passive_skill_icon",
+    "Call to Arms": "CallToArms_passive_skill_icon",
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", 
+    "Conduit": "Conduit_passive_skill_icon",
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
     "Divine Shield": "EnergisedFortress_passive_skill_icon",
     "Eldritch Battery": "KeystoneEldritchBattery_passive_skill_icon",
+    "Elemental Equilibrium": "KeystoneElementalEquilibrium_passive_skill_icon",
     "Elemental Overload": "KeystoneElementalOverload_passive_skill_icon",
+    "Eternal Youth": "KeystoneEternalYouth_passive_skill_icon",
+    "Ghost Dance": "GhostDance_passive_skill_icon",
     "Ghost Reaver": "GhostReaver_passive_skill_icon",
     "Glancing Blows": "Glancing_Blows_passive_skill_icon",
-    "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
+    "Hex Master": "KeystoneHexMaster_passive_skill_icon",
     "Imbalanced Guard": "SacredBastionKeystone_passive_skill_icon",
     "Iron Grip": "IronGrip_passive_skill_icon",
     "Iron Reflexes": "IronReflexes_passive_skill_icon",
-    "Iron Will": "KeystoneIronWill_passive_skill_icon", // CORRECTED
+    "Iron Will": "KeystoneIronWill_passive_skill_icon",
     "Lethe Shade": "MomentofRespite_passive_skill_icon",
-    "Magebane": "Deaden_passive_skill_icon", // CORRECTED
+    "Magebane": "Deaden_passive_skill_icon",
     "Mind Over Matter": "Heroicspirit_passive_skill_icon",
     "Minion Instability": "MinionInstability_passive_skill_icon",
-    "Oath of the Maji": "Oath_of_the_Maji_passive_skill_icon",
+    "Necromantic Aegis": "KeystoneNecromanticAegis_passive_skill_icon",
     "Pain Attunement": "PainAttunement_passive_skill_icon",
     "Perfect Agony": "KeystonePerfectAgony_passive_skill_icon",
     "Point Blank": "PointBlank_passive_skill_icon",
@@ -63,8 +76,10 @@ const KEYSTONE_FILENAME_MAP = {
     "The Impaler": "The_Impaler_passive_skill_icon",
     "Unwavering Stance": "UnwaveringStance_passive_skill_icon",
     "Vaal Pact": "VaalPact_passive_skill_icon",
+    "Versatile Combatant": "VersatileCombatant_passive_skill_icon",
     "Wicked Ward": "Wicked_Ward_passive_skill_icon",
     "Wind Dancer": "KeystoneWindDancer_passive_skill_icon",
+    "Worship the Blightheart": "WorshipTheBlightheart_passive_skill_icon",
     "Zealot's Oath": "Liferegentoenergyshield_passive_skill_icon"
 };
 
@@ -145,42 +160,17 @@ function getWikiImage(filename) {
 // LOOKUP FUNCTION: Uses the manual map to guarantee success
 function getKeystoneImage(name) {
     let filename = KEYSTONE_FILENAME_MAP[name];
-    // Fallback: Remove spaces
-    if (!filename) {
-        filename = name.replace(/ /g, "_");
+    if (filename) {
+        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
+    // Fallback: Remove spaces
+    filename = name.replace(/ /g, "_");
+    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
 function getWikiLink(name) {
     const safeName = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/${safeName}`;
-}
-
-// --- SEARCH LOGIC ---
-function searchBuild() {
-    const ascName = document.getElementById('res-asc-name').innerText;
-    const skillName = document.getElementById('res-skill-name').innerText;
-    
-    if(ascName === "?" || skillName === "?") return;
-
-    let query = `"${ascName}" "${skillName}" build guide`;
-
-    const includeKeystone = document.getElementById('searchKeystoneToggle').checked;
-    if(includeKeystone) {
-        const k1 = document.getElementById('res-key1-name').innerText;
-        const k2 = document.getElementById('res-key2-name').innerText;
-        
-        if (document.getElementById('link-key1').style.display !== 'none' && k1 !== "?") {
-            query += ` "${k1}"`;
-        }
-        if (document.getElementById('link-key2').style.display !== 'none' && k2 !== "?") {
-            query += ` "${k2}"`;
-        }
-    }
-
-    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-    window.open(url, '_blank');
 }
 
 // --- LOGIC ---
@@ -190,7 +180,6 @@ function castFate() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
-    const searchContainer = document.getElementById('search-container');
     const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
@@ -260,6 +249,7 @@ function castFate() {
         k2El.style.display = 'none';
         noKeyEl.style.display = 'none';
         
+        // RESET DUAL MODE CLASS
         keystoneContainer.classList.remove('dual-mode');
 
         if(chosenKeys.length === 0) {
@@ -292,7 +282,6 @@ function castFate() {
 
         setTimeout(() => {
             resetBtn.classList.remove('hidden');
-            searchContainer.classList.remove('hidden'); // Show Search
         }, 1200);
 
     }, 800);
@@ -303,11 +292,9 @@ function resetDeck() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
-    const searchContainer = document.getElementById('search-container');
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    searchContainer.classList.add('hidden');
 
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');
