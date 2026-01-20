@@ -30,8 +30,9 @@ function updatePoeNinjaLink(ascName, skillName) {
     // Set href
     ninjaBtn.href = ninjaUrl;
     
-    // Show button
-    ninjaBtn.classList.remove('hidden');
+    setTimeout(() => {
+        ninjaBtn.classList.remove('hidden');
+    }, 800); // Sync with reset button reveal
 }
 
 function hidePoeNinjaLink() {

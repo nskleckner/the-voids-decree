@@ -32,7 +32,7 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// MANUAL FILENAME MAP: Validated against PoE Wiki Source
+// FILENAME MAP
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "Totemmax_passive_skill_icon",
@@ -162,7 +162,6 @@ function getKeystoneImage(name) {
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    // Fallback: Remove spaces
     filename = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
@@ -245,7 +244,6 @@ function castFate() {
         if(chosenKeys.length === 0) {
             noKeyEl.style.display = 'block';
         } else {
-            // IF 2 KEYS, toggle layout mode
             if (chosenKeys.length > 1) {
                 keystoneContainer.classList.add('dual-mode');
             }
@@ -266,16 +264,17 @@ function castFate() {
 
         resultCards.forEach(card => card.classList.add('revealed'));
 
-        // Update Inspiration Button (from inspiration.js)
+        // Update Inspiration Button, then show it with Reset button
         if(typeof updatePoeNinjaLink === "function") {
             updatePoeNinjaLink(chosenAsc.name, chosenSkill.name);
         }
 
         setTimeout(() => {
-            resetBtn.classList.remove('hidden');
-        }, 1200);
+            document.getElementById('resetBtn').classList.remove('hidden');
+            // Check if link is ready before showing? updatePoeNinjaLink already handles removing 'hidden' from the link itself
+        }, 800); // Faster reveal (800ms)
 
-    }, 800);
+    }, 500); // Faster deal (500ms)
 }
 
 function resetDeck() {
