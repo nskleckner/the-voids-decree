@@ -127,33 +127,15 @@
 
         </section>
         
-        <div class="action-bar">
-            <button id="inspireBtn" class="action-btn inspire-btn hidden" onclick="openInspirationModal()">
-                Check Build Meta
-            </button>
-            <button id="resetBtn" class="action-btn reset-btn hidden" onclick="resetDeck()">
+        <div class="action-bar-container">
+            <a id="inspireLink" href="#" target="_blank" class="ninja-btn hidden">
+                <img src="https://poe.ninja/shared-assets/ninja-logo.png" alt="Ninja" class="ninja-icon">
+                <span>Seek Inspiration on poe.ninja</span>
+            </a>
+
+            <button id="resetBtn" class="reset-btn hidden" onclick="resetDeck()">
                 Draw Another Set
             </button>
-        </div>
-
-        <div id="inspiration-modal" class="modal-overlay hidden">
-            <div class="modal-content">
-                <span class="close-modal" onclick="closeInspirationModal()">&times;</span>
-                
-                <h2 class="modal-title">The Archives</h2>
-                <p class="modal-subtitle">Verify if this combination exists in the <strong>Keepers</strong> league.</p>
-                <div id="modal-build-summary" class="build-summary-text">Ascendancy + Skill</div>
-
-                <div class="modal-single-action">
-                    <a id="btn-ninja" href="#" target="_blank" class="modal-option">
-                        <div class="option-icon">📊</div>
-                        <div class="option-text">
-                            <h3>Search poe.ninja</h3>
-                            <p>Apply filters for Class, Skill, and Keystones.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </div>
 
     </div>

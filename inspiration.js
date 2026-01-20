@@ -1,15 +1,13 @@
 // --- CONFIGURATION ---
 const CURRENT_LEAGUE = "keepers"; 
 
-function openInspirationModal() {
-    const modal = document.getElementById('inspiration-modal');
-    const ascName = document.getElementById('res-asc-name').innerText;
-    const skillName = document.getElementById('res-skill-name').innerText;
-
-    // Safety: Don't open if cards aren't dealt
-    if (ascName === "?" || skillName === "?") return;
-
-    // 1. Gather Data
+function updatePoeNinjaLink(ascName, skillName) {
+    const ninjaBtn = document.getElementById('inspireLink');
+    
+    // Base URL
+    let ninjaUrl = `https://poe.ninja/builds/${CURRENT_LEAGUE}?class=${encodeURIComponent(ascName)}&skill=${encodeURIComponent(skillName)}`;
+    
+    // Check Active Keystones
     let keystones = [];
     const k1Link = document.getElementById('link-key1');
     const k1Text = document.getElementById('res-key1-name').innerText;
@@ -22,37 +20,20 @@ function openInspirationModal() {
         keystones.push(k2Text);
     }
 
-    // 2. Generate poe.ninja URL
-    let ninjaUrl = `https://poe.ninja/builds/${CURRENT_LEAGUE}?class=${encodeURIComponent(ascName)}&skill=${encodeURIComponent(skillName)}`;
+    // Append Keystones to URL
     if (keystones.length > 0) {
         keystones.forEach(k => {
             ninjaUrl += `&keystone=${encodeURIComponent(k)}`;
         });
     }
 
-    // 3. Assign URL to Button
-    document.getElementById('btn-ninja').href = ninjaUrl;
-
-    // 4. Update Summary Text
-    document.getElementById('modal-build-summary').innerText = `${ascName} + ${skillName}`;
-
-    // 5. Show Modal
-    modal.classList.remove('hidden');
-    modal.classList.add('visible');
+    // Set href
+    ninjaBtn.href = ninjaUrl;
+    
+    // Show button
+    ninjaBtn.classList.remove('hidden');
 }
 
-function closeInspirationModal() {
-    const modal = document.getElementById('inspiration-modal');
-    modal.classList.remove('visible');
-    setTimeout(() => {
-        modal.classList.add('hidden');
-    }, 300);
-}
-
-// Close modal if clicking outside the content box
-window.onclick = function(event) {
-    const modal = document.getElementById('inspiration-modal');
-    if (event.target === modal) {
-        closeInspirationModal();
-    }
+function hidePoeNinjaLink() {
+    document.getElementById('inspireLink').classList.add('hidden');
 }

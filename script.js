@@ -32,7 +32,7 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// FILENAME MAP: Validated against PoE Wiki Source
+// MANUAL FILENAME MAP: Validated against PoE Wiki Source
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "Totemmax_passive_skill_icon",
@@ -42,7 +42,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Blood Magic": "KeystoneBloodMagic_passive_skill_icon",
     "Bloodsoaked Blade": "TinctureKeystone1_passive_skill_icon",
     "Call to Arms": "CallToArms_passive_skill_icon",
-    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", 
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon",
     "Conduit": "KeystoneConduit_passive_skill_icon",
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
     "Divine Shield": "EnergisedFortress_passive_skill_icon",
@@ -179,7 +179,6 @@ function castFate() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
-    const inspireBtn = document.getElementById('inspireBtn');
     const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
@@ -218,8 +217,7 @@ function castFate() {
         document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
         
         const ascImg = document.getElementById('img-asc');
-        ascImg.classList.remove('loaded'); // Clear old state
-        // Attach listener BEFORE src
+        ascImg.classList.remove('loaded');
         ascImg.onload = function() { this.classList.add('loaded'); };
         ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
         
@@ -268,9 +266,13 @@ function castFate() {
 
         resultCards.forEach(card => card.classList.add('revealed'));
 
+        // Update Inspiration Button (from inspiration.js)
+        if(typeof updatePoeNinjaLink === "function") {
+            updatePoeNinjaLink(chosenAsc.name, chosenSkill.name);
+        }
+
         setTimeout(() => {
             resetBtn.classList.remove('hidden');
-            inspireBtn.classList.remove('hidden');
         }, 1200);
 
     }, 800);
@@ -281,11 +283,14 @@ function resetDeck() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
-    const inspireBtn = document.getElementById('inspireBtn');
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    inspireBtn.classList.add('hidden');
+    
+    // Hide Ninja Button
+    if(typeof hidePoeNinjaLink === "function") {
+        hidePoeNinjaLink();
+    }
 
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');
