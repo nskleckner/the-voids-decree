@@ -191,6 +191,7 @@ h1 {
     align-items: center;
     background: rgba(0,0,0,0.3);
     transition: 0.3s;
+    pointer-events: none;
 }
 
 .click-instruction {
