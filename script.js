@@ -32,7 +32,7 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// MANUAL FILENAME MAP (User Verified)
+// FILENAME MAP: Validated against PoE Wiki Source
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "Totemmax_passive_skill_icon",
@@ -42,7 +42,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Blood Magic": "KeystoneBloodMagic_passive_skill_icon",
     "Bloodsoaked Blade": "TinctureKeystone1_passive_skill_icon",
     "Call to Arms": "CallToArms_passive_skill_icon",
-    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon",
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", 
     "Conduit": "KeystoneConduit_passive_skill_icon",
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
     "Divine Shield": "EnergisedFortress_passive_skill_icon",
@@ -156,14 +156,14 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// LOOKUP FUNCTION: Uses the verified map
+// LOOKUP FUNCTION
 function getKeystoneImage(name) {
     let filename = KEYSTONE_FILENAME_MAP[name];
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    // Fallback: Remove spaces (Safe default)
-    filename = name.replace(/ /g, "");
+    // Fallback: Remove spaces
+    filename = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
@@ -179,6 +179,7 @@ function castFate() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const inspireBtn = document.getElementById('inspireBtn');
     const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
@@ -217,14 +218,11 @@ function castFate() {
         document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
         
         const ascImg = document.getElementById('img-asc');
-        ascImg.classList.remove('loaded');
-        ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
+        ascImg.classList.remove('loaded'); // Clear old state
+        // Attach listener BEFORE src
         ascImg.onload = function() { this.classList.add('loaded'); };
-        ascImg.onerror = function() { 
-            this.src = "https://www.poewiki.net/wiki/Special:FilePath/Ascendant_avatar.png"; 
-            this.classList.add('loaded');
-        };
-
+        ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
+        
         // Render Skill
         document.getElementById('res-skill-name').innerText = chosenSkill.name;
         document.getElementById('res-skill-type').innerText = chosenSkill.isTransfigured ? "Transfigured Gem" : "Standard Gem";
@@ -232,12 +230,8 @@ function castFate() {
         
         const skillImg = document.getElementById('img-skill');
         skillImg.classList.remove('loaded');
-        skillImg.src = getWikiImage(chosenSkill.imageName);
         skillImg.onload = function() { this.classList.add('loaded'); };
-        skillImg.onerror = function() { 
-            this.src = "https://www.poewiki.net/wiki/Special:FilePath/Gem_inventory_icon.png"; 
-            this.classList.add('loaded');
-        };
+        skillImg.src = getWikiImage(chosenSkill.imageName);
 
         // Render Keystones
         const k1El = document.getElementById('link-key1');
@@ -265,12 +259,8 @@ function castFate() {
                 
                 const img = document.getElementById(imgId);
                 img.classList.remove('loaded');
-                img.src = getKeystoneImage(keyName);
                 img.onload = function() { this.classList.add('loaded'); };
-                img.onerror = function() { 
-                    this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; 
-                    this.classList.add('loaded');
-                };
+                img.src = getKeystoneImage(keyName);
             };
             if(chosenKeys[0]) setKey('link-key1', 'res-key1-name', 'img-key1', chosenKeys[0]);
             if(chosenKeys[1]) setKey('link-key2', 'res-key2-name', 'img-key2', chosenKeys[1]);
@@ -280,6 +270,7 @@ function castFate() {
 
         setTimeout(() => {
             resetBtn.classList.remove('hidden');
+            inspireBtn.classList.remove('hidden');
         }, 1200);
 
     }, 800);
@@ -290,9 +281,11 @@ function resetDeck() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const inspireBtn = document.getElementById('inspireBtn');
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
+    inspireBtn.classList.add('hidden');
 
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');

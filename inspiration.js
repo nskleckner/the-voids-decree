@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const CURRENT_LEAGUE = "settlers"; 
+const CURRENT_LEAGUE = "keepers"; 
 
 function openInspirationModal() {
     const modal = document.getElementById('inspiration-modal');
@@ -22,9 +22,7 @@ function openInspirationModal() {
         keystones.push(k2Text);
     }
 
-    // 2. Generate URLs
-    
-    // -- Poe.Ninja --
+    // 2. Generate poe.ninja URL
     let ninjaUrl = `https://poe.ninja/builds/${CURRENT_LEAGUE}?class=${encodeURIComponent(ascName)}&skill=${encodeURIComponent(skillName)}`;
     if (keystones.length > 0) {
         keystones.forEach(k => {
@@ -32,18 +30,8 @@ function openInspirationModal() {
         });
     }
 
-    // -- YouTube --
-    const ytQuery = `Path of Exile 3.25 ${ascName} ${skillName} Build`;
-    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(ytQuery)}`;
-
-    // -- Google --
-    const googleQuery = `site:reddit.com/r/pathofexile OR site:pathofexile.com/forum "${skillName}" "${ascName}" build guide`;
-    const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(googleQuery)}`;
-
-    // 3. Assign URLs to Buttons
+    // 3. Assign URL to Button
     document.getElementById('btn-ninja').href = ninjaUrl;
-    document.getElementById('btn-youtube').href = ytUrl;
-    document.getElementById('btn-google').href = googleUrl;
 
     // 4. Update Summary Text
     document.getElementById('modal-build-summary').innerText = `${ascName} + ${skillName}`;

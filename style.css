@@ -242,8 +242,25 @@ a:visited { color: inherit; }
 
 .fate-value { font-family: 'Alegreya SC', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-parchment); margin: 10px 0 2px 0; line-height: 1.2; }
 .fate-sub { color: var(--text-dim); font-size: 1rem; }
-.main-icon { width: 64px; height: auto; filter: drop-shadow(0 3px 8px rgba(0,0,0,0.8)); margin-bottom: 15px; transition: transform 0.2s; opacity: 0; transition: opacity 0.5s ease-in-out, transform 0.2s; }
+
+/* Image Frames for Smooth Loading */
+.icon-frame {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05); /* Placeholder background */
+    border-radius: 4px;
+}
+.portrait-frame { border-radius: 50%; }
+
+.main-icon { 
+    width: 100%; height: 100%; 
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.8));
+    transition: transform 0.2s, opacity 0.4s ease-in; /* Fade in animation */
+    opacity: 0; 
+}
 .main-icon.loaded { opacity: 1; }
+
 .portrait { border-radius: 50%; border: 2px solid var(--border-purple-muted); }
 .result-link { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .result-link:hover .main-icon { transform: scale(1.1); }
@@ -316,8 +333,8 @@ a:visited { color: inherit; }
 .modal-title { font-family: 'Alegreya SC', serif; color: var(--gold); font-size: 2rem; margin: 0 0 10px 0; text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
 .modal-subtitle { color: var(--text-dim); margin-bottom: 5px; }
 .build-summary-text { font-family: 'Alegreya SC', serif; font-size: 1.4rem; color: var(--text-parchment); font-weight: 700; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; }
-.modal-grid { display: flex; flex-direction: column; gap: 15px; }
-.modal-option { display: flex; align-items: center; gap: 20px; padding: 15px; border: 1px solid #333; background: rgba(255,255,255,0.02); transition: 0.2s; text-align: left; }
+.modal-single-action { display: flex; justify-content: center; }
+.modal-option { display: flex; align-items: center; gap: 20px; padding: 15px; border: 1px solid #333; background: rgba(255,255,255,0.02); transition: 0.2s; text-align: left; width: 100%; max-width: 350px; }
 .modal-option:hover { border-color: var(--gold); background: rgba(200, 170, 110, 0.05); transform: translateX(5px); }
 .option-icon { font-size: 2rem; }
 .option-text h3 { margin: 0; font-family: 'Alegreya SC', serif; color: var(--text-parchment); font-size: 1.2rem; }

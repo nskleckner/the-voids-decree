@@ -80,7 +80,9 @@
                 <div class="card-header">Ascendancy Class</div>
                 <div class="card-inner">
                     <a id="link-asc" href="#" target="_blank" class="result-link">
-                        <img id="img-asc" class="main-icon portrait" src="" alt="Ascendancy Art">
+                        <div class="icon-frame portrait-frame">
+                            <img id="img-asc" class="main-icon portrait" src="" alt="Ascendancy Art">
+                        </div>
                         <div class="fate-value" id="res-asc-name">?</div>
                         <div class="fate-sub" id="res-asc-class">Class</div>
                     </a>
@@ -91,7 +93,9 @@
                 <div class="card-header">Active Skill Gem</div>
                 <div class="card-inner">
                     <a id="link-skill" href="#" target="_blank" class="result-link">
-                        <img id="img-skill" class="main-icon" src="" alt="Skill Gem">
+                        <div class="icon-frame">
+                            <img id="img-skill" class="main-icon" src="" alt="Skill Gem">
+                        </div>
                         <div class="fate-value" id="res-skill-name">?</div>
                         <div class="fate-sub" id="res-skill-type">Gem Type</div>
                     </a>
@@ -125,7 +129,7 @@
         
         <div class="action-bar">
             <button id="inspireBtn" class="action-btn inspire-btn hidden" onclick="openInspirationModal()">
-                Seek Inspiration
+                Check Build Meta
             </button>
             <button id="resetBtn" class="action-btn reset-btn hidden" onclick="resetDeck()">
                 Draw Another Set
@@ -136,32 +140,16 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeInspirationModal()">&times;</span>
                 
-                <h2 class="modal-title">Forbidden Knowledge</h2>
-                <p class="modal-subtitle">The Void reveals existing paths for:</p>
+                <h2 class="modal-title">The Archives</h2>
+                <p class="modal-subtitle">Verify if this combination exists in the <strong>Keepers</strong> league.</p>
                 <div id="modal-build-summary" class="build-summary-text">Ascendancy + Skill</div>
 
-                <div class="modal-grid">
+                <div class="modal-single-action">
                     <a id="btn-ninja" href="#" target="_blank" class="modal-option">
                         <div class="option-icon">📊</div>
                         <div class="option-text">
-                            <h3>The Evidence</h3>
-                            <p>See who survives with this build on <strong>poe.ninja</strong>.</p>
-                        </div>
-                    </a>
-
-                    <a id="btn-youtube" href="#" target="_blank" class="modal-option">
-                        <div class="option-icon">▶️</div>
-                        <div class="option-text">
-                            <h3>The Archives</h3>
-                            <p>Watch gameplay records on <strong>YouTube</strong>.</p>
-                        </div>
-                    </a>
-
-                    <a id="btn-google" href="#" target="_blank" class="modal-option">
-                        <div class="option-icon">📜</div>
-                        <div class="option-text">
-                            <h3>The Theory</h3>
-                            <p>Search standard scrolls on <strong>Google</strong>.</p>
+                            <h3>Search poe.ninja</h3>
+                            <p>Apply filters for Class, Skill, and Keystones.</p>
                         </div>
                     </a>
                 </div>
