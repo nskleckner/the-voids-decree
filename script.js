@@ -27,8 +27,9 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
-// FILENAME MAP: Validated against PoE Wiki (cite: Google Search/Wiki Check)
-// This solves the 404 errors by providing the exact file name expected by Special:FilePath
+// --- MASTER FILE NAME MAP ---
+// Manually mapped to the exact internal name used by the Wiki.
+// Excludes ".png" extension.
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "TotemMax_passive_skill_icon",
@@ -43,11 +44,11 @@ const KEYSTONE_FILENAME_MAP = {
     "Ghost Reaver": "GhostReaver_passive_skill_icon",
     "Glancing Blows": "Glancing_Blows_passive_skill_icon",
     "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
-    "Imbalanced Guard": "Imbalanced_Guard_passive_skill_icon",
+    "Imbalanced Guard": "SacredBastionKeystone", // Found via search
     "Iron Grip": "IronGrip_passive_skill_icon",
     "Iron Reflexes": "IronReflexes_passive_skill_icon",
-    "Iron Will": "IronWill_passive_skill_icon",
-    "Lethe Shade": "Lethe_Shade_passive_skill_icon",
+    "Iron Will": "KeystoneIronWill", // Found via search
+    "Lethe Shade": "MomentofRespite", // Found via search
     "Magebane": "Magebane_passive_skill_icon",
     "Mind Over Matter": "Heroicspirit_passive_skill_icon",
     "Minion Instability": "MinionInstability_passive_skill_icon",
@@ -58,7 +59,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Precise Technique": "Precise_Technique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
     "Runebinder": "KeystoneRunebinder_passive_skill_icon",
-    "Solipsism": "Solipsism_passive_skill_icon",
+    "Solipsism": "Resilience", // Found via search
     "Supreme Ego": "Supreme_Ego_passive_skill_icon",
     "The Agnostic": "The_Agnostic_passive_skill_icon",
     "The Impaler": "The_Impaler_passive_skill_icon",
@@ -143,13 +144,14 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// LOOKUP FUNCTION: Uses the manual map to guarantee success
+// FIX: Uses manual map to guarantee correct filename
 function getKeystoneImage(name) {
-    const filename = KEYSTONE_FILENAME_MAP[name];
-    if (filename) {
-        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
+    let filename = KEYSTONE_FILENAME_MAP[name];
+    if (!filename) {
+        // Fallback: Remove spaces
+        filename = name.replace(/ /g, "");
     }
-    return "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png";
+    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
 }
 
 function getWikiLink(name) {
