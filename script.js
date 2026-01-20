@@ -27,46 +27,45 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
-// MANUAL MAP: Maps Keystone Name -> Exact Wiki Filename (No .png extension)
-// This fixes the "Empty Circle" bug by ensuring we ask for the real file.
-const KEYSTONE_ICON_MAP = {
-    "Acrobatics": "KeystoneAcrobatics",
-    "Ancestral Bond": "TotemMax",
-    "Arrow Dancing": "KeystoneArrowDodging",
-    "Avatar of Fire": "AvatarOfFire",
-    "Blood Magic": "BloodMagic",
-    "Chaos Inoculation": "ChaosInoculation",
-    "Crimson Dance": "CrimsonDance",
-    "Divine Shield": "Divine_Shield",
-    "Eldritch Battery": "KeystoneEldritchBattery",
-    "Elemental Overload": "KeystoneElementalOverload",
-    "Ghost Reaver": "GhostReaver",
-    "Glancing Blows": "Glancing_Blows",
+// MANUAL FILENAME MAP: Exact file names from the Wiki (excluding .png)
+const KEYSTONE_FILENAME_MAP = {
+    "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
+    "Ancestral Bond": "TotemMax_passive_skill_icon",
+    "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
+    "Avatar of Fire": "AvatarOfFire_passive_skill_icon",
+    "Blood Magic": "BloodMagic_passive_skill_icon",
+    "Chaos Inoculation": "ChaosInoculation_passive_skill_icon",
+    "Crimson Dance": "CrimsonDance_passive_skill_icon",
+    "Divine Shield": "Divine_Shield_passive_skill_icon",
+    "Eldritch Battery": "KeystoneEldritchBattery_passive_skill_icon",
+    "Elemental Overload": "KeystoneElementalOverload_passive_skill_icon",
+    "Ghost Reaver": "GhostReaver_passive_skill_icon",
+    "Glancing Blows": "Glancing_Blows_passive_skill_icon",
     "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
-    "Imbalanced Guard": "Imbalanced_Guard",
-    "Iron Grip": "IronGrip",
-    "Iron Reflexes": "IronReflexes",
-    "Iron Will": "IronWill",
-    "Lethe Shade": "Lethe_Shade",
-    "Magebane": "Magebane",
-    "Mind Over Matter": "Heroicspirit", // The weirdest one
-    "Minion Instability": "MinionInstability",
-    "Oath of the Maji": "Oath_of_the_Maji",
-    "Pain Attunement": "PainAttunement",
-    "Perfect Agony": "KeystonePerfectAgony",
-    "Point Blank": "PointBlank",
-    "Precise Technique": "Precise_Technique",
-    "Resolute Technique": "KeystoneResoluteTechnique",
-    "Runebinder": "KeystoneRunebinder",
-    "Solipsism": "Solipsism",
-    "Supreme Ego": "Supreme_Ego",
-    "The Agnostic": "The_Agnostic",
-    "The Impaler": "The_Impaler",
-    "Unwavering Stance": "UnwaveringStance",
-    "Vaal Pact": "VaalPact",
-    "Wicked Ward": "Wicked_Ward",
-    "Wind Dancer": "KeystoneWindDancer",
-    "Zealot's Oath": "Liferegentoenergyshield"
+    "Imbalanced Guard": "Imbalanced_Guard_passive_skill_icon",
+    "Iron Grip": "IronGrip_passive_skill_icon",
+    "Iron Reflexes": "IronReflexes_passive_skill_icon",
+    "Iron Will": "IronWill_passive_skill_icon",
+    "Lethe Shade": "Lethe_Shade_passive_skill_icon",
+    "Magebane": "Magebane_passive_skill_icon",
+    "Mind Over Matter": "Heroicspirit_passive_skill_icon", // The tricky one
+    "Minion Instability": "MinionInstability_passive_skill_icon",
+    "Oath of the Maji": "Oath_of_the_Maji_passive_skill_icon",
+    "Pain Attunement": "PainAttunement_passive_skill_icon",
+    "Perfect Agony": "KeystonePerfectAgony_passive_skill_icon",
+    "Point Blank": "PointBlank_passive_skill_icon",
+    "Precise Technique": "Precise_Technique_passive_skill_icon",
+    "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
+    "Runebinder": "KeystoneRunebinder_passive_skill_icon",
+    "Solipsism": "Solipsism_passive_skill_icon",
+    "Supreme Ego": "Supreme_Ego_passive_skill_icon",
+    "The Agnostic": "The_Agnostic_passive_skill_icon",
+    "The Impaler": "The_Impaler_passive_skill_icon",
+    "Unwavering Stance": "UnwaveringStance_passive_skill_icon",
+    "Vaal Pact": "VaalPact_passive_skill_icon",
+    "Wicked Ward": "Wicked_Ward_passive_skill_icon",
+    "Wind Dancer": "KeystoneWindDancer_passive_skill_icon",
+    "Zealot's Oath": "Liferegentoenergyshield_passive_skill_icon"
 };
 
 const SKILLS_DB = {
@@ -120,6 +119,8 @@ const SKILLS_DB = {
     "Winter Orb": [], "Wintertide Brand": []
 };
 
+// --- UTILITIES ---
+
 function getRandom(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -141,14 +142,15 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// FIX: Uses manual map to guarantee correct filename
+// 2. FIXED KEYSTONE FUNCTION
 function getKeystoneImage(name) {
-    let filename = KEYSTONE_ICON_MAP[name];
-    if (!filename) {
-        // Fallback: Remove spaces
-        filename = name.replace(/ /g, "");
+    // Look up the EXACT filename in the map
+    const filename = KEYSTONE_FILENAME_MAP[name];
+    if (filename) {
+        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
+    // Absolute fallback just in case
+    return "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png";
 }
 
 function getWikiLink(name) {
@@ -241,7 +243,10 @@ function castFate() {
                 
                 const img = document.getElementById(imgId);
                 img.classList.remove('loaded');
+                
+                // USE THE NEW MAP FUNCTION
                 img.src = getKeystoneImage(keyName);
+                
                 img.onload = function() { this.classList.add('loaded'); };
                 img.onerror = function() { 
                     this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; 
