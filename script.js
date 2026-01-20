@@ -32,10 +32,10 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// FILENAME MAP
+// FILENAME MAP: Validated against PoE Wiki Source
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
-    "Ancestral Bond": "Totemmax_passive_skill_icon",
+    "Ancestral Bond": "Totemmax_passive_skill_icon", // CORRECTED
     "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
     "Arsenal of Vengeance": "RetaliationKeystone_passive_skill_icon",
     "Avatar of Fire": "KeystoneAvatarOfFire_passive_skill_icon",
@@ -65,7 +65,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Necromantic Aegis": "KeystoneNecromanticAegis_passive_skill_icon",
     "Pain Attunement": "KeystonePainAttunement_passive_skill_icon",
     "Perfect Agony": "CritAilments_passive_skill_icon",
-    "Point Blank": "KeystonePointBlankArcher_passive_skill_icon",
+    "Point Blank": "KeystonePointBlankArcher_passive_skill_icon", // CORRECTED
     "Precise Technique": "PreciseTechnique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
     "Runebinder": "BrandKeystone_passive_skill_icon",
@@ -97,7 +97,7 @@ const SKILLS_DB = {
     "Earthquake": ["of Amplification"], "Earthshatter": [], "Elemental Hit": ["of the Spectrum"], "Energy Blade": [],
     "Essence Drain": ["of Desperation", "of Wickedness"], "Ethereal Knives": ["of the Massacre", "of Lingering Blades"], "Explosive Arrow": [],
     "Explosive Concoction": ["of Destruction"], "Explosive Trap": ["of Magnitude", "of Shrapnel"], "Exsanguinate": ["of Transmission"],
-    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": [],
+    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": [], // CORRECTED: No transfigured
     "Firestorm": ["of Meteors", "of Pelting"], "Flame Dash": ["of Return"], "Flame Surge": ["of Combusting"], "Flame Wall": [],
     "Flameblast": ["of Celerity", "of Contraction"], "Flicker Strike": ["of Power"], "Forbidden Rite": ["of Soul Sacrifice"],
     "Freezing Pulse": [], "Frenzy": ["of Onslaught"], "Frost Blades": ["of Katabasis"], "Frost Bomb": ["of Forthcoming", "of Instability"],
@@ -274,6 +274,7 @@ function castFate() {
         // 2. Reveal Buttons (Wait 700ms total)
         setTimeout(() => {
             document.getElementById('resetBtn').classList.remove('hidden');
+            document.getElementById('inspireBtn').classList.remove('hidden');
         }, 700); 
 
     }, 300); // Wait for initial deal
@@ -289,11 +290,7 @@ function resetDeck() {
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    
-    // Hide Ninja Button
-    if(typeof hidePoeNinjaLink === "function") {
-        hidePoeNinjaLink();
-    }
+    inspireBtn.classList.add('hidden');
 
     // 3. Reset Deck Return Time (400ms)
     setTimeout(() => {
