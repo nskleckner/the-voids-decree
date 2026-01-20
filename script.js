@@ -65,7 +65,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Necromantic Aegis": "KeystoneNecromanticAegis_passive_skill_icon",
     "Pain Attunement": "KeystonePainAttunement_passive_skill_icon",
     "Perfect Agony": "CritAilments_passive_skill_icon",
-    "Point Blank": "KeystonePointBlank_passive_skill_icon",
+    "Point Blank": "KeystonePointBlankArcher_passive_skill_icon",
     "Precise Technique": "PreciseTechnique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
     "Runebinder": "BrandKeystone_passive_skill_icon",
