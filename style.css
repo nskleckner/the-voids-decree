@@ -6,7 +6,8 @@
     --gold: #c8aa6e;
     --gold-glow: #ebdcb2;
     --void-purple: #9b59b6;
-    --border-color: #2a2a30; 
+    /* New Muted Purple Border */
+    --border-purple-muted: #5a4a6e; 
 }
 
 body {
@@ -15,7 +16,7 @@ body {
                 radial-gradient(circle at 80% 80%, #0e0e12 0%, transparent 40%);
     color: var(--text-parchment);
     font-family: 'Alegreya', serif; 
-    font-size: 16px; /* Reduced from 18px */
+    font-size: 16px; 
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -47,21 +48,21 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 1000px; /* Tighter container */
+    max-width: 1000px;
     width: 95%;
     text-align: center;
-    padding: 1.5rem 0; /* Reduced padding */
+    padding: 1.5rem 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-/* Typography - Tighter & Smaller */
+/* Typography */
 h1 {
     font-family: 'Alegreya SC', serif; 
     color: var(--text-parchment);
-    font-size: 2.8rem; /* Reduced from 4rem */
+    font-size: 2.8rem;
     margin: 0;
     text-transform: uppercase;
     text-shadow: 0 0 15px rgba(155, 89, 182, 0.4);
@@ -72,19 +73,19 @@ h1 {
     color: var(--text-dim);
     margin-top: 0.2rem;
     margin-bottom: 1.5rem;
-    font-size: 1rem; /* Reduced */
+    font-size: 1rem;
     letter-spacing: 0.5px;
 }
 
 a { color: inherit; text-decoration: none; transition: 0.2s; }
 a:visited { color: inherit; }
 
-/* Config Panel - Compact Map Device Style */
+/* Config Panel */
 .config-panel {
     background: rgba(19, 19, 24, 0.95);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-purple-muted);
     border-radius: 4px;
-    padding: 10px 20px; /* Tighter padding */
+    padding: 10px 20px;
     display: inline-flex;
     gap: 2rem;
     justify-content: center;
@@ -115,9 +116,9 @@ a:visited { color: inherit; }
 .toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(14px); background: var(--gold); }
 .toggle-checkbox:checked + .toggle-label .toggle-text { color: var(--gold); }
 
-/* Exchange Zone - Compact */
+/* Exchange Zone */
 .exchange-zone {
-    height: 260px; /* Reduced from 350px */
+    height: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,10 +134,10 @@ a:visited { color: inherit; }
     transform: scale(0.8);
 }
 
-/* Deck - Tarot Sized */
+/* Deck */
 .deck-container {
     position: relative;
-    width: 150px; /* Much smaller deck */
+    width: 150px;
     height: 230px;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -166,7 +167,7 @@ a:visited { color: inherit; }
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: 10;
     background: #000;
-    border: 1px solid #444; /* Thinner border */
+    border: 1px solid #444;
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0,0,0,0.8);
 }
@@ -205,43 +206,40 @@ a:visited { color: inherit; }
     100% { transform: scale(0) translateY(150px); opacity: 0; }
 }
 
-/* --- RESULTS (Compact Row) --- */
+/* --- RESULTS --- */
 .fate-grid {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: flex-start;
-    gap: 15px; /* Tighter gap */
+    align-items: stretch; /* Forces equal height */
+    gap: 15px;
     width: 100%;
     min-height: 0; 
 }
 
 .fate-card {
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    flex: 1;
-    max-width: 300px; /* Reduced width */
+    /* Unified Purple Border */
+    border: 1px solid var(--border-purple-muted); 
+    flex: 1; /* All cards take equal space */
+    width: 250px; /* Fixed basis */
+    max-width: 300px;
     min-width: 240px;
-    min-height: auto; /* Let content dictate height */
     opacity: 0;
     transform: translateY(30px);
     display: none;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     border-radius: 2px;
     position: relative;
+    /* Ensure content centers vertically */
+    display: flex; /* Hidden by default, toggled via JS */
+    flex-direction: column; 
 }
 
-.fate-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0.4;
-}
-
+/* JS toggles display, but we need flex when revealed */
 .fate-card.revealed {
-    display: block;
+    display: flex; 
     animation: card-reveal 0.6s forwards cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -251,37 +249,39 @@ a:visited { color: inherit; }
 }
 
 .card-header {
-    background: linear-gradient(90deg, transparent, rgba(30, 30, 35, 0.8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(90, 74, 110, 0.3), transparent);
     color: var(--gold);
     font-family: 'Alegreya SC', serif;
     font-size: 1rem;
     font-weight: 700;
-    padding: 10px;
-    border-bottom: 1px solid #222;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-purple-muted);
     letter-spacing: 1px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
 }
 
 .card-inner {
-    padding: 20px 15px; /* Compact padding */
+    padding: 20px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    justify-content: flex-start; /* Items align to top */
+    flex-grow: 1; /* Fills height */
 }
 
+/* Subtle Glow for Main Skill (No Sizing Changes) */
 .fate-card.highlight {
-    border-color: var(--void-purple);
-    box-shadow: 0 0 20px rgba(120, 50, 150, 0.1);
+    box-shadow: 0 0 25px rgba(155, 89, 182, 0.15);
 }
 
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
 
-/* Result Content - Scaled Down */
+/* Content */
 .fate-value { 
     font-family: 'Alegreya SC', serif; 
-    font-size: 1.4rem; /* Smaller Font */
+    font-size: 1.4rem;
     font-weight: 700; 
     color: var(--text-parchment); 
     margin: 10px 0 2px 0; 
@@ -294,21 +294,22 @@ a:visited { color: inherit; }
 }
 
 .main-icon { 
-    width: 50px; /* Smaller Icons */
+    width: 64px; /* Sync icon size */
     height: auto; 
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.8));
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     transition: transform 0.2s;
 }
 
-.portrait { border-radius: 50%; border: 2px solid var(--border-color); }
+.portrait { border-radius: 50%; border: 2px solid var(--border-purple-muted); }
 
 /* Links */
+.result-link { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; }
 .result-link:hover .main-icon { transform: scale(1.1); }
 .result-link:hover .fate-value { color: var(--gold); text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
 .result-link:hover .portrait { border-color: var(--gold); }
 
-/* Keystones - Tighter */
+/* Keystones */
 .keystone-row { 
     display: flex; 
     align-items: center; 
@@ -334,16 +335,16 @@ a:visited { color: inherit; }
     line-height: 1.1;
 }
 
-.keystone-icon { width: 32px; height: 32px; min-width: 32px; }
+.keystone-icon { width: 32px; height: 32px; min-width: 32px; border: 1px solid #333; border-radius: 50%; }
 
-/* Reset Button - Fixed Z-Index and Styling */
+/* Reset Button */
 .reset-btn {
     position: relative;
-    z-index: 100; /* Ensure clickable over cards */
+    z-index: 100;
     margin-top: 30px;
     background: transparent;
-    border: 1px solid var(--gold-dim);
-    color: var(--gold-dim);
+    border: 1px solid var(--border-purple-muted);
+    color: var(--text-dim);
     padding: 8px 25px;
     font-family: 'Alegreya SC', serif;
     font-size: 1rem;
@@ -364,15 +365,6 @@ a:visited { color: inherit; }
 
 /* Mobile */
 @media (max-width: 850px) {
-    h1 { font-size: 2rem; }
-    
-    .config-panel {
-        flex-direction: column;
-        gap: 0.8rem;
-        padding: 15px;
-        width: 85%;
-    }
-
     .fate-grid {
         flex-direction: column;
         align-items: center;
@@ -383,6 +375,4 @@ a:visited { color: inherit; }
         width: 100%;
         max-width: 320px;
     }
-    
-    .exchange-zone { height: 250px; }
 }

@@ -101,8 +101,10 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
+// FIX: Removes ALL non-alphanumeric chars (spaces, apostrophes, dashes)
+// Example: "Zealot's Oath" -> "ZealotsOath"
 function getKeystoneImage(name) {
-    const safeName = name.replace(/ /g, "");
+    const safeName = name.replace(/[^a-zA-Z0-9]/g, "");
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}_passive_skill_icon.png`;
 }
 
@@ -121,7 +123,6 @@ function castFate() {
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
     
-    // Check if we are currently dealing to prevent double clicks
     if (deck.classList.contains('dealing')) return;
 
     let numKeystones = 1;
