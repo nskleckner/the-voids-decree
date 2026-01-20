@@ -6,7 +6,7 @@
     --gold: #c8aa6e;
     --gold-glow: #ebdcb2;
     --void-purple: #9b59b6;
-    /* New Muted Purple Border */
+    --border-color: #2a2a30;
     --border-purple-muted: #5a4a6e; 
 }
 
@@ -16,7 +16,7 @@ body {
                 radial-gradient(circle at 80% 80%, #0e0e12 0%, transparent 40%);
     color: var(--text-parchment);
     font-family: 'Alegreya', serif; 
-    font-size: 16px; 
+    font-size: 18px; /* Bumped back up for better visibility */
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -37,7 +37,7 @@ body {
     background-size: 200px 200px;
     opacity: 0.1;
     z-index: -1;
-    animation: twinkle 20s infinite linear;
+    animation: twinkle 25s infinite linear;
 }
 
 @keyframes twinkle {
@@ -48,11 +48,13 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 1000px;
+    max-width: 1200px;
     width: 95%;
     text-align: center;
-    padding: 1.5rem 0;
-    min-height: 100vh;
+    /* Added Top Spacing to push content down (Vertical Centering feel) */
+    padding-top: 5vh; 
+    padding-bottom: 2rem;
+    min-height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -62,19 +64,48 @@ body {
 h1 {
     font-family: 'Alegreya SC', serif; 
     color: var(--text-parchment);
-    font-size: 2.8rem;
+    font-size: 3.5rem; /* Larger Header */
     margin: 0;
     text-transform: uppercase;
-    text-shadow: 0 0 15px rgba(155, 89, 182, 0.4);
-    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+    letter-spacing: 3px;
+    line-height: 1;
 }
 
 .subtitle {
     color: var(--text-dim);
-    margin-top: 0.2rem;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
     letter-spacing: 0.5px;
+}
+
+/* New Flavor Text Styling - "The Pop" */
+.flavor-container {
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 15px 20px;
+    margin: 0 auto 3rem auto;
+    max-width: 650px;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.flavor-text {
+    font-family: 'Alegreya', serif;
+    color: var(--text-parchment);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.95;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+.highlight-text {
+    color: var(--gold);
+    font-weight: 700;
+    font-family: 'Alegreya SC', serif;
 }
 
 a { color: inherit; text-decoration: none; transition: 0.2s; }
@@ -85,12 +116,12 @@ a:visited { color: inherit; }
     background: rgba(19, 19, 24, 0.95);
     border: 1px solid var(--border-purple-muted);
     border-radius: 4px;
-    padding: 10px 20px;
+    padding: 12px 25px;
     display: inline-flex;
-    gap: 2rem;
+    gap: 3rem;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 2.5rem auto;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     backdrop-filter: blur(5px);
 }
@@ -98,27 +129,27 @@ a:visited { color: inherit; }
 .config-label {
     font-family: 'Alegreya SC', serif;
     color: var(--gold);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
-.radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: var(--text-dim); font-family: 'Alegreya SC', serif; font-size: 0.9rem; transition: 0.2s; }
-.radio-group input { accent-color: var(--gold); transform: scale(1.1); }
+.radio-group label { cursor: pointer; display: flex; align-items: center; gap: 8px; color: var(--text-dim); font-family: 'Alegreya SC', serif; font-size: 1rem; transition: 0.2s; }
+.radio-group input { accent-color: var(--gold); transform: scale(1.3); }
 .radio-group label:hover, .radio-group input:checked + span { color: var(--gold); }
 
 .toggle-wrapper { display: flex; align-items: center; }
 .toggle-checkbox { display: none; }
-.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-dim); font-family: 'Alegreya SC', serif; }
-.toggle-switch { width: 30px; height: 16px; background: #000; border: 1px solid #444; position: relative; transition: 0.3s; }
-.toggle-switch::after { content: ''; position: absolute; top: 1px; left: 1px; width: 12px; height: 12px; background: #666; transition: 0.3s; }
+.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1rem; color: var(--text-dim); font-family: 'Alegreya SC', serif; }
+.toggle-switch { width: 34px; height: 18px; background: #000; border: 1px solid #444; position: relative; transition: 0.3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 1px; left: 1px; width: 14px; height: 14px; background: #666; transition: 0.3s; }
 .toggle-checkbox:checked + .toggle-label .toggle-switch { border-color: var(--gold); background: #222; }
-.toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(14px); background: var(--gold); }
+.toggle-checkbox:checked + .toggle-label .toggle-switch::after { transform: translateX(16px); background: var(--gold); }
 .toggle-checkbox:checked + .toggle-label .toggle-text { color: var(--gold); }
 
-/* Exchange Zone */
+/* Exchange Zone - Slightly Taller */
 .exchange-zone {
-    height: 260px;
+    height: 300px; /* Increased */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,11 +165,11 @@ a:visited { color: inherit; }
     transform: scale(0.8);
 }
 
-/* Deck */
+/* Deck - Slightly Larger */
 .deck-container {
     position: relative;
-    width: 150px;
-    height: 230px;
+    width: 170px; /* Wider */
+    height: 260px; /* Taller */
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -186,11 +217,11 @@ a:visited { color: inherit; }
 
 .click-instruction {
     font-family: 'Alegreya SC', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--gold-glow);
     border: 1px solid var(--gold);
-    padding: 5px 12px;
+    padding: 6px 14px;
     background: rgba(0,0,0,0.85);
     letter-spacing: 1.5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -212,32 +243,27 @@ a:visited { color: inherit; }
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: stretch; /* Forces equal height */
-    gap: 15px;
+    align-items: stretch;
+    gap: 20px;
     width: 100%;
     min-height: 0; 
 }
 
 .fate-card {
     background: var(--card-bg);
-    /* Unified Purple Border */
     border: 1px solid var(--border-purple-muted); 
-    flex: 1; /* All cards take equal space */
-    width: 250px; /* Fixed basis */
-    max-width: 300px;
-    min-width: 240px;
+    flex: 1; 
+    max-width: 340px; /* Wider Cards */
+    min-width: 260px;
     opacity: 0;
     transform: translateY(30px);
     display: none;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     border-radius: 2px;
     position: relative;
-    /* Ensure content centers vertically */
-    display: flex; /* Hidden by default, toggled via JS */
     flex-direction: column; 
 }
 
-/* JS toggles display, but we need flex when revealed */
 .fate-card.revealed {
     display: flex; 
     animation: card-reveal 0.6s forwards cubic-bezier(0.23, 1, 0.32, 1);
@@ -252,24 +278,23 @@ a:visited { color: inherit; }
     background: linear-gradient(90deg, transparent, rgba(90, 74, 110, 0.3), transparent);
     color: var(--gold);
     font-family: 'Alegreya SC', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    padding: 12px;
+    padding: 14px;
     border-bottom: 1px solid var(--border-purple-muted);
     letter-spacing: 1px;
     text-shadow: 0 2px 5px rgba(0,0,0,0.8);
 }
 
 .card-inner {
-    padding: 20px 15px;
+    padding: 25px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Items align to top */
-    flex-grow: 1; /* Fills height */
+    justify-content: flex-start;
+    flex-grow: 1;
 }
 
-/* Subtle Glow for Main Skill (No Sizing Changes) */
 .fate-card.highlight {
     box-shadow: 0 0 25px rgba(155, 89, 182, 0.15);
 }
@@ -281,20 +306,20 @@ a:visited { color: inherit; }
 /* Content */
 .fate-value { 
     font-family: 'Alegreya SC', serif; 
-    font-size: 1.4rem;
+    font-size: 1.6rem; /* Larger text */
     font-weight: 700; 
     color: var(--text-parchment); 
     margin: 10px 0 2px 0; 
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
 .fate-sub { 
     color: var(--text-dim); 
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .main-icon { 
-    width: 64px; /* Sync icon size */
+    width: 64px;
     height: auto; 
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.8));
     margin-bottom: 15px;
@@ -313,10 +338,10 @@ a:visited { color: inherit; }
 .keystone-row { 
     display: flex; 
     align-items: center; 
-    gap: 10px; 
+    gap: 12px; 
     margin: 8px 0; 
     width: 100%; 
-    padding: 8px 10px; 
+    padding: 10px 12px; 
     background: rgba(255,255,255,0.02); 
     border: 1px solid transparent; 
     border-radius: 2px;
@@ -328,26 +353,26 @@ a:visited { color: inherit; }
 
 .keystone-text { 
     font-family: 'Alegreya SC', serif; 
-    font-size: 1rem; 
+    font-size: 1.1rem; 
     font-weight: 700;
     color: var(--text-parchment);
     text-align: left;
     line-height: 1.1;
 }
 
-.keystone-icon { width: 32px; height: 32px; min-width: 32px; border: 1px solid #333; border-radius: 50%; }
+.keystone-icon { width: 36px; height: 36px; min-width: 36px; border: 1px solid #333; border-radius: 50%; }
 
 /* Reset Button */
 .reset-btn {
     position: relative;
     z-index: 100;
-    margin-top: 30px;
+    margin-top: 40px;
     background: transparent;
     border: 1px solid var(--border-purple-muted);
     color: var(--text-dim);
-    padding: 8px 25px;
+    padding: 10px 30px;
     font-family: 'Alegreya SC', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: 0.3s;
     opacity: 1;
@@ -368,28 +393,20 @@ a:visited { color: inherit; }
     .fate-grid {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 25px;
     }
 
     .fate-card {
         width: 100%;
-        max-width: 320px;
+        max-width: 340px;
     }
-}
-
-.flavor-text {
-    font-family: 'Alegreya', serif;
-    color: var(--text-dim);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    max-width: 600px; /* Keeps the text from getting too wide/hard to read */
-    margin: -1rem auto 2.5rem auto; /* Negative top margin pulls it closer to subtitle */
-    opacity: 0.9;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-}
-
-.highlight-text {
-    color: var(--gold);
-    font-weight: 700;
-    font-family: 'Alegreya SC', serif; /* Small caps for key terms */
+    
+    .config-panel {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .container {
+        padding-top: 2rem;
+    }
 }
