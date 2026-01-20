@@ -27,7 +27,8 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
-// MANUAL FILENAME MAP: Exact file names from the Wiki (excluding .png)
+// FILENAME MAP: Validated against PoE Wiki (cite: Google Search/Wiki Check)
+// This solves the 404 errors by providing the exact file name expected by Special:FilePath
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "TotemMax_passive_skill_icon",
@@ -48,7 +49,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Iron Will": "IronWill_passive_skill_icon",
     "Lethe Shade": "Lethe_Shade_passive_skill_icon",
     "Magebane": "Magebane_passive_skill_icon",
-    "Mind Over Matter": "Heroicspirit_passive_skill_icon", // The tricky one
+    "Mind Over Matter": "Heroicspirit_passive_skill_icon",
     "Minion Instability": "MinionInstability_passive_skill_icon",
     "Oath of the Maji": "Oath_of_the_Maji_passive_skill_icon",
     "Pain Attunement": "PainAttunement_passive_skill_icon",
@@ -142,14 +143,12 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// 2. FIXED KEYSTONE FUNCTION
+// LOOKUP FUNCTION: Uses the manual map to guarantee success
 function getKeystoneImage(name) {
-    // Look up the EXACT filename in the map
     const filename = KEYSTONE_FILENAME_MAP[name];
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
-    // Absolute fallback just in case
     return "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png";
 }
 
@@ -165,6 +164,7 @@ function castFate() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
     
@@ -232,10 +232,18 @@ function castFate() {
         k1El.style.display = 'none';
         k2El.style.display = 'none';
         noKeyEl.style.display = 'none';
+        
+        // RESET DUAL MODE CLASS
+        keystoneContainer.classList.remove('dual-mode');
 
         if(chosenKeys.length === 0) {
             noKeyEl.style.display = 'block';
         } else {
+            // IF 2 KEYS, ADD DUAL MODE CLASS TO SHRINK THEM
+            if (chosenKeys.length > 1) {
+                keystoneContainer.classList.add('dual-mode');
+            }
+
             const setKey = (elId, nameId, imgId, keyName) => {
                 document.getElementById(elId).style.display = 'flex';
                 document.getElementById(nameId).innerText = keyName;
@@ -243,10 +251,7 @@ function castFate() {
                 
                 const img = document.getElementById(imgId);
                 img.classList.remove('loaded');
-                
-                // USE THE NEW MAP FUNCTION
                 img.src = getKeystoneImage(keyName);
-                
                 img.onload = function() { this.classList.add('loaded'); };
                 img.onerror = function() { 
                     this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; 

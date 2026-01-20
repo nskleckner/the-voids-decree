@@ -6,7 +6,6 @@
     --gold: #c8aa6e;
     --gold-glow: #ebdcb2;
     --void-purple: #9b59b6;
-    /* Muted Purple for borders to match the void theme */
     --border-purple-muted: #5a4a6e;
 }
 
@@ -25,7 +24,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- BACKGROUND ANIMATION --- */
+/* Starfield */
 .stars-layer {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -59,7 +58,7 @@ body {
     justify-content: flex-start;
 }
 
-/* --- TYPOGRAPHY --- */
+/* Typography */
 h1 {
     font-family: 'Alegreya SC', serif; 
     color: var(--text-parchment);
@@ -79,7 +78,7 @@ h1 {
     letter-spacing: 0.5px;
 }
 
-/* Flavor Text Box */
+/* Flavor Container */
 .flavor-container {
     background: rgba(0, 0, 0, 0.4);
     border-top: 1px solid #333;
@@ -110,7 +109,7 @@ h1 {
 a { color: inherit; text-decoration: none; transition: 0.2s; }
 a:visited { color: inherit; }
 
-/* --- CONFIG PANEL --- */
+/* Config Panel */
 .config-panel {
     background: rgba(19, 19, 24, 0.95);
     border: 1px solid var(--border-purple-muted);
@@ -139,196 +138,44 @@ a:visited { color: inherit; }
     text-transform: uppercase;
 }
 
-/* --- STYLIZED CONTROLS --- */
-
 /* Radio Gem Sockets */
 .radio-group { display: flex; gap: 15px; }
 .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 8px; position: relative; user-select: none; }
 .radio-group input { position: absolute; opacity: 0; cursor: pointer; }
-
-/* The Socket */
-.radio-gem { 
-    width: 16px; 
-    height: 16px; 
-    background: #000; 
-    border: 2px solid #555; 
-    border-radius: 50%; 
-    transition: 0.3s; 
-    box-shadow: inset 0 0 5px #000; 
-    position: relative; 
-}
-
-/* The Gem (Inside) */
-.radio-gem::after { 
-    content: ''; 
-    position: absolute; 
-    top: 50%; left: 50%; 
-    transform: translate(-50%, -50%) scale(0); 
-    width: 10px; 
-    height: 10px; 
-    background: var(--gold); 
-    border-radius: 50%; 
-    box-shadow: 0 0 10px var(--gold), inset 0 0 3px #fff; 
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-}
-
-/* Checked State */
+.radio-gem { width: 16px; height: 16px; background: #000; border: 2px solid #555; border-radius: 50%; transition: 0.3s; box-shadow: inset 0 0 5px #000; position: relative; }
+.radio-gem::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold), inset 0 0 3px #fff; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .radio-group input:checked + .radio-gem { border-color: var(--gold); }
 .radio-group input:checked + .radio-gem::after { transform: translate(-50%, -50%) scale(1); }
 .radio-group:hover .radio-gem { border-color: #888; }
-
-.radio-label { 
-    font-family: 'Alegreya SC', serif; 
-    color: var(--text-dim); 
-    font-size: 1rem; 
-    transition: 0.3s; 
-}
+.radio-label { font-family: 'Alegreya SC', serif; color: var(--text-dim); font-size: 1rem; transition: 0.3s; }
 .radio-group input:checked ~ .radio-label { color: var(--gold); text-shadow: 0 0 8px rgba(200, 170, 110, 0.3); }
 
-/* Stylized Toggle Switch */
+/* Toggle Switch */
 .toggle-wrapper { display: flex; align-items: center; }
 .toggle-checkbox { display: none; }
-.toggle-label { 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-    font-size: 1rem; 
-    color: var(--text-dim); 
-    font-family: 'Alegreya SC', serif; 
-    user-select: none; 
-}
-
-/* The Track */
-.toggle-switch { 
-    width: 44px; 
-    height: 22px; 
-    background: #0b0b0f; 
-    border: 1px solid #444; 
-    border-radius: 20px; 
-    position: relative; 
-    transition: 0.3s; 
-    box-shadow: inset 0 0 5px #000; 
-}
-
-/* The Orb (Thumb) */
-.toggle-thumb { 
-    position: absolute; 
-    top: 2px; left: 2px; 
-    width: 16px; height: 16px; 
-    background: #666; 
-    border-radius: 50%; 
-    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5); 
-}
-
+.toggle-label { cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 1rem; color: var(--text-dim); font-family: 'Alegreya SC', serif; user-select: none; }
+.toggle-switch { width: 44px; height: 22px; background: #0b0b0f; border: 1px solid #444; border-radius: 20px; position: relative; transition: 0.3s; box-shadow: inset 0 0 5px #000; }
+.toggle-thumb { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: #666; border-radius: 50%; transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 .toggle-label:hover .toggle-switch { border-color: #666; }
+.toggle-checkbox:checked + .toggle-label .toggle-switch { border-color: var(--void-purple); box-shadow: 0 0 10px rgba(155, 89, 182, 0.2), inset 0 0 5px #000; }
+.toggle-checkbox:checked + .toggle-label .toggle-thumb { transform: translateX(22px); background: var(--void-purple); box-shadow: 0 0 10px var(--void-purple), inset 0 0 2px #fff; }
+.toggle-checkbox:checked + .toggle-label .toggle-text { color: var(--void-purple); text-shadow: 0 0 8px rgba(155, 89, 182, 0.4); }
 
-/* Active State (Phrecia Mode) */
-.toggle-checkbox:checked + .toggle-label .toggle-switch { 
-    border-color: var(--void-purple); 
-    box-shadow: 0 0 10px rgba(155, 89, 182, 0.2), inset 0 0 5px #000; 
-}
-.toggle-checkbox:checked + .toggle-label .toggle-thumb { 
-    transform: translateX(22px); 
-    background: var(--void-purple); 
-    box-shadow: 0 0 10px var(--void-purple), inset 0 0 2px #fff; 
-}
-.toggle-checkbox:checked + .toggle-label .toggle-text { 
-    color: var(--void-purple); 
-    text-shadow: 0 0 8px rgba(155, 89, 182, 0.4); 
-}
-
-/* --- EXCHANGE ZONE (The Deck) --- */
-.exchange-zone {
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    transition: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-.exchange-zone.collapsed {
-    height: 0;
-    opacity: 0;
-    pointer-events: none;
-    margin-bottom: 0;
-    transform: scale(0.8);
-}
-
-.deck-container {
-    position: relative;
-    width: 170px;
-    height: 260px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.deck-container:hover {
-    transform: scale(1.05) translateY(-5px);
-}
-
-.div-card-stack {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #111;
-    border: 1px solid #444;
-    transform: rotate(-2deg) translate(-3px, -3px);
-    z-index: 1;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-.div-card-stack:nth-child(2) {
-    transform: rotate(2deg) translate(3px, -2px);
-    z-index: 2;
-}
-
-.div-card-main {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 10;
-    background: #000;
-    border: 1px solid #444;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.8);
-}
-
+/* Exchange Zone */
+.exchange-zone { height: 300px; display: flex; justify-content: center; align-items: center; perspective: 1000px; transition: 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+.exchange-zone.collapsed { height: 0; opacity: 0; pointer-events: none; margin-bottom: 0; transform: scale(0.8); }
+.deck-container { position: relative; width: 170px; height: 260px; cursor: pointer; transition: transform 0.3s ease; }
+.deck-container:hover { transform: scale(1.05) translateY(-5px); }
+.div-card-stack { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #111; border: 1px solid #444; transform: rotate(-2deg) translate(-3px, -3px); z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+.div-card-stack:nth-child(2) { transform: rotate(2deg) translate(3px, -2px); z-index: 2; }
+.div-card-main { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; background: #000; border: 1px solid #444; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
 .div-card-main img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+.card-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); pointer-events: none; }
+.click-instruction { font-family: 'Alegreya SC', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold-glow); border: 1px solid var(--gold); padding: 6px 14px; background: rgba(0,0,0,0.85); letter-spacing: 1.5px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+.deck-container.dealing { animation: deal-anim 0.8s forwards cubic-bezier(0.6, -0.28, 0.735, 0.045); }
+@keyframes deal-anim { 0% { transform: scale(1); } 50% { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--void-purple); } 100% { transform: scale(0) translateY(150px); opacity: 0; } }
 
-.card-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,0.3);
-    pointer-events: none;
-}
-
-.click-instruction {
-    font-family: 'Alegreya SC', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--gold-glow);
-    border: 1px solid var(--gold);
-    padding: 6px 14px;
-    background: rgba(0,0,0,0.85);
-    letter-spacing: 1.5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.deck-container.dealing {
-    animation: deal-anim 0.8s forwards cubic-bezier(0.6, -0.28, 0.735, 0.045);
-}
-
-@keyframes deal-anim {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--void-purple); }
-    100% { transform: scale(0) translateY(150px); opacity: 0; }
-}
-
-/* --- RESULTS GRID --- */
+/* --- RESULTS (The Fixes) --- */
 .fate-grid {
     display: flex;
     flex-direction: row;
@@ -388,7 +235,7 @@ a:visited { color: inherit; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center; /* ALIGNMENT FIX: Centers 1 or 2 items vertically */
     flex-grow: 1;
 }
 
@@ -400,7 +247,7 @@ a:visited { color: inherit; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
 
-/* --- CARD CONTENT --- */
+/* Content */
 .fate-value { 
     font-family: 'Alegreya SC', serif; 
     font-size: 1.6rem; 
@@ -421,7 +268,7 @@ a:visited { color: inherit; }
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.8));
     margin-bottom: 15px;
     transition: transform 0.2s;
-    opacity: 0; /* Hidden until loaded */
+    opacity: 0; 
     transition: opacity 0.5s ease-in-out, transform 0.2s;
 }
 
@@ -429,30 +276,40 @@ a:visited { color: inherit; }
 
 .portrait { border-radius: 50%; border: 2px solid var(--border-purple-muted); }
 
-/* Link Behavior */
-.result-link { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; }
+.result-link { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .result-link:hover .main-icon { transform: scale(1.1); }
 .result-link:hover .fate-value { color: var(--gold); text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
 .result-link:hover .portrait { border-color: var(--gold); }
 
 /* --- KEYSTONES --- */
+/* Base Keystone Row */
 .keystone-row { 
     display: flex; 
-    flex-direction: column; /* Stacked Vertically */
+    flex-direction: column; 
     align-items: center; 
     justify-content: center;
     gap: 8px; 
-    margin: 10px 0; 
+    margin: 15px 0; 
     width: 100%; 
-    padding: 15px; 
+    padding: 10px; 
     background: transparent; 
-    /* Subtle separator */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: 0.2s;
 }
 
-.keystone-row:last-child {
-    border-bottom: none; 
+/* DUAL MODE (Applied via JS when 2 keystones) */
+.dual-mode .keystone-row {
+    margin: 5px 0; /* Tighter margins */
+    padding: 5px;
+}
+
+.dual-mode .keystone-text {
+    font-size: 1.2rem; /* Slightly smaller text */
+}
+
+.dual-mode .keystone-frame {
+    width: 40px; /* Smaller icon */
+    height: 40px;
+    min-width: 40px;
 }
 
 .keystone-row:hover .keystone-text { color: var(--gold); text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
@@ -460,7 +317,7 @@ a:visited { color: inherit; }
 
 .keystone-text { 
     font-family: 'Alegreya SC', serif; 
-    font-size: 1.4rem; /* Matches Main Skill size */
+    font-size: 1.5rem; 
     font-weight: 700;
     color: var(--text-parchment);
     text-align: center; 
@@ -468,7 +325,6 @@ a:visited { color: inherit; }
     margin-top: 5px;
 }
 
-/* Keystone Gold Frame */
 .keystone-frame {
     width: 50px;
     height: 50px;
@@ -486,13 +342,13 @@ a:visited { color: inherit; }
     width: 100%; 
     height: 100%; 
     object-fit: cover;
-    opacity: 0; /* Hidden until loaded */
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .keystone-icon.loaded { opacity: 1; }
 
-/* --- RESET BUTTON --- */
+/* Reset Button */
 .reset-btn {
     position: relative;
     z-index: 100;
@@ -518,7 +374,7 @@ a:visited { color: inherit; }
 
 .reset-btn.hidden { opacity: 0; pointer-events: none; }
 
-/* --- MOBILE --- */
+/* Mobile */
 @media (max-width: 850px) {
     .fate-grid {
         flex-direction: column;
