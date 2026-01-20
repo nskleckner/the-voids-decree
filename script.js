@@ -27,6 +27,17 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
+// EXCEPTIONS MAP: Maps Keystone Name -> Specific Wiki Filename Prefix
+const KEYSTONE_ICON_MAP = {
+    "Mind Over Matter": "Heroicspirit",
+    "Ancestral Bond": "TotemMax",
+    "Zealot's Oath": "Liferegentoenergyshield", // Wiki redirect
+    "Chaos Inoculation": "Chaos_Inoculation",
+    "Eldritch Battery": "KeystoneEldritchBattery",
+    "Resolute Technique": "KeystoneResoluteTechnique",
+    "Vaal Pact": "Vaal_Pact"
+};
+
 const SKILLS_DB = {
     "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Crossfire", "of Focus"],
     "Ball Lightning": ["of Orbiting", "of Static"], "Bane": ["of Condemnation"], "Barrage": ["of Volley Fire"],
@@ -101,11 +112,15 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// FIX: Change to use Underscores (Standard Wiki Format)
-// Example: "Lethe Shade" -> "Lethe_Shade_passive_skill_icon.png"
+// Logic: Use Manual Map -> Else Standard Underscores
 function getKeystoneImage(name) {
-    const safeName = name.replace(/ /g, "_");
-    return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}_passive_skill_icon.png`;
+    if (KEYSTONE_ICON_MAP[name]) {
+        return `https://www.poewiki.net/wiki/Special:FilePath/${KEYSTONE_ICON_MAP[name]}_passive_skill_icon.png`;
+    }
+    // Default: "Lethe Shade" -> "Lethe_Shade"
+    // Remove apostrophes: "Zealot's Oath" -> "Zealots_Oath" (if not in map)
+    const cleanName = name.replace(/'/g, "").replace(/ /g, "_");
+    return `https://www.poewiki.net/wiki/Special:FilePath/${cleanName}_passive_skill_icon.png`;
 }
 
 function getWikiLink(name) {
@@ -130,10 +145,8 @@ function castFate() {
         if(radio.checked) numKeystones = parseInt(radio.value);
     });
 
-    // 1. Trigger Animation
     deck.classList.add('dealing');
 
-    // 2. Logic & Reveal
     setTimeout(() => {
         exchangeZone.classList.add('collapsed');
 
@@ -159,8 +172,13 @@ function castFate() {
         document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
         
         const ascImg = document.getElementById('img-asc');
+        ascImg.classList.remove('loaded'); // Reset Fade
         ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
-        ascImg.onerror = function() { this.src = "https://www.poewiki.net/wiki/Special:FilePath/Ascendant_avatar.png"; };
+        ascImg.onload = function() { this.classList.add('loaded'); };
+        ascImg.onerror = function() { 
+            this.src = "https://www.poewiki.net/wiki/Special:FilePath/Ascendant_avatar.png"; 
+            this.classList.add('loaded');
+        };
 
         // Render Skill
         document.getElementById('res-skill-name').innerText = chosenSkill.name;
@@ -168,8 +186,13 @@ function castFate() {
         document.getElementById('link-skill').href = getWikiLink(chosenSkill.name);
         
         const skillImg = document.getElementById('img-skill');
+        skillImg.classList.remove('loaded');
         skillImg.src = getWikiImage(chosenSkill.imageName);
-        skillImg.onerror = function() { this.src = "https://www.poewiki.net/wiki/Special:FilePath/Gem_inventory_icon.png"; };
+        skillImg.onload = function() { this.classList.add('loaded'); };
+        skillImg.onerror = function() { 
+            this.src = "https://www.poewiki.net/wiki/Special:FilePath/Gem_inventory_icon.png"; 
+            this.classList.add('loaded');
+        };
 
         // Render Keystones
         const k1El = document.getElementById('link-key1');
@@ -187,11 +210,14 @@ function castFate() {
                 document.getElementById(elId).style.display = 'flex';
                 document.getElementById(nameId).innerText = keyName;
                 document.getElementById(elId).href = getWikiLink(keyName);
+                
                 const img = document.getElementById(imgId);
+                img.classList.remove('loaded');
                 img.src = getKeystoneImage(keyName);
-                // Fallback to generic icon if specific Art is missing
+                img.onload = function() { this.classList.add('loaded'); };
                 img.onerror = function() { 
                     this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; 
+                    this.classList.add('loaded');
                 };
             };
             if(chosenKeys[0]) setKey('link-key1', 'res-key1-name', 'img-key1', chosenKeys[0]);
@@ -201,7 +227,6 @@ function castFate() {
         // Reveal Cards
         resultCards.forEach(card => card.classList.add('revealed'));
 
-        // Show Reset Button
         setTimeout(() => {
             resetBtn.classList.remove('hidden');
         }, 1200);
@@ -215,11 +240,9 @@ function resetDeck() {
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
 
-    // 1. Hide results
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
 
-    // 2. Bring back the deck
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');
         deck.classList.remove('dealing');

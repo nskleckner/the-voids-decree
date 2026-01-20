@@ -19,7 +19,7 @@
             
             <div class="flavor-container">
                 <p class="flavor-text">
-                    Surrender your agency, Exile. Exchange the cards below to bind your soul to a randomized <span class="highlight-text">Ascendancy</span>, <span class="highlight-text">Main Skill</span>, and <span class="highlight-text">Keystones</span>. The Void offers power, but guarantees nothing.
+                    Surrender your agency, Exile. Exchange the cards below to bind your soul to a randomized <span class="highlight-text">Ascendancy</span>, <span class="highlight-text">Main Skill</span>, with an optional <span class="highlight-text">Keystone</span> selection. The Void offers power, but guarantees nothing.
                 </p>
             </div>
         </header>
@@ -30,8 +30,10 @@
                 <div class="toggle-wrapper">
                     <input type="checkbox" id="phreciaToggle" class="toggle-checkbox">
                     <label for="phreciaToggle" class="toggle-label">
+                        <div class="toggle-switch">
+                            <div class="toggle-thumb"></div>
+                        </div>
                         <span class="toggle-text">Legacy of Phrecia</span>
-                        <span class="toggle-switch"></span>
                     </label>
                 </div>
             </div>
@@ -39,9 +41,21 @@
             <div class="config-row">
                 <span class="config-label">Keystone Allocation:</span>
                 <div class="radio-group">
-                    <label><input type="radio" name="keystoneCount" value="0"><span>None</span></label>
-                    <label><input type="radio" name="keystoneCount" value="1" checked><span>1</span></label>
-                    <label><input type="radio" name="keystoneCount" value="2"><span>2</span></label>
+                    <label>
+                        <input type="radio" name="keystoneCount" value="0">
+                        <span class="radio-gem"></span>
+                        <span class="radio-label">None</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="keystoneCount" value="1" checked>
+                        <span class="radio-gem"></span>
+                        <span class="radio-label">1</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="keystoneCount" value="2">
+                        <span class="radio-gem"></span>
+                        <span class="radio-label">2</span>
+                    </label>
                 </div>
             </div>
         </section>
@@ -89,11 +103,15 @@
                 <div class="card-inner">
                     <div id="keystone-results">
                         <a id="link-key1" href="#" target="_blank" class="keystone-row result-link">
-                            <img id="img-key1" class="keystone-icon" src="" alt="Keystone">
+                            <div class="keystone-frame">
+                                <img id="img-key1" class="keystone-icon" src="" alt="Keystone">
+                            </div>
                             <span id="res-key1-name" class="keystone-text">?</span>
                         </a>
                         <a id="link-key2" href="#" target="_blank" class="keystone-row result-link" style="display:none">
-                            <img id="img-key2" class="keystone-icon" src="" alt="Keystone">
+                            <div class="keystone-frame">
+                                <img id="img-key2" class="keystone-icon" src="" alt="Keystone">
+                            </div>
                             <span id="res-key2-name" class="keystone-text">?</span>
                         </a>
                         <div id="no-keystones" style="display:none;">
