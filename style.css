@@ -51,7 +51,7 @@ body {
     width: 95%;
     text-align: center;
     padding-top: 5vh;
-    padding-bottom: 4rem;
+    padding-bottom: 3rem;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -236,8 +236,6 @@ a:visited { color: inherit; }
 }
 
 .fate-card.highlight { box-shadow: 0 0 25px rgba(155, 89, 182, 0.15); }
-
-/* Faster Delays */
 .delay-1 { animation-delay: 0.05s; }
 .delay-2 { animation-delay: 0.1s; }
 .delay-3 { animation-delay: 0.15s; }
@@ -245,12 +243,12 @@ a:visited { color: inherit; }
 .fate-value { font-family: 'Alegreya SC', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-parchment); margin: 10px 0 2px 0; line-height: 1.2; }
 .fate-sub { color: var(--text-dim); font-size: 1rem; }
 
-/* Image Frames */
+/* Image Frames for Smooth Loading */
 .icon-frame {
     width: 64px;
     height: 64px;
     margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.05);
+    background: transparent; /* FIXED: Removed background */
     border-radius: 4px;
     display: flex;
     justify-content: center;
@@ -286,10 +284,10 @@ a:visited { color: inherit; }
 .keystone-row { 
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 8px; margin: 10px 0; width: 100%; padding: 10px; 
-    background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent; 
+    border-bottom: none; /* FIXED: Removed border */
     transition: 0.2s; flex-grow: 1;
 }
-.keystone-row:last-child { border-bottom: none; }
 
 .dual-mode .keystone-row { margin: 5px 0; padding: 8px; }
 .dual-mode .keystone-text { font-size: 1.3rem; }
@@ -334,6 +332,7 @@ a:visited { color: inherit; }
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     opacity: 1;
     pointer-events: auto;
+    cursor: pointer;
 }
 
 .ninja-btn.hidden { opacity: 0; pointer-events: none; display: none; }
@@ -348,7 +347,7 @@ a:visited { color: inherit; }
 .ninja-icon {
     width: 24px;
     height: 24px;
-    min-width: 24px; /* Prevent crushing */
+    min-width: 24px;
     object-fit: contain;
     display: block;
 }
@@ -375,6 +374,28 @@ a:visited { color: inherit; }
     color: var(--gold);
     background: rgba(200, 170, 110, 0.05);
 }
+
+/* MODAL FOR CONFIG */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.modal-overlay.visible { opacity: 1; pointer-events: auto; }
+.modal-content { background: #111116; border: 1px solid var(--gold); padding: 30px; width: 90%; max-width: 450px; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.9); transform: translateY(20px); transition: transform 0.3s ease; text-align: center; display: flex; flex-direction: column; gap: 20px; }
+.modal-overlay.visible .modal-content { transform: translateY(0); }
+.close-modal { position: absolute; top: 10px; right: 15px; font-size: 2rem; color: var(--text-dim); cursor: pointer; line-height: 1; }
+.close-modal:hover { color: var(--gold); }
+.modal-title { font-family: 'Alegreya SC', serif; color: var(--gold); font-size: 1.8rem; margin: 0; text-shadow: 0 0 10px rgba(200, 170, 110, 0.3); }
+.modal-subtitle { color: var(--text-dim); margin: 0; font-size: 1rem; }
+
+.search-options { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; margin: 10px 0; width: 100%; padding: 0 20px; box-sizing: border-box; }
+.search-option-row { display: flex; align-items: center; gap: 15px; cursor: pointer; position: relative; user-select: none; font-size: 1.2rem; color: var(--text-parchment); width: 100%; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid transparent; transition: 0.2s; }
+.search-option-row:hover { background: rgba(255,255,255,0.06); border-color: var(--border-purple-muted); }
+.search-option-row input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+.checkmark { height: 20px; width: 20px; background-color: #000; border: 1px solid #555; position: relative; }
+.search-option-row input:checked ~ .checkmark { background-color: var(--gold); border-color: var(--gold); box-shadow: 0 0 5px var(--gold); }
+.checkmark:after { content: ""; position: absolute; display: none; }
+.search-option-row input:checked ~ .checkmark:after { display: block; }
+
+.modal-action-btn { background: var(--gold); color: #000; font-weight: 700; border: none; padding: 12px 0; width: 100%; font-family: 'Alegreya SC', serif; font-size: 1.2rem; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
+.modal-action-btn:hover { background: #fff; box-shadow: 0 0 15px #fff; }
 
 @media (max-width: 850px) {
     .fate-grid { flex-direction: column; align-items: center; gap: 25px; }

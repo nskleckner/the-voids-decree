@@ -32,7 +32,7 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// FILENAME MAP
+// FILENAME MAP: Validated against PoE Wiki Source
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "Totemmax_passive_skill_icon",
@@ -42,7 +42,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Blood Magic": "KeystoneBloodMagic_passive_skill_icon",
     "Bloodsoaked Blade": "TinctureKeystone1_passive_skill_icon",
     "Call to Arms": "CallToArms_passive_skill_icon",
-    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon",
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", 
     "Conduit": "KeystoneConduit_passive_skill_icon",
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
     "Divine Shield": "EnergisedFortress_passive_skill_icon",
@@ -87,7 +87,7 @@ const SKILLS_DB = {
     "Ball Lightning": ["of Orbiting", "of Static"], "Bane": ["of Condemnation"], "Barrage": ["of Volley Fire"],
     "Blade Blast": ["of Dagger Detonation", "of Unloading"], "Blade Flurry": ["of Incision"], "Blade Trap": ["of Greatswords", "of Laceration"],
     "Blade Vortex": ["of the Scythe"], "Bladefall": ["of Impaling", "of Volleys"], "Bladestorm": ["of Uncertainty"], "Blast Rain": [],
-    "Blazing Salvo": [], "Blight": ["of Atrophy", "of Contagion"], "Blink Arrow": ["of Bombarding Clones", "of Prismatic Clones"], "Body Swap": [],
+    "Blazing Salvo": [], "Blight": ["of Atrophy", "of Contagion"], "Blink Arrow": ["of Bombarding Clones", "of Prismatic Clones"],
     "BoneShatter": ["of Carnage", "of Complex Trauma"], "Burning Arrow": ["of Vigour"], "Caustic Arrow": ["of Poison"], "Chain Hook": [],
     "Charged Dash": [], "Cleave": ["of Rage"], "Cobra Lash": [], "Cold Snap": ["of Power"], "Consecrated Path": ["of Endurance"],
     "Contagion": ["of Subsiding", "of Transference"], "Crackling Lance": ["of Branching", "of Disintegration"], "Creeping Frost": [],
@@ -162,6 +162,7 @@ function getKeystoneImage(name) {
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
+    // Fallback: Remove spaces
     filename = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
@@ -178,6 +179,7 @@ function castFate() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const inspireBtn = document.getElementById('inspireBtn');
     const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
@@ -264,17 +266,12 @@ function castFate() {
 
         resultCards.forEach(card => card.classList.add('revealed'));
 
-        // Update Inspiration Button, then show it with Reset button
-        if(typeof updatePoeNinjaLink === "function") {
-            updatePoeNinjaLink(chosenAsc.name, chosenSkill.name);
-        }
-
         setTimeout(() => {
-            document.getElementById('resetBtn').classList.remove('hidden');
-            // Check if link is ready before showing? updatePoeNinjaLink already handles removing 'hidden' from the link itself
-        }, 800); // Faster reveal (800ms)
+            resetBtn.classList.remove('hidden');
+            inspireBtn.classList.remove('hidden');
+        }, 800);
 
-    }, 500); // Faster deal (500ms)
+    }, 500);
 }
 
 function resetDeck() {
@@ -282,14 +279,11 @@ function resetDeck() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const inspireBtn = document.getElementById('inspireBtn');
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    
-    // Hide Ninja Button
-    if(typeof hidePoeNinjaLink === "function") {
-        hidePoeNinjaLink();
-    }
+    inspireBtn.classList.add('hidden');
 
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');

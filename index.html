@@ -128,14 +128,46 @@
         </section>
         
         <div class="action-bar-container">
-            <a id="inspireLink" href="#" target="_blank" class="ninja-btn hidden">
+            <button id="inspireBtn" class="ninja-btn hidden" onclick="openSearchConfig()">
                 <img src="https://poe.ninja/shared-assets/ninja-logo.png" alt="Ninja" class="ninja-icon">
-                <span>Seek Inspiration on poe.ninja</span>
-            </a>
+                <span>Seek Inspiration</span>
+            </button>
 
             <button id="resetBtn" class="reset-btn hidden" onclick="resetDeck()">
                 Draw Another Set
             </button>
+        </div>
+
+        <div id="search-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeSearchConfig()">&times;</span>
+                <h2 class="modal-title">Refine Query</h2>
+                <p class="modal-subtitle">Select parameters to include in your poe.ninja search:</p>
+                
+                <div class="search-options">
+                    <label class="search-option-row">
+                        <input type="checkbox" id="chk-asc" checked>
+                        <span class="checkmark"></span>
+                        <span id="lbl-asc">Ascendancy</span>
+                    </label>
+                    
+                    <label class="search-option-row">
+                        <input type="checkbox" id="chk-skill" checked>
+                        <span class="checkmark"></span>
+                        <span id="lbl-skill">Skill Gem</span>
+                    </label>
+                    
+                    <label class="search-option-row" id="row-keystone">
+                        <input type="checkbox" id="chk-keystone" checked>
+                        <span class="checkmark"></span>
+                        <span id="lbl-keystone">Keystones</span>
+                    </label>
+                </div>
+
+                <button class="modal-action-btn" onclick="executePoeNinjaSearch()">
+                    Open Portal
+                </button>
+            </div>
         </div>
 
     </div>
