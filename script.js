@@ -1,233 +1,81 @@
 // --- DATABASE ---
-
 const ASCENDANCIES = {
     standard: [
-        { name: "Juggernaut", class: "Marauder" },
-        { name: "Berserker", class: "Marauder" },
-        { name: "Chieftain", class: "Marauder" },
-        { name: "Slayer", class: "Duelist" },
-        { name: "Gladiator", class: "Duelist" },
-        { name: "Champion", class: "Duelist" },
-        { name: "Deadeye", class: "Ranger" },
-        { name: "Raider", class: "Ranger" },
-        { name: "Pathfinder", class: "Ranger" },
-        { name: "Assassin", class: "Shadow" },
-        { name: "Saboteur", class: "Shadow" },
-        { name: "Trickster", class: "Shadow" },
-        { name: "Necromancer", class: "Witch" },
-        { name: "Occultist", class: "Witch" },
-        { name: "Elementalist", class: "Witch" },
-        { name: "Inquisitor", class: "Templar" },
-        { name: "Hierophant", class: "Templar" },
-        { name: "Guardian", class: "Templar" },
+        { name: "Juggernaut", class: "Marauder" }, { name: "Berserker", class: "Marauder" }, { name: "Chieftain", class: "Marauder" },
+        { name: "Slayer", class: "Duelist" }, { name: "Gladiator", class: "Duelist" }, { name: "Champion", class: "Duelist" },
+        { name: "Deadeye", class: "Ranger" }, { name: "Raider", class: "Ranger" }, { name: "Pathfinder", class: "Ranger" },
+        { name: "Assassin", class: "Shadow" }, { name: "Saboteur", class: "Shadow" }, { name: "Trickster", class: "Shadow" },
+        { name: "Necromancer", class: "Witch" }, { name: "Occultist", class: "Witch" }, { name: "Elementalist", class: "Witch" },
+        { name: "Inquisitor", class: "Templar" }, { name: "Hierophant", class: "Templar" }, { name: "Guardian", class: "Templar" },
         { name: "Ascendant", class: "Scion" }
     ],
     phrecia: [
-        { name: "Antiquarian", class: "Marauder" },
-        { name: "Behemoth", class: "Marauder" },
-        { name: "Ancestral Commander", class: "Marauder" },
-        { name: "Gambler", class: "Duelist" },
-        { name: "Paladin", class: "Duelist" },
-        { name: "Aristocrat", class: "Duelist" },
-        { name: "Daughter of Oshabi", class: "Ranger" },
-        { name: "Whisperer", class: "Ranger" },
-        { name: "Wildspeaker", class: "Ranger" },
-        { name: "Surfcaster", class: "Shadow" },
-        { name: "Servant of Arakaali", class: "Shadow" },
-        { name: "Blind Prophet", class: "Shadow" },
-        { name: "Harbinger", class: "Witch" },
-        { name: "Herald", class: "Witch" },
-        { name: "Bog Shaman", class: "Witch" },
-        { name: "Polytheist", class: "Templar" },
-        { name: "Scavenger", class: "Scion" }
+        { name: "Antiquarian", class: "Marauder" }, { name: "Behemoth", class: "Marauder" }, { name: "Ancestral Commander", class: "Marauder" },
+        { name: "Gambler", class: "Duelist" }, { name: "Paladin", class: "Duelist" }, { name: "Aristocrat", class: "Duelist" },
+        { name: "Daughter of Oshabi", class: "Ranger" }, { name: "Whisperer", class: "Ranger" }, { name: "Wildspeaker", class: "Ranger" },
+        { name: "Surfcaster", class: "Shadow" }, { name: "Servant of Arakaali", class: "Shadow" }, { name: "Blind Prophet", class: "Shadow" },
+        { name: "Harbinger", class: "Witch" }, { name: "Herald", class: "Witch" }, { name: "Bog Shaman", class: "Witch" },
+        { name: "Polytheist", class: "Templar" }, { name: "Scavenger", class: "Scion" }
     ]
 };
 
 const KEYSTONES = [
-    "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Avatar of Fire",
-    "Blood Magic", "Chaos Inoculation", "Crimson Dance", "Divine Shield",
-    "Eldritch Battery", "Elemental Overload", "Ghost Reaver", "Glancing Blows",
-    "Hollow Palm Technique", "Imbalanced Guard", "Iron Grip", "Iron Reflexes",
-    "Iron Will", "Lethe Shade", "Magebane", "Mind Over Matter",
-    "Minion Instability", "Oath of the Maji", "Pain Attunement", "Perfect Agony",
-    "Point Blank", "Precise Technique", "Resolute Technique", "Runebinder",
-    "Solipsism", "Supreme Ego", "The Agnostic", "The Impaler",
-    "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer",
-    "Zealot's Oath"
+    "Acrobatics", "Ancestral Bond", "Arrow Dancing", "Avatar of Fire", "Blood Magic", "Chaos Inoculation", "Crimson Dance", "Divine Shield",
+    "Eldritch Battery", "Elemental Overload", "Ghost Reaver", "Glancing Blows", "Hollow Palm Technique", "Imbalanced Guard", "Iron Grip",
+    "Iron Reflexes", "Iron Will", "Lethe Shade", "Magebane", "Mind Over Matter", "Minion Instability", "Oath of the Maji", "Pain Attunement",
+    "Perfect Agony", "Point Blank", "Precise Technique", "Resolute Technique", "Runebinder", "Solipsism", "Supreme Ego", "The Agnostic",
+    "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
 const SKILLS_DB = {
-    "Absolution": ["of Inspiring"],
-    "Arc": ["of Oscillating", "of Surging"],
-    "Artillery Ballista": ["of Crossfire", "of Focus"],
-    "Ball Lightning": ["of Orbiting", "of Static"],
-    "Bane": ["of Condemnation"],
-    "Barrage": ["of Volley Fire"],
-    "Blade Blast": ["of Dagger Detonation", "of Unloading"],
-    "Blade Flurry": ["of Incision"],
-    "Blade Trap": ["of Greatswords", "of Laceration"],
-    "Blade Vortex": ["of the Scythe"],
-    "Bladefall": ["of Impaling", "of Volleys"],
-    "Bladestorm": ["of Uncertainty"],
-    "Blast Rain": [],
-    "Blazing Salvo": [],
-    "Blight": ["of Atrophy", "of Contagion"],
-    "Blink Arrow": ["of Bombarding Clones", "of Prismatic Clones"],
-    "Body Swap": [],
-    "BoneShatter": ["of Carnage", "of Complex Trauma"],
-    "Burning Arrow": ["of Vigour"],
-    "Caustic Arrow": ["of Poison"],
-    "Chain Hook": [],
-    "Charged Dash": [],
-    "Cleave": ["of Rage"],
-    "Cobra Lash": [],
-    "Cold Snap": ["of Power"],
-    "Consecrated Path": ["of Endurance"],
-    "Contagion": ["of Subsiding", "of Transference"],
-    "Crackling Lance": ["of Branching", "of Disintegration"],
-    "Creeping Frost": [],
-    "Cremation": ["of Exhuming", "of the Volcano"],
-    "Cyclone": ["of Tumult"],
-    "Dark Pact": [],
-    "Desecrate": [],
-    "Detonate Dead": ["of Chain Reaction", "of Scavenging"],
-    "Discharge": ["of Misery"],
-    "Divine Ire": ["of Disintegration", "of Holy Lightning"],
-    "Dominating Blow": ["of Inspiring"],
-    "Double Strike": ["of Impaling", "of Momentum"],
-    "Dual Strike": ["of Ambidexterity"],
-    "Earthquake": ["of Amplification"],
-    "Earthshatter": [],
-    "Elemental Hit": ["of the Spectrum"],
-    "Energy Blade": [],
-    "Essence Drain": ["of Desperation", "of Wickedness"],
-    "Ethereal Knives": ["of the Massacre", "of Lingering Blades"],
-    "Explosive Arrow": [],
-    "Explosive Concoction": ["of Destruction"],
-    "Explosive Trap": ["of Magnitude", "of Shrapnel"],
-    "Exsanguinate": ["of Transmission"],
-    "Eye of Winter": ["of Finality", "of Transience"],
-    "Fire Trap": ["of Blasting"],
-    "Fireball": ["of Dragon's Breath"],
-    "Firestorm": ["of Meteors", "of Pelting"],
-    "Flame Dash": ["of Return"],
-    "Flame Surge": ["of Combusting"],
-    "Flame Wall": [],
-    "Flameblast": ["of Celerity", "of Contraction"],
-    "Flicker Strike": ["of Power"],
-    "Forbidden Rite": ["of Soul Sacrifice"],
-    "Freezing Pulse": [],
-    "Frenzy": ["of Onslaught"],
-    "Frost Blades": ["of Katabasis"],
-    "Frost Bomb": ["of Forthcoming", "of Instability"],
-    "Frost Wall": [],
-    "Frostblink": ["of Wintry Blast"],
-    "Frozen Legion": ["of Rallying"],
-    "Galvanic Arrow": ["of Energy", "of Surging"],
-    "Galvanic Field": ["of Intensity"],
-    "General's Cry": [],
-    "Glacial Cascade": ["of the Fissure"],
-    "Glacial Hammer": ["of Shattering"],
-    "Ground Slam": ["of Earthshaking"],
-    "Heavy Strike": [],
-    "Hexblast": ["of Contradiction", "of Havoc"],
-    "Holy Flame Totem": ["of Ire"],
-    "Ice Crash": ["of Cadence"],
-    "Ice Nova": ["of Deep Freeze", "of Frostbolts"],
-    "Ice Shot": ["of Penetration"],
-    "Ice Spear": ["of Splitting"],
-    "Ice Trap": ["of Hollowness"],
-    "Icicle Mine": ["of Fanning", "of Sabotage"],
-    "Incinerate": ["of Expanse", "of Venting"],
-    "Infernal Blow": ["of Immolation"],
-    "Kinetic Blast": ["of Clustering"],
-    "Kinetic Bolt": ["of Fragmentation"],
-    "Lacerate": ["of Butchering", "of Haemorrhage"],
-    "Lancing Steel": ["of Spraying"],
-    "Leap Slam": ["of Groundbreaking"],
-    "Lightning Arrow": ["of Electrocution"],
-    "Lightning Conduit": ["of the Heavens"],
-    "Lightning Spire Trap": ["of Overloading", "of Zapping"],
-    "Lightning Strike": ["of Arcing"],
-    "Lightning Tendrils": ["of Eccentricity", "of Escalation"],
-    "Lightning Trap": ["of Sparking"],
-    "Lightning Warp": [],
-    "Magma Orb": [],
-    "Manabond": [],
-    "Mirror Arrow": ["of Bombarding Clones", "of Prismatic Clones"],
-    "Molten Shell": [],
-    "Molten Strike": ["of the Zenith"],
-    "Orb of Storms": [],
-    "Penance Brand": ["of Conduction", "of Dissipation"],
-    "Perforate": ["of Bloodshed", "of Duality"],
-    "Pestilent Strike": [],
-    "Power Siphon": ["of the Archmage"],
-    "Puncture": [],
-    "Purifying Flame": ["of Revelations"],
-    "Pyroclast Mine": ["of Sabotage"],
-    "Rage Vortex": ["of Berserking"],
-    "Rain of Arrows": ["of Artillery", "of Saturation"],
-    "Raise Spectre": ["of Transience"],
-    "Raise Zombie": ["of Falling", "of Slamming"],
-    "Reap": [],
-    "Reave": ["of Refraction"],
-    "Reckoning": [],
-    "Righteous Fire": ["of Arcane Devotion"],
-    "Riposte": [],
-    "Rolling Magma": [],
-    "Scorching Ray": ["of Immolation"],
-    "Scourge Arrow": ["of Menace"],
-    "Searing Bond": [],
-    "Seismic Trap": ["of Swells"],
-    "Shattering Steel": ["of Ammunition"],
-    "Shield Charge": [],
-    "Shield Crush": ["of the Chieftain"],
-    "Shock Nova": [],
-    "Shockwave Totem": [],
-    "Shrapnel Ballista": ["of Steel"],
-    "Siege Ballista": ["of Splintering"],
-    "Smite": ["of Divine Judgement"],
-    "Soulrend": ["of Reaping", "of the Spiral"],
-    "Spark": ["of the Nova", "of Unpredictability"],
-    "Spectral Helix": [],
-    "Spectral Shield Throw": ["of Shattering"],
-    "Spectral Throw": ["of Materialising"],
-    "Split Arrow": ["of Splitting"],
-    "Splitting Steel": ["of Ammunition"],
-    "Static Strike": [],
-    "Storm Brand": ["of Indecision"],
-    "Storm Burst": [],
-    "Storm Call": [],
-    "Storm Rain": ["of the Conduit", "of the Fence"],
-    "Stormbind": ["of Teleportation"],
-    "Summon Carrion Golem": ["of Hordes", "of Scavenging"],
-    "Summon Chaos Golem": ["of Hordes", "of the Maelstrom"],
-    "Summon Flame Golem": ["of Hordes", "of the Meteor"],
-    "Summon Holy Relic": ["of Conviction"],
-    "Summon Ice Golem": ["of Hordes", "of Shattering"],
-    "Summon Lightning Golem": ["of Hordes"],
-    "Summon Raging Spirit": ["of Enormity"],
-    "Summon Reaper": ["of Eviscerating", "of Revenants"],
-    "Summon Skeletons": ["of Archers", "of Mages"],
-    "Summon Stone Golem": ["of Hordes", "of Safeguarding"],
-    "Sunder": ["of Earthbreaking"],
-    "Sweep": [],
-    "Tectonic Slam": ["of Cataclysm"],
-    "Tempest Shield": [],
-    "Tornado Shot": [],
-    "Toxic Rain": ["of Sporeburst", "of Withering"],
-    "Unearth": [],
-    "Vengeance": [],
-    "Venom Gyre": [],
-    "Viper Strike": ["of the Mamba"],
-    "Void Sphere": ["of Rending"],
-    "Volatile Dead": ["of Confinement", "of Seething"],
-    "Volcanic Fissure": ["of Snaking"],
-    "Vortex": ["of Projection"],
-    "Wave of Conviction": [],
-    "Wild Strike": ["of Extremes"],
-    "Winter Orb": [],
-    "Wintertide Brand": []
+    "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Crossfire", "of Focus"],
+    "Ball Lightning": ["of Orbiting", "of Static"], "Bane": ["of Condemnation"], "Barrage": ["of Volley Fire"],
+    "Blade Blast": ["of Dagger Detonation", "of Unloading"], "Blade Flurry": ["of Incision"], "Blade Trap": ["of Greatswords", "of Laceration"],
+    "Blade Vortex": ["of the Scythe"], "Bladefall": ["of Impaling", "of Volleys"], "Bladestorm": ["of Uncertainty"], "Blast Rain": [],
+    "Blazing Salvo": [], "Blight": ["of Atrophy", "of Contagion"], "Blink Arrow": ["of Bombarding Clones", "of Prismatic Clones"], "Body Swap": [],
+    "BoneShatter": ["of Carnage", "of Complex Trauma"], "Burning Arrow": ["of Vigour"], "Caustic Arrow": ["of Poison"], "Chain Hook": [],
+    "Charged Dash": [], "Cleave": ["of Rage"], "Cobra Lash": [], "Cold Snap": ["of Power"], "Consecrated Path": ["of Endurance"],
+    "Contagion": ["of Subsiding", "of Transference"], "Crackling Lance": ["of Branching", "of Disintegration"], "Creeping Frost": [],
+    "Cremation": ["of Exhuming", "of the Volcano"], "Cyclone": ["of Tumult"], "Dark Pact": [], "Desecrate": [],
+    "Detonate Dead": ["of Chain Reaction", "of Scavenging"], "Discharge": ["of Misery"], "Divine Ire": ["of Disintegration", "of Holy Lightning"],
+    "Dominating Blow": ["of Inspiring"], "Double Strike": ["of Impaling", "of Momentum"], "Dual Strike": ["of Ambidexterity"],
+    "Earthquake": ["of Amplification"], "Earthshatter": [], "Elemental Hit": ["of the Spectrum"], "Energy Blade": [],
+    "Essence Drain": ["of Desperation", "of Wickedness"], "Ethereal Knives": ["of the Massacre", "of Lingering Blades"], "Explosive Arrow": [],
+    "Explosive Concoction": ["of Destruction"], "Explosive Trap": ["of Magnitude", "of Shrapnel"], "Exsanguinate": ["of Transmission"],
+    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": ["of Dragon's Breath"],
+    "Firestorm": ["of Meteors", "of Pelting"], "Flame Dash": ["of Return"], "Flame Surge": ["of Combusting"], "Flame Wall": [],
+    "Flameblast": ["of Celerity", "of Contraction"], "Flicker Strike": ["of Power"], "Forbidden Rite": ["of Soul Sacrifice"],
+    "Freezing Pulse": [], "Frenzy": ["of Onslaught"], "Frost Blades": ["of Katabasis"], "Frost Bomb": ["of Forthcoming", "of Instability"],
+    "Frost Wall": [], "Frostblink": ["of Wintry Blast"], "Frozen Legion": ["of Rallying"], "Galvanic Arrow": ["of Energy", "of Surging"],
+    "Galvanic Field": ["of Intensity"], "General's Cry": [], "Glacial Cascade": ["of the Fissure"], "Glacial Hammer": ["of Shattering"],
+    "Ground Slam": ["of Earthshaking"], "Heavy Strike": [], "Hexblast": ["of Contradiction", "of Havoc"], "Holy Flame Totem": ["of Ire"],
+    "Ice Crash": ["of Cadence"], "Ice Nova": ["of Deep Freeze", "of Frostbolts"], "Ice Shot": ["of Penetration"], "Ice Spear": ["of Splitting"],
+    "Ice Trap": ["of Hollowness"], "Icicle Mine": ["of Fanning", "of Sabotage"], "Incinerate": ["of Expanse", "of Venting"],
+    "Infernal Blow": ["of Immolation"], "Kinetic Blast": ["of Clustering"], "Kinetic Bolt": ["of Fragmentation"],
+    "Lacerate": ["of Butchering", "of Haemorrhage"], "Lancing Steel": ["of Spraying"], "Leap Slam": ["of Groundbreaking"],
+    "Lightning Arrow": ["of Electrocution"], "Lightning Conduit": ["of the Heavens"], "Lightning Spire Trap": ["of Overloading", "of Zapping"],
+    "Lightning Strike": ["of Arcing"], "Lightning Tendrils": ["of Eccentricity", "of Escalation"], "Lightning Trap": ["of Sparking"],
+    "Lightning Warp": [], "Magma Orb": [], "Manabond": [], "Mirror Arrow": ["of Bombarding Clones", "of Prismatic Clones"], "Molten Shell": [],
+    "Molten Strike": ["of the Zenith"], "Orb of Storms": [], "Penance Brand": ["of Conduction", "of Dissipation"],
+    "Perforate": ["of Bloodshed", "of Duality"], "Pestilent Strike": [], "Power Siphon": ["of the Archmage"], "Puncture": [],
+    "Purifying Flame": ["of Revelations"], "Pyroclast Mine": ["of Sabotage"], "Rage Vortex": ["of Berserking"],
+    "Rain of Arrows": ["of Artillery", "of Saturation"], "Raise Spectre": ["of Transience"], "Raise Zombie": ["of Falling", "of Slamming"],
+    "Reap": [], "Reave": ["of Refraction"], "Reckoning": [], "Righteous Fire": ["of Arcane Devotion"], "Riposte": [],
+    "Rolling Magma": [], "Scorching Ray": ["of Immolation"], "Scourge Arrow": ["of Menace"], "Searing Bond": [],
+    "Seismic Trap": ["of Swells"], "Shattering Steel": ["of Ammunition"], "Shield Charge": [], "Shield Crush": ["of the Chieftain"],
+    "Shock Nova": [], "Shockwave Totem": [], "Shrapnel Ballista": ["of Steel"], "Siege Ballista": ["of Splintering"],
+    "Smite": ["of Divine Judgement"], "Soulrend": ["of Reaping", "of the Spiral"], "Spark": ["of the Nova", "of Unpredictability"],
+    "Spectral Helix": [], "Spectral Shield Throw": ["of Shattering"], "Spectral Throw": ["of Materialising"], "Split Arrow": ["of Splitting"],
+    "Splitting Steel": ["of Ammunition"], "Static Strike": [], "Storm Brand": ["of Indecision"], "Storm Burst": [], "Storm Call": [],
+    "Storm Rain": ["of the Conduit", "of the Fence"], "Stormbind": ["of Teleportation"], "Summon Carrion Golem": ["of Hordes", "of Scavenging"],
+    "Summon Chaos Golem": ["of Hordes", "of the Maelstrom"], "Summon Flame Golem": ["of Hordes", "of the Meteor"],
+    "Summon Holy Relic": ["of Conviction"], "Summon Ice Golem": ["of Hordes", "of Shattering"], "Summon Lightning Golem": ["of Hordes"],
+    "Summon Raging Spirit": ["of Enormity"], "Summon Reaper": ["of Eviscerating", "of Revenants"], "Summon Skeletons": ["of Archers", "of Mages"],
+    "Summon Stone Golem": ["of Hordes", "of Safeguarding"], "Sunder": ["of Earthbreaking"], "Sweep": [], "Tectonic Slam": ["of Cataclysm"],
+    "Tempest Shield": [], "Tornado Shot": [], "Toxic Rain": ["of Sporeburst", "of Withering"], "Unearth": [], "Vengeance": [], "Venom Gyre": [],
+    "Viper Strike": ["of the Mamba"], "Void Sphere": ["of Rending"], "Volatile Dead": ["of Confinement", "of Seething"],
+    "Volcanic Fissure": ["of Snaking"], "Vortex": ["of Projection"], "Wave of Conviction": [], "Wild Strike": ["of Extremes"],
+    "Winter Orb": [], "Wintertide Brand": []
 };
 
 // --- UTILITIES ---
@@ -239,32 +87,20 @@ function getRandom(arr) {
 function flattenSkillDatabase() {
     let allSkills = [];
     for (const [baseName, variants] of Object.entries(SKILLS_DB)) {
-        allSkills.push({
-            name: baseName,
-            isTransfigured: false,
-            // Skills typically use underscores: "Ice_Shot"
-            imageName: `${baseName} inventory icon.png` 
-        });
+        allSkills.push({ name: baseName, isTransfigured: false, imageName: `${baseName} inventory icon.png` });
         variants.forEach(variant => {
             const fullName = `${baseName} ${variant}`;
-            allSkills.push({
-                name: fullName,
-                isTransfigured: true,
-                imageName: `${fullName} inventory icon.png`
-            });
+            allSkills.push({ name: fullName, isTransfigured: true, imageName: `${fullName} inventory icon.png` });
         });
     }
     return allSkills;
 }
 
-// 1. STANDARD IMAGES (Skills, Ascendancies) -> Replace Spaces with Underscores
 function getWikiImage(filename) {
     const safeName = filename.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// 2. KEYSTONE IMAGES -> Remove Spaces Entirely
-// Example: "Crimson Dance" becomes "CrimsonDance_passive_skill_icon.png"
 function getKeystoneImage(name) {
     const safeName = name.replace(/ /g, "");
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}_passive_skill_icon.png`;
@@ -275,7 +111,7 @@ function getWikiLink(name) {
     return `https://www.poewiki.net/wiki/${safeName}`;
 }
 
-// --- FATE LOGIC ---
+// --- LOGIC ---
 
 function castFate() {
     const deck = document.getElementById('deck-container');
@@ -285,20 +121,22 @@ function castFate() {
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
     
-    const keystoneRadios = document.getElementsByName('keystoneCount');
-    let numKeystones = 1;
-    for (const radio of keystoneRadios) {
-        if (radio.checked) numKeystones = parseInt(radio.value);
-    }
+    // Check if we are currently dealing to prevent double clicks
+    if (deck.classList.contains('dealing')) return;
 
-    // 1. TRIGGER ANIMATION
+    let numKeystones = 1;
+    document.getElementsByName('keystoneCount').forEach(radio => {
+        if(radio.checked) numKeystones = parseInt(radio.value);
+    });
+
+    // 1. Trigger Animation
     deck.classList.add('dealing');
 
-    // 2. WAIT FOR ANIMATION (800ms)
+    // 2. Logic & Reveal
     setTimeout(() => {
         exchangeZone.classList.add('collapsed');
 
-        // --- CALCULATION ---
+        // Logic
         let ascPool = usePhrecia ? [...ASCENDANCIES.phrecia] : [...ASCENDANCIES.standard];
         const chosenAsc = getRandom(ascPool);
 
@@ -314,23 +152,16 @@ function castFate() {
             keyPool = keyPool.filter(item => item !== k);
         }
 
-        // --- DOM UPDATES ---
-        
-        // Ascendancy
+        // Render Ascendancy
         document.getElementById('res-asc-name').innerText = chosenAsc.name;
         document.getElementById('res-asc-class').innerText = chosenAsc.class;
         document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
         
         const ascImg = document.getElementById('img-asc');
-        // Standard/Phrecia Logic
-        if (usePhrecia) {
-            ascImg.src = getWikiImage(`${chosenAsc.class} avatar.png`);
-        } else {
-            ascImg.src = getWikiImage(`${chosenAsc.name} avatar.png`);
-        }
+        ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
         ascImg.onerror = function() { this.src = "https://www.poewiki.net/wiki/Special:FilePath/Ascendant_avatar.png"; };
 
-        // Skill
+        // Render Skill
         document.getElementById('res-skill-name').innerText = chosenSkill.name;
         document.getElementById('res-skill-type').innerText = chosenSkill.isTransfigured ? "Transfigured Gem" : "Standard Gem";
         document.getElementById('link-skill').href = getWikiLink(chosenSkill.name);
@@ -339,7 +170,7 @@ function castFate() {
         skillImg.src = getWikiImage(chosenSkill.imageName);
         skillImg.onerror = function() { this.src = "https://www.poewiki.net/wiki/Special:FilePath/Gem_inventory_icon.png"; };
 
-        // Keystones (Updated with CamelCase Logic)
+        // Render Keystones
         const k1El = document.getElementById('link-key1');
         const k2El = document.getElementById('link-key2');
         const noKeyEl = document.getElementById('no-keystones');
@@ -355,32 +186,23 @@ function castFate() {
                 document.getElementById(elId).style.display = 'flex';
                 document.getElementById(nameId).innerText = keyName;
                 document.getElementById(elId).href = getWikiLink(keyName);
-                
                 const img = document.getElementById(imgId);
-                
-                // USE NEW HELPER: Remove spaces for keystones
                 img.src = getKeystoneImage(keyName);
-                
-                // Fallback to generic if specific fails
-                img.onerror = function() { 
-                    this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; 
-                };
+                img.onerror = function() { this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; };
             };
-
             if(chosenKeys[0]) setKey('link-key1', 'res-key1-name', 'img-key1', chosenKeys[0]);
             if(chosenKeys[1]) setKey('link-key2', 'res-key2-name', 'img-key2', chosenKeys[1]);
         }
 
-        // --- REVEAL ---
-        resultCards.forEach(card => {
-            card.classList.add('revealed');
-        });
+        // Reveal Cards
+        resultCards.forEach(card => card.classList.add('revealed'));
 
+        // Show Reset Button
         setTimeout(() => {
             resetBtn.classList.remove('hidden');
         }, 1200);
 
-    }, 800); 
+    }, 800);
 }
 
 function resetDeck() {
@@ -389,13 +211,13 @@ function resetDeck() {
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
 
-    resultCards.forEach(card => {
-        card.classList.remove('revealed');
-    });
+    // 1. Hide results
+    resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
 
+    // 2. Bring back the deck
     setTimeout(() => {
-        deck.classList.remove('dealing');
         exchangeZone.classList.remove('collapsed');
+        deck.classList.remove('dealing');
     }, 500);
 }
