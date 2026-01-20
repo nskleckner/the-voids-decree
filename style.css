@@ -376,3 +376,20 @@ a:visited { color: inherit; }
         max-width: 320px;
     }
 }
+
+.flavor-text {
+    font-family: 'Alegreya', serif;
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px; /* Keeps the text from getting too wide/hard to read */
+    margin: -1rem auto 2.5rem auto; /* Negative top margin pulls it closer to subtitle */
+    opacity: 0.9;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+.highlight-text {
+    color: var(--gold);
+    font-weight: 700;
+    font-family: 'Alegreya SC', serif; /* Small caps for key terms */
+}
