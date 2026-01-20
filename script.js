@@ -27,14 +27,14 @@ const KEYSTONES = [
     "The Impaler", "Unwavering Stance", "Vaal Pact", "Wicked Ward", "Wind Dancer", "Zealot's Oath"
 ];
 
-// MANUAL FILENAME MAP: Exact file names from the Wiki (excluding .png)
+// FILENAME MAP: Validated against PoE Wiki (cite: 7.1, 4.1, 10.1)
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "TotemMax_passive_skill_icon",
     "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
     "Avatar of Fire": "AvatarOfFire_passive_skill_icon",
     "Blood Magic": "BloodMagic_passive_skill_icon",
-    "Chaos Inoculation": "ChaosInoculation_passive_skill_icon",
+    "Chaos Inoculation": "KeystoneChaosInoculation_passive_skill_icon", // CORRECTED
     "Crimson Dance": "CrimsonDance_passive_skill_icon",
     "Divine Shield": "EnergisedFortress_passive_skill_icon",
     "Eldritch Battery": "KeystoneEldritchBattery_passive_skill_icon",
@@ -42,12 +42,12 @@ const KEYSTONE_FILENAME_MAP = {
     "Ghost Reaver": "GhostReaver_passive_skill_icon",
     "Glancing Blows": "Glancing_Blows_passive_skill_icon",
     "Hollow Palm Technique": "Hollow_Palm_Technique_keystone_icon",
-    "Imbalanced Guard": "Imbalanced_Guard_passive_skill_icon",
+    "Imbalanced Guard": "SacredBastionKeystone_passive_skill_icon",
     "Iron Grip": "IronGrip_passive_skill_icon",
     "Iron Reflexes": "IronReflexes_passive_skill_icon",
-    "Iron Will": "IronWill_passive_skill_icon",
-    "Lethe Shade": "Lethe_Shade_passive_skill_icon",
-    "Magebane": "Magebane_passive_skill_icon",
+    "Iron Will": "KeystoneIronWill_passive_skill_icon", // CORRECTED
+    "Lethe Shade": "MomentofRespite_passive_skill_icon",
+    "Magebane": "Deaden_passive_skill_icon", // CORRECTED
     "Mind Over Matter": "Heroicspirit_passive_skill_icon",
     "Minion Instability": "MinionInstability_passive_skill_icon",
     "Oath of the Maji": "Oath_of_the_Maji_passive_skill_icon",
@@ -57,7 +57,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Precise Technique": "Precise_Technique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
     "Runebinder": "KeystoneRunebinder_passive_skill_icon",
-    "Solipsism": "Solipsism_passive_skill_icon",
+    "Solipsism": "Resilience_passive_skill_icon",
     "Supreme Ego": "Supreme_Ego_passive_skill_icon",
     "The Agnostic": "The_Agnostic_passive_skill_icon",
     "The Impaler": "The_Impaler_passive_skill_icon",
@@ -145,17 +145,42 @@ function getWikiImage(filename) {
 // LOOKUP FUNCTION: Uses the manual map to guarantee success
 function getKeystoneImage(name) {
     let filename = KEYSTONE_FILENAME_MAP[name];
-    if (filename) {
-        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
-    }
     // Fallback: Remove spaces
-    filename = name.replace(/ /g, "");
+    if (!filename) {
+        filename = name.replace(/ /g, "_");
+    }
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
 }
 
 function getWikiLink(name) {
     const safeName = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/${safeName}`;
+}
+
+// --- SEARCH LOGIC ---
+function searchBuild() {
+    const ascName = document.getElementById('res-asc-name').innerText;
+    const skillName = document.getElementById('res-skill-name').innerText;
+    
+    if(ascName === "?" || skillName === "?") return;
+
+    let query = `"${ascName}" "${skillName}" build guide`;
+
+    const includeKeystone = document.getElementById('searchKeystoneToggle').checked;
+    if(includeKeystone) {
+        const k1 = document.getElementById('res-key1-name').innerText;
+        const k2 = document.getElementById('res-key2-name').innerText;
+        
+        if (document.getElementById('link-key1').style.display !== 'none' && k1 !== "?") {
+            query += ` "${k1}"`;
+        }
+        if (document.getElementById('link-key2').style.display !== 'none' && k2 !== "?") {
+            query += ` "${k2}"`;
+        }
+    }
+
+    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    window.open(url, '_blank');
 }
 
 // --- LOGIC ---
@@ -165,6 +190,7 @@ function castFate() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const searchContainer = document.getElementById('search-container');
     const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
@@ -234,7 +260,6 @@ function castFate() {
         k2El.style.display = 'none';
         noKeyEl.style.display = 'none';
         
-        // RESET DUAL MODE CLASS
         keystoneContainer.classList.remove('dual-mode');
 
         if(chosenKeys.length === 0) {
@@ -267,6 +292,7 @@ function castFate() {
 
         setTimeout(() => {
             resetBtn.classList.remove('hidden');
+            searchContainer.classList.remove('hidden'); // Show Search
         }, 1200);
 
     }, 800);
@@ -277,9 +303,11 @@ function resetDeck() {
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
     const resetBtn = document.getElementById('resetBtn');
+    const searchContainer = document.getElementById('search-container');
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
+    searchContainer.classList.add('hidden');
 
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');
