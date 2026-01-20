@@ -101,10 +101,10 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// FIX: Removes ALL non-alphanumeric chars (spaces, apostrophes, dashes)
-// Example: "Zealot's Oath" -> "ZealotsOath"
+// FIX: Change to use Underscores (Standard Wiki Format)
+// Example: "Lethe Shade" -> "Lethe_Shade_passive_skill_icon.png"
 function getKeystoneImage(name) {
-    const safeName = name.replace(/[^a-zA-Z0-9]/g, "");
+    const safeName = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}_passive_skill_icon.png`;
 }
 
@@ -189,7 +189,10 @@ function castFate() {
                 document.getElementById(elId).href = getWikiLink(keyName);
                 const img = document.getElementById(imgId);
                 img.src = getKeystoneImage(keyName);
-                img.onerror = function() { this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; };
+                // Fallback to generic icon if specific Art is missing
+                img.onerror = function() { 
+                    this.src = "https://www.poewiki.net/wiki/Special:FilePath/Keystone_passive_node_icon.png"; 
+                };
             };
             if(chosenKeys[0]) setKey('link-key1', 'res-key1-name', 'img-key1', chosenKeys[0]);
             if(chosenKeys[1]) setKey('link-key2', 'res-key2-name', 'img-key2', chosenKeys[1]);
