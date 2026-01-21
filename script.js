@@ -97,7 +97,7 @@ const SKILLS_DB = {
     "Earthquake": ["of Amplification"], "Earthshatter": [], "Elemental Hit": ["of the Spectrum"], "Energy Blade": [],
     "Essence Drain": ["of Desperation", "of Wickedness"], "Ethereal Knives": ["of the Massacre", "of Lingering Blades"], "Explosive Arrow": [],
     "Explosive Concoction": ["of Destruction"], "Explosive Trap": ["of Magnitude", "of Shrapnel"], "Exsanguinate": ["of Transmission"],
-    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": [],
+    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": [], 
     "Firestorm": ["of Meteors", "of Pelting"], "Flame Dash": ["of Return"], "Flame Surge": ["of Combusting"], "Flame Wall": [],
     "Flameblast": ["of Celerity", "of Contraction"], "Flicker Strike": ["of Power"], "Forbidden Rite": ["of Soul Sacrifice"],
     "Freezing Pulse": [], "Frenzy": ["of Onslaught"], "Frost Blades": ["of Katabasis"], "Frost Bomb": ["of Forthcoming", "of Instability"],
@@ -167,13 +167,11 @@ function getKeystoneImage(name) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
-// UPDATED: Handle Harbinger and Gambler Exceptions
+// UPDATED: Fixed Linking for Phrecia Classes
 function getWikiLink(name) {
-    if (name === "Harbinger") {
-        return "https://www.poewiki.net/wiki/Harbinger_(ascendancy_class)";
-    }
-    if (name === "Gambler") {
-        return "https://www.poewiki.net/wiki/Gambler_(ascendancy_class)";
+    // Specifically handle the Phrecia classes that share names with other mechanics
+    if (name === "Harbinger" || name === "Gambler" || name === "Herald") {
+        return `https://www.poewiki.net/wiki/${name}_(ascendancy_class)`;
     }
     const safeName = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/${safeName}`;
