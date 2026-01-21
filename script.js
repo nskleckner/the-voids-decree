@@ -167,10 +167,13 @@ function getKeystoneImage(name) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
-// UPDATED: Handle Harbinger Exception
+// UPDATED: Handle Harbinger and Gambler Exceptions
 function getWikiLink(name) {
     if (name === "Harbinger") {
         return "https://www.poewiki.net/wiki/Harbinger_(ascendancy_class)";
+    }
+    if (name === "Gambler") {
+        return "https://www.poewiki.net/wiki/Gambler_(ascendancy_class)";
     }
     const safeName = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/${safeName}`;
@@ -295,11 +298,7 @@ function resetDeck() {
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    
-    // Hide Ninja Button
-    if(typeof hidePoeNinjaLink === "function") {
-        hidePoeNinjaLink();
-    }
+    inspireBtn.classList.add('hidden');
 
     // 3. Reset Deck Return Time (400ms)
     setTimeout(() => {
