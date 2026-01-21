@@ -3,7 +3,7 @@ const ASCENDANCIES = {
     standard: [
         { name: "Juggernaut", class: "Marauder" }, { name: "Berserker", class: "Marauder" }, { name: "Chieftain", class: "Marauder" },
         { name: "Slayer", class: "Duelist" }, { name: "Gladiator", class: "Duelist" }, { name: "Champion", class: "Duelist" },
-        { name: "Deadeye", class: "Ranger" }, { name: "Raider", class: "Ranger" }, { name: "Pathfinder", class: "Ranger" },
+        { name: "Deadeye", class: "Ranger" }, { name: "Warden", class: "Ranger" }, { name: "Pathfinder", class: "Ranger" },
         { name: "Assassin", class: "Shadow" }, { name: "Saboteur", class: "Shadow" }, { name: "Trickster", class: "Shadow" },
         { name: "Necromancer", class: "Witch" }, { name: "Occultist", class: "Witch" }, { name: "Elementalist", class: "Witch" },
         { name: "Inquisitor", class: "Templar" }, { name: "Hierophant", class: "Templar" }, { name: "Guardian", class: "Templar" },
@@ -35,7 +35,7 @@ const KEYSTONES = [
 // FILENAME MAP: Validated against PoE Wiki Source
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
-    "Ancestral Bond": "Totemmax_passive_skill_icon", // CORRECTED
+    "Ancestral Bond": "Totemmax_passive_skill_icon",
     "Arrow Dancing": "KeystoneArrowDodging_passive_skill_icon",
     "Arsenal of Vengeance": "RetaliationKeystone_passive_skill_icon",
     "Avatar of Fire": "KeystoneAvatarOfFire_passive_skill_icon",
@@ -65,7 +65,7 @@ const KEYSTONE_FILENAME_MAP = {
     "Necromantic Aegis": "KeystoneNecromanticAegis_passive_skill_icon",
     "Pain Attunement": "KeystonePainAttunement_passive_skill_icon",
     "Perfect Agony": "CritAilments_passive_skill_icon",
-    "Point Blank": "KeystonePointBlankArcher_passive_skill_icon", // CORRECTED
+    "Point Blank": "KeystonePointBlankArcher_passive_skill_icon",
     "Precise Technique": "PreciseTechnique_passive_skill_icon",
     "Resolute Technique": "KeystoneResoluteTechnique_passive_skill_icon",
     "Runebinder": "BrandKeystone_passive_skill_icon",
@@ -83,12 +83,12 @@ const KEYSTONE_FILENAME_MAP = {
 };
 
 const SKILLS_DB = {
-    "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Cross Strafe", "of Focus Fire"],
+    "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Crossfire", "of Focus"],
     "Ball Lightning": ["of Orbiting", "of Static"], "Bane": ["of Condemnation"], "Barrage": ["of Volley Fire"],
     "Blade Blast": ["of Dagger Detonation", "of Unloading"], "Blade Flurry": ["of Incision"], "Blade Trap": ["of Greatswords", "of Laceration"],
     "Blade Vortex": ["of the Scythe"], "Bladefall": ["of Impaling", "of Volleys"], "Bladestorm": ["of Uncertainty"], "Blast Rain": [],
     "Blazing Salvo": [], "Blight": ["of Atrophy", "of Contagion"], "Blink Arrow": ["of Bombarding Clones", "of Prismatic Clones"],
-    "Bone Shatter": ["of Carnage", "of Complex Trauma"], "Burning Arrow": ["of Vigour"], "Caustic Arrow": ["of Poison"], "Chain Hook": [],
+    "BoneShatter": ["of Carnage", "of Complex Trauma"], "Burning Arrow": ["of Vigour"], "Caustic Arrow": ["of Poison"], "Chain Hook": [],
     "Charged Dash": [], "Cleave": ["of Rage"], "Cobra Lash": [], "Cold Snap": ["of Power"], "Consecrated Path": ["of Endurance"],
     "Contagion": ["of Subsiding", "of Transference"], "Crackling Lance": ["of Branching", "of Disintegration"], "Creeping Frost": [],
     "Cremation": ["of Exhuming", "of the Volcano"], "Cyclone": ["of Tumult"], "Dark Pact": [], "Desecrate": [],
@@ -97,7 +97,7 @@ const SKILLS_DB = {
     "Earthquake": ["of Amplification"], "Earthshatter": [], "Elemental Hit": ["of the Spectrum"], "Energy Blade": [],
     "Essence Drain": ["of Desperation", "of Wickedness"], "Ethereal Knives": ["of the Massacre", "of Lingering Blades"], "Explosive Arrow": [],
     "Explosive Concoction": ["of Destruction"], "Explosive Trap": ["of Magnitude", "of Shrapnel"], "Exsanguinate": ["of Transmission"],
-    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": [], // CORRECTED: No transfigured
+    "Eye of Winter": ["of Finality", "of Transience"], "Fire Trap": ["of Blasting"], "Fireball": [],
     "Firestorm": ["of Meteors", "of Pelting"], "Flame Dash": ["of Return"], "Flame Surge": ["of Combusting"], "Flame Wall": [],
     "Flameblast": ["of Celerity", "of Contraction"], "Flicker Strike": ["of Power"], "Forbidden Rite": ["of Soul Sacrifice"],
     "Freezing Pulse": [], "Frenzy": ["of Onslaught"], "Frost Blades": ["of Katabasis"], "Frost Bomb": ["of Forthcoming", "of Instability"],
@@ -162,11 +162,16 @@ function getKeystoneImage(name) {
     if (filename) {
         return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
     }
+    // Fallback: Remove spaces
     filename = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
 }
 
+// UPDATED: Handle Harbinger Exception
 function getWikiLink(name) {
+    if (name === "Harbinger") {
+        return "https://www.poewiki.net/wiki/Harbinger_(ascendancy_class)";
+    }
     const safeName = name.replace(/ /g, "_");
     return `https://www.poewiki.net/wiki/${safeName}`;
 }
@@ -290,7 +295,11 @@ function resetDeck() {
 
     resultCards.forEach(card => card.classList.remove('revealed'));
     resetBtn.classList.add('hidden');
-    inspireBtn.classList.add('hidden');
+    
+    // Hide Ninja Button
+    if(typeof hidePoeNinjaLink === "function") {
+        hidePoeNinjaLink();
+    }
 
     // 3. Reset Deck Return Time (400ms)
     setTimeout(() => {
