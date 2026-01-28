@@ -331,7 +331,7 @@ function getWikiImage(filename) {
 }
 
 function getWikiLink(name) {
-    if (name === "Harbinger" || name === "Gambler" || name === "Herald") {
+    if (name === "Harbinger" || name === "Gambler" || name === "Herald" || name === "Scavenger") {
         return `https://www.poewiki.net/wiki/${name}_(ascendancy_class)`;
     }
     const safeName = name.replace(/ /g, "_");
