@@ -158,7 +158,7 @@ const SKILLS_DB = {
     "Stormbind": ["of Teleportation"],
     "Stormblast Mine": [],
     "Summon Carrion Golem": ["of Hordes", "of Scavenging"],
-    "Summon Chaos Golem": ["of Hordes"],
+    "Summon Chaos Golem": ["of Hordes", "of the Maelström"],
     "Summon Flame Golem": ["of Hordes", "of the Meteor"],
     "Summon Holy Relic": ["of Conviction"],
     "Summon Ice Golem": ["of Hordes", "of Shattering"],
