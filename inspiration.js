@@ -45,8 +45,14 @@ function closeSearchConfig() {
 function executePoeNinjaSearch() {
     const ascName = document.getElementById('res-asc-name').innerText;
     const skillName = document.getElementById('res-skill-name').innerText;
+    
+    // Check the Phrecia Toggle state
+    const isPhrecia = document.getElementById('phreciaToggle').checked;
+    
+    // Switch league based on toggle (Lowercase "phrecia" as requested previously)
+    const targetLeague = isPhrecia ? "phrecia" : CURRENT_LEAGUE;
 
-    let ninjaUrl = `https://poe.ninja/poe1/builds/${CURRENT_LEAGUE}`;
+    let ninjaUrl = `https://poe.ninja/poe1/builds/${targetLeague}`;
     let params = [];
 
     if (document.getElementById('chk-asc').checked) {
@@ -68,7 +74,8 @@ function executePoeNinjaSearch() {
         if (k2Link.style.display !== 'none' && k2Text !== "?") keystones.push(k2Text);
 
         if (keystones.length > 0) {
-            params.push(`keystones=${keystones.map(k => encodeURIComponent(k)).join(',')}`);
+            // FIXED: Changed parameter from 'keystones' to 'keypassives'
+            params.push(`keypassives=${keystones.map(k => encodeURIComponent(k)).join(',')}`);
         }
     }
 

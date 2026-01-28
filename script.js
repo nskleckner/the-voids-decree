@@ -32,7 +32,6 @@ const KEYSTONES = [
     "Zealot's Oath"
 ];
 
-// FILENAME MAP: Validated against PoE Wiki Source
 const KEYSTONE_FILENAME_MAP = {
     "Acrobatics": "KeystoneAcrobatics_passive_skill_icon",
     "Ancestral Bond": "Totemmax_passive_skill_icon",
@@ -86,12 +85,17 @@ const SKILLS_DB = {
     "Absolution": ["of Inspiring"], "Arc": ["of Oscillating", "of Surging"], "Artillery Ballista": ["of Crossfire", "of Focus"],
     "Ball Lightning": ["of Orbiting", "of Static"], "Bane": ["of Condemnation"], "Barrage": ["of Volley Fire"],
     "Blade Blast": ["of Dagger Detonation", "of Unloading"], "Blade Flurry": ["of Incision"], "Blade Trap": ["of Greatswords", "of Laceration"],
-    "Blade Vortex": ["of the Scythe"], "Bladefall": ["of Impaling", "of Volleys"], "Bladestorm": ["of Uncertainty"], "Blast Rain": [],
+    "Blade Vortex": ["of the Scythe"], 
+    "Bladefall": ["of Impaling", "of Volleys", "of Trarthus"], 
+    "Bladestorm": ["of Uncertainty"], 
+    "Blast Rain": ["of Trarthus"],
     "Blazing Salvo": [], "Blight": ["of Atrophy", "of Contagion"], "Blink Arrow": ["of Bombarding Clones", "of Prismatic Clones"],
-    "BoneShatter": ["of Carnage", "of Complex Trauma"], "Burning Arrow": ["of Vigour"], "Caustic Arrow": ["of Poison"], "Chain Hook": [],
+    "BoneShatter": ["of Carnage", "of Complex Trauma"], "Burning Arrow": ["of Vigour"], "Caustic Arrow": ["of Poison"], 
+    "Chain Hook": ["of Trarthus"],
     "Charged Dash": [], "Cleave": ["of Rage"], "Cobra Lash": [], "Cold Snap": ["of Power"], "Consecrated Path": ["of Endurance"],
     "Contagion": ["of Subsiding", "of Transference"], "Crackling Lance": ["of Branching", "of Disintegration"], "Creeping Frost": [],
-    "Cremation": ["of Exhuming", "of the Volcano"], "Cyclone": ["of Tumult"], "Dark Pact": [], "Desecrate": [],
+    "Cremation": ["of Exhuming", "of the Volcano"], "Cyclone": ["of Tumult"], 
+    "Dark Pact": ["of Trarthus"], "Desecrate": [],
     "Detonate Dead": ["of Chain Reaction", "of Scavenging"], "Discharge": ["of Misery"], "Divine Ire": ["of Disintegration", "of Holy Lightning"],
     "Dominating Blow": ["of Inspiring"], "Double Strike": ["of Impaling", "of Momentum"], "Dual Strike": ["of Ambidexterity"],
     "Earthquake": ["of Amplification"], "Earthshatter": [], "Elemental Hit": ["of the Spectrum"], "Energy Blade": [],
@@ -103,7 +107,9 @@ const SKILLS_DB = {
     "Freezing Pulse": [], "Frenzy": ["of Onslaught"], "Frost Blades": ["of Katabasis"], "Frost Bomb": ["of Forthcoming", "of Instability"],
     "Frost Wall": [], "Frostblink": ["of Wintry Blast"], "Frozen Legion": ["of Rallying"], "Galvanic Arrow": ["of Energy", "of Surging"],
     "Galvanic Field": ["of Intensity"], "General's Cry": [], "Glacial Cascade": ["of the Fissure"], "Glacial Hammer": ["of Shattering"],
-    "Ground Slam": ["of Earthshaking"], "Heavy Strike": [], "Hexblast": ["of Contradiction", "of Havoc"], "Holy Flame Totem": ["of Ire"],
+    "Ground Slam": ["of Earthshaking"], 
+    "Heavy Strike": ["of Trarthus"], 
+    "Hexblast": ["of Contradiction", "of Havoc"], "Holy Flame Totem": ["of Ire"],
     "Ice Crash": ["of Cadence"], "Ice Nova": ["of Deep Freeze", "of Frostbolts"], "Ice Shot": ["of Penetration"], "Ice Spear": ["of Splitting"],
     "Ice Trap": ["of Hollowness"], "Icicle Mine": ["of Fanning", "of Sabotage"], "Incinerate": ["of Expanse", "of Venting"],
     "Infernal Blow": ["of Immolation"], "Kinetic Blast": ["of Clustering"], "Kinetic Bolt": ["of Fragmentation"],
@@ -118,34 +124,77 @@ const SKILLS_DB = {
     "Reap": [], "Reave": ["of Refraction"], "Reckoning": [], "Righteous Fire": ["of Arcane Devotion"], "Riposte": [],
     "Rolling Magma": [], "Scorching Ray": ["of Immolation"], "Scourge Arrow": ["of Menace"], "Searing Bond": [],
     "Seismic Trap": ["of Swells"], "Shattering Steel": ["of Ammunition"], "Shield Charge": [], "Shield Crush": ["of the Chieftain"],
-    "Shock Nova": [], "Shockwave Totem": [], "Shrapnel Ballista": ["of Steel"], "Siege Ballista": ["of Splintering"],
+    "Shock Nova": [], "Shockwave Totem": [], "Shrapnel Ballista": ["of Steel"], 
+    "Siege Ballista": ["of Splintering", "of Trarthus"],
     "Smite": ["of Divine Judgement"], "Soulrend": ["of Reaping", "of the Spiral"], "Spark": ["of the Nova", "of Unpredictability"],
-    "Spectral Helix": [], "Spectral Shield Throw": ["of Shattering"], "Spectral Throw": ["of Materialising"], "Split Arrow": ["of Splitting"],
-    "Splitting Steel": ["of Ammunition"], "Static Strike": [], "Storm Brand": ["of Indecision"], "Storm Burst": [], "Storm Call": [],
+    "Spectral Helix": ["of Trarthus"], 
+    "Spectral Shield Throw": ["of Shattering", "of Trarthus"], 
+    "Spectral Throw": ["of Materialising", "of Trarthus"], 
+    "Split Arrow": ["of Splitting"],
+    "Splitting Steel": ["of Ammunition"], "Static Strike": [], "Storm Brand": ["of Indecision"], "Storm Burst": [], 
+    "Storm Call": ["of Trarthus"],
     "Storm Rain": ["of the Conduit", "of the Fence"], "Stormbind": ["of Teleportation"], "Summon Carrion Golem": ["of Hordes", "of Scavenging"],
-    "Summon Chaos Golem": ["of Hordes", "of the Maelstrom"], "Summon Flame Golem": ["of Hordes", "of the Meteor"],
+    "Summon Chaos Golem": ["of Hordes"], 
+    "Summon Flame Golem": ["of Hordes", "of the Meteor"],
     "Summon Holy Relic": ["of Conviction"], "Summon Ice Golem": ["of Hordes", "of Shattering"], "Summon Lightning Golem": ["of Hordes"],
     "Summon Raging Spirit": ["of Enormity"], "Summon Reaper": ["of Eviscerating", "of Revenants"], "Summon Skeletons": ["of Archers", "of Mages"],
-    "Summon Stone Golem": ["of Hordes", "of Safeguarding"], "Sunder": ["of Earthbreaking"], "Sweep": [], "Tectonic Slam": ["of Cataclysm"],
+    "Summon Stone Golem": ["of Hordes", "of Safeguarding"], 
+    "Sunder": ["of Earthbreaking", "of Trarthus"], 
+    "Sweep": [], "Tectonic Slam": ["of Cataclysm"],
     "Tempest Shield": [], "Tornado Shot": [], "Toxic Rain": ["of Sporeburst", "of Withering"], "Unearth": [], "Vengeance": [], "Venom Gyre": [],
     "Viper Strike": ["of the Mamba"], "Void Sphere": ["of Rending"], "Volatile Dead": ["of Confinement", "of Seething"],
-    "Volcanic Fissure": ["of Snaking"], "Vortex": ["of Projection"], "Wave of Conviction": [], "Wild Strike": ["of Extremes"],
+    "Volcanic Fissure": ["of Snaking"], "Vortex": ["of Projection"], 
+    "Wave of Conviction": ["of Trarthus"], 
+    "Wild Strike": ["of Extremes"],
     "Winter Orb": [], "Wintertide Brand": []
 };
 
 // --- UTILITIES ---
 
+let sessionHistory = [];
+const HISTORY_LIMIT = 8; 
+
 function getRandom(arr) {
+    if (!arr || arr.length === 0) return null;
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function flattenSkillDatabase() {
+function flattenSkillDatabase(includeStd, includeTrans, includeTrarthan) {
     let allSkills = [];
+    
+    if (includeStd === undefined) includeStd = true;
+    if (includeTrans === undefined) includeTrans = true;
+    if (includeTrarthan === undefined) includeTrarthan = true;
+
     for (const [baseName, variants] of Object.entries(SKILLS_DB)) {
-        allSkills.push({ name: baseName, isTransfigured: false, imageName: `${baseName} inventory icon.png` });
+        if (includeStd) {
+            allSkills.push({ 
+                name: baseName, 
+                type: "Standard Gem",
+                imageName: `${baseName} inventory icon.png` 
+            });
+        }
         variants.forEach(variant => {
             const fullName = `${baseName} ${variant}`;
-            allSkills.push({ name: fullName, isTransfigured: true, imageName: `${fullName} inventory icon.png` });
+            const isTrarthan = variant === "of Trarthus";
+            
+            if (isTrarthan) {
+                if (includeTrarthan) {
+                    allSkills.push({ 
+                        name: fullName, 
+                        type: "Trarthan Gem",
+                        imageName: `${fullName} inventory icon.png` 
+                    });
+                }
+            } else {
+                if (includeTrans) {
+                    allSkills.push({ 
+                        name: fullName, 
+                        type: "Transfigured Gem",
+                        imageName: `${fullName} inventory icon.png` 
+                    });
+                }
+            }
         });
     }
     return allSkills;
@@ -156,20 +205,7 @@ function getWikiImage(filename) {
     return `https://www.poewiki.net/wiki/Special:FilePath/${safeName}`;
 }
 
-// LOOKUP FUNCTION
-function getKeystoneImage(name) {
-    let filename = KEYSTONE_FILENAME_MAP[name];
-    if (filename) {
-        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
-    }
-    // Fallback: Remove spaces
-    filename = name.replace(/ /g, "_");
-    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
-}
-
-// UPDATED: Fixed Linking for Phrecia Classes
 function getWikiLink(name) {
-    // Specifically handle the Phrecia classes that share names with other mechanics
     if (name === "Harbinger" || name === "Gambler" || name === "Herald") {
         return `https://www.poewiki.net/wiki/${name}_(ascendancy_class)`;
     }
@@ -177,18 +213,250 @@ function getWikiLink(name) {
     return `https://www.poewiki.net/wiki/${safeName}`;
 }
 
-// --- LOGIC ---
+function getKeystoneImage(name) {
+    let filename = KEYSTONE_FILENAME_MAP[name];
+    if (filename) {
+        return `https://www.poewiki.net/wiki/Special:FilePath/${filename}.png`;
+    }
+    filename = name.replace(/ /g, "_");
+    return `https://www.poewiki.net/wiki/Special:FilePath/${filename}_passive_skill_icon.png`;
+}
+
+// --- LOCKING LOGIC ---
+function toggleFracture(cardId) {
+    const card = document.getElementById(cardId);
+    card.classList.toggle('fractured');
+}
+
+// --- STATE MANAGEMENT ---
+
+function getCurrentState() {
+    return {
+        ascName: document.getElementById('res-asc-name').innerText,
+        ascClass: document.getElementById('res-asc-class').innerText,
+        skillName: document.getElementById('res-skill-name').innerText,
+        skillType: document.getElementById('res-skill-type').innerText,
+        keys: [
+            document.getElementById('res-key1-name').innerText,
+            document.getElementById('res-key2-name').innerText
+        ],
+        isPhrecia: document.getElementById('phreciaToggle').checked,
+        pools: [
+            document.getElementById('pool-std').checked,
+            document.getElementById('pool-trans').checked,
+            document.getElementById('pool-trarthan').checked
+        ]
+    };
+}
+
+function updateUrlState(state) {
+    if (state.ascName === "?" || state.skillName === "?") return;
+    
+    const url = new URL(window.location.href);
+    url.searchParams.set('asc', state.ascName);
+    url.searchParams.set('class', state.ascClass);
+    url.searchParams.set('skill', state.skillName);
+    url.searchParams.set('type', state.skillType);
+    url.searchParams.set('phrecia', state.isPhrecia);
+    
+    const pStr = state.pools.map(p => p ? '1' : '0').join(',');
+    url.searchParams.set('pools', pStr);
+    
+    const validKeys = state.keys.filter(k => k && k !== "?");
+    if(validKeys.length > 0) {
+        url.searchParams.set('keys', validKeys.join(','));
+    } else {
+        url.searchParams.delete('keys');
+    }
+
+    window.history.replaceState({}, '', url);
+}
+
+function addToHistory(state) {
+    if (state.ascName === "?" || state.skillName === "?") return;
+    sessionHistory.unshift(state);
+    if (sessionHistory.length > HISTORY_LIMIT) sessionHistory.pop();
+    renderHistory();
+}
+
+function renderHistory() {
+    const historyList = document.getElementById('history-list');
+    const historySection = document.getElementById('history-section');
+    
+    if(!historyList || !historySection) return;
+    historyList.innerHTML = '';
+
+    if (sessionHistory.length === 0) {
+        historySection.classList.add('hidden');
+        return;
+    }
+    
+    historySection.classList.remove('hidden');
+
+    sessionHistory.forEach((item, index) => {
+        const tab = document.createElement('div');
+        tab.className = 'history-tab-item';
+        tab.innerHTML = `
+            <span class="h-tab-class">${item.ascName}</span>
+            <span>|</span>
+            <span class="h-tab-skill">${item.skillName}</span>
+        `;
+        tab.onclick = () => restoreState(index);
+        historyList.appendChild(tab);
+    });
+}
+
+function restoreState(index) {
+    const state = sessionHistory[index];
+    if (!state) return;
+
+    renderCardData(state.ascName, state.ascClass, state.skillName, state.skillType, state.keys, state.isPhrecia, state.pools);
+    
+    updateUrlState(state);
+    
+    // Instant reveal for history restoration
+    document.querySelectorAll('.fate-card').forEach(c => {
+        c.classList.remove('instant-reveal'); 
+        c.classList.add('revealed'); 
+    });
+
+    document.getElementById('resetBtn').closest('.btn-group-vertical').classList.remove('hidden');
+    document.getElementById('inspireBtn').classList.remove('hidden');
+}
+
+function renderCardData(ascName, ascClass, skillName, skillType, keys, isPhrecia, pools) {
+    document.getElementById('phreciaToggle').checked = isPhrecia;
+    
+    if (pools && pools.length === 3) {
+        document.getElementById('pool-std').checked = pools[0];
+        document.getElementById('pool-trans').checked = pools[1];
+        document.getElementById('pool-trarthan').checked = pools[2];
+    }
+
+    document.getElementById('res-asc-name').innerText = ascName;
+    document.getElementById('res-asc-class').innerText = ascClass;
+    document.getElementById('link-asc').href = getWikiLink(ascName);
+    const ascImg = document.getElementById('img-asc');
+    ascImg.src = getWikiImage(isPhrecia ? `${ascClass} avatar.png` : `${ascName} avatar.png`);
+    
+    document.getElementById('res-skill-name').innerText = skillName;
+    document.getElementById('res-skill-type').innerText = skillType;
+    document.getElementById('link-skill').href = getWikiLink(skillName);
+    const skillImg = document.getElementById('img-skill');
+    skillImg.src = getWikiImage(`${skillName} inventory icon.png`); 
+    
+    const k1El = document.getElementById('link-key1');
+    const k2El = document.getElementById('link-key2');
+    const noKeyEl = document.getElementById('no-keystones');
+    const keystoneContainer = document.getElementById('keystone-results');
+
+    k1El.style.display = 'none';
+    k2El.style.display = 'none';
+    noKeyEl.style.display = 'none';
+    keystoneContainer.classList.remove('dual-mode');
+
+    const validKeys = keys.filter(k => k && k !== "?");
+    
+    if(validKeys.length === 0) {
+        noKeyEl.style.display = 'block';
+        document.getElementById('res-key1-name').innerText = "?";
+        document.getElementById('res-key2-name').innerText = "?";
+    } else {
+        if(validKeys.length > 1) keystoneContainer.classList.add('dual-mode');
+        
+        if(validKeys[0]) {
+            k1El.style.display = 'flex';
+            document.getElementById('res-key1-name').innerText = validKeys[0];
+            document.getElementById('link-key1').href = getWikiLink(validKeys[0]);
+            document.getElementById('img-key1').src = getKeystoneImage(validKeys[0]);
+        }
+        if(validKeys[1]) {
+            k2El.style.display = 'flex';
+            document.getElementById('res-key2-name').innerText = validKeys[1];
+            document.getElementById('link-key2').href = getWikiLink(validKeys[1]);
+            document.getElementById('img-key2').src = getKeystoneImage(validKeys[1]);
+        }
+        if(!validKeys[1]) document.getElementById('res-key2-name').innerText = "?";
+    }
+}
+
+function copyPermalink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        const toast = document.getElementById('toast');
+        if(toast) {
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2000);
+        }
+    });
+}
+
+function checkUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const asc = params.get('asc');
+    const skill = params.get('skill');
+    
+    if (asc && skill) {
+        const ascClass = params.get('class') || "Ascendancy";
+        const skillType = params.get('type') || "Gem";
+        const isPhrecia = params.get('phrecia') === 'true';
+        
+        let pools = [true, true, true]; 
+        const pStr = params.get('pools');
+        if (pStr) {
+            const pArr = pStr.split(',');
+            if(pArr.length === 3) {
+                pools = pArr.map(v => v === '1');
+            }
+        }
+
+        const keysParam = params.get('keys');
+        const keys = keysParam ? keysParam.split(',') : [];
+
+        const exchangeZone = document.querySelector('.exchange-zone');
+        if(exchangeZone) exchangeZone.classList.add('collapsed');
+        
+        renderCardData(asc, ascClass, skill, skillType, keys, isPhrecia, pools);
+        
+        document.querySelectorAll('.fate-card').forEach(c => {
+            c.classList.add('instant-reveal'); 
+            c.classList.add('revealed');
+        });
+        
+        document.getElementById('resetBtn').closest('.btn-group-vertical').classList.remove('hidden');
+        document.getElementById('inspireBtn').classList.remove('hidden');
+        
+        addToHistory({
+            ascName: asc, ascClass: ascClass,
+            skillName: skill, skillType: skillType,
+            keys: keys, isPhrecia: isPhrecia, pools: pools
+        });
+    }
+}
+
+// --- MAIN LOGIC ---
 
 function castFate() {
     const deck = document.getElementById('deck-container');
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
-    const resetBtn = document.getElementById('resetBtn');
-    const inspireBtn = document.getElementById('inspireBtn');
-    const keystoneContainer = document.getElementById('keystone-results');
     
     const usePhrecia = document.getElementById('phreciaToggle').checked;
     
+    const useStd = document.getElementById('pool-std').checked;
+    const useTrans = document.getElementById('pool-trans').checked;
+    const useTrarthan = document.getElementById('pool-trarthan').checked;
+
+    const ascCard = document.getElementById('card-asc');
+    const skillCard = document.getElementById('card-skill');
+    const keyCard = document.getElementById('card-keystones');
+    
+    // Check Lock Status
+    const ascLocked = ascCard ? ascCard.classList.contains('fractured') : false;
+    const skillLocked = skillCard ? skillCard.classList.contains('fractured') : false;
+    const keyLocked = keyCard ? keyCard.classList.contains('fractured') : false;
+
     if (deck.classList.contains('dealing')) return;
 
     let numKeystones = 1;
@@ -198,118 +466,159 @@ function castFate() {
 
     deck.classList.add('dealing');
 
-    // 1. Wait for Deal Animation (300ms)
     setTimeout(() => {
         exchangeZone.classList.add('collapsed');
 
-        // Logic
-        let ascPool = usePhrecia ? [...ASCENDANCIES.phrecia] : [...ASCENDANCIES.standard];
-        const chosenAsc = getRandom(ascPool);
-
-        const allSkills = flattenSkillDatabase();
-        const chosenSkill = getRandom(allSkills);
-
-        let chosenKeys = [];
-        let keyPool = [...KEYSTONES];
-        for(let i=0; i<numKeystones; i++) {
-            if(keyPool.length === 0) break;
-            const k = getRandom(keyPool);
-            chosenKeys.push(k);
-            keyPool = keyPool.filter(item => item !== k);
+        // Logic Generation
+        if (!ascLocked) {
+            let ascPool = usePhrecia ? [...ASCENDANCIES.phrecia] : [...ASCENDANCIES.standard];
+            const chosenAsc = getRandom(ascPool);
+            document.getElementById('res-asc-name').innerText = chosenAsc.name;
+            document.getElementById('res-asc-class').innerText = chosenAsc.class;
+            document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
+            document.getElementById('img-asc').src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
         }
 
-        // Render Ascendancy
-        document.getElementById('res-asc-name').innerText = chosenAsc.name;
-        document.getElementById('res-asc-class').innerText = chosenAsc.class;
-        document.getElementById('link-asc').href = getWikiLink(chosenAsc.name);
-        
-        const ascImg = document.getElementById('img-asc');
-        ascImg.classList.remove('loaded');
-        ascImg.onload = function() { this.classList.add('loaded'); };
-        ascImg.src = getWikiImage(usePhrecia ? `${chosenAsc.class} avatar.png` : `${chosenAsc.name} avatar.png`);
-        
-        // Render Skill
-        document.getElementById('res-skill-name').innerText = chosenSkill.name;
-        document.getElementById('res-skill-type').innerText = chosenSkill.isTransfigured ? "Transfigured Gem" : "Standard Gem";
-        document.getElementById('link-skill').href = getWikiLink(chosenSkill.name);
-        
-        const skillImg = document.getElementById('img-skill');
-        skillImg.classList.remove('loaded');
-        skillImg.onload = function() { this.classList.add('loaded'); };
-        skillImg.src = getWikiImage(chosenSkill.imageName);
+        if (!skillLocked) {
+            const allSkills = flattenSkillDatabase(useStd, useTrans, useTrarthan);
+            let chosenSkill;
+            if (allSkills.length === 0) {
+                chosenSkill = { name: "Void Sphere", type: "Standard Gem", imageName: "Void Sphere inventory icon.png" };
+                alert("You must select at least one gem pool. The Void has chosen for you.");
+                document.getElementById('pool-std').checked = true;
+            } else {
+                chosenSkill = getRandom(allSkills);
+            }
+            document.getElementById('res-skill-name').innerText = chosenSkill.name;
+            document.getElementById('res-skill-type').innerText = chosenSkill.type;
+            document.getElementById('link-skill').href = getWikiLink(chosenSkill.name);
+            document.getElementById('img-skill').src = getWikiImage(chosenSkill.imageName);
+        }
 
-        // Render Keystones
-        const k1El = document.getElementById('link-key1');
-        const k2El = document.getElementById('link-key2');
-        const noKeyEl = document.getElementById('no-keystones');
-        
-        k1El.style.display = 'none';
-        k2El.style.display = 'none';
-        noKeyEl.style.display = 'none';
-        
-        keystoneContainer.classList.remove('dual-mode');
-
-        if(chosenKeys.length === 0) {
-            noKeyEl.style.display = 'block';
-        } else {
-            if (chosenKeys.length > 1) {
-                keystoneContainer.classList.add('dual-mode');
+        if (!keyLocked) {
+            let chosenKeys = [];
+            let keyPool = [...KEYSTONES];
+            for(let i=0; i<numKeystones; i++) {
+                if(keyPool.length === 0) break;
+                const k = getRandom(keyPool);
+                chosenKeys.push(k);
+                keyPool = keyPool.filter(item => item !== k);
             }
 
-            const setKey = (elId, nameId, imgId, keyName) => {
-                document.getElementById(elId).style.display = 'flex';
-                document.getElementById(nameId).innerText = keyName;
-                document.getElementById(elId).href = getWikiLink(keyName);
+            const k1El = document.getElementById('link-key1');
+            const k2El = document.getElementById('link-key2');
+            const noKeyEl = document.getElementById('no-keystones');
+            const keystoneContainer = document.getElementById('keystone-results');
+            
+            k1El.style.display = 'none';
+            k2El.style.display = 'none';
+            noKeyEl.style.display = 'none';
+            keystoneContainer.classList.remove('dual-mode');
+
+            if(chosenKeys.length === 0) {
+                noKeyEl.style.display = 'block';
+                document.getElementById('res-key1-name').innerText = "?";
+                document.getElementById('res-key2-name').innerText = "?";
+            } else {
+                if (chosenKeys.length > 1) {
+                    keystoneContainer.classList.add('dual-mode');
+                }
+                const setKey = (elId, nameId, imgId, keyName) => {
+                    document.getElementById(elId).style.display = 'flex';
+                    document.getElementById(nameId).innerText = keyName;
+                    document.getElementById(elId).href = getWikiLink(keyName);
+                    document.getElementById(imgId).src = getKeystoneImage(keyName);
+                };
+                if(chosenKeys[0]) setKey('link-key1', 'res-key1-name', 'img-key1', chosenKeys[0]);
+                if(chosenKeys[1]) setKey('link-key2', 'res-key2-name', 'img-key2', chosenKeys[1]);
+                if(!chosenKeys[1]) document.getElementById('res-key2-name').innerText = "?";
+            }
+        }
+
+        // --- DEALING ANIMATION LOGIC ---
+        // Force sequential dealing for non-locked cards
+        const cards = [
+            { id: 'card-asc', locked: ascLocked },
+            { id: 'card-skill', locked: skillLocked },
+            { id: 'card-keystones', locked: keyLocked }
+        ];
+
+        let delayCounter = 100; // Start with small delay to allow reflow
+        const STAGGER_MS = 400; // Time between cards
+
+        cards.forEach(c => {
+            const cardEl = document.getElementById(c.id);
+            if (!c.locked) {
+                // Remove class to reset animation state
+                cardEl.classList.remove('revealed');
+                cardEl.classList.remove('instant-reveal');
                 
-                const img = document.getElementById(imgId);
-                img.classList.remove('loaded');
-                img.onload = function() { this.classList.add('loaded'); };
-                img.src = getKeystoneImage(keyName);
-            };
-            if(chosenKeys[0]) setKey('link-key1', 'res-key1-name', 'img-key1', chosenKeys[0]);
-            if(chosenKeys[1]) setKey('link-key2', 'res-key2-name', 'img-key2', chosenKeys[1]);
-        }
+                // FORCE REFLOW: This is critical for the animation to restart
+                void cardEl.offsetWidth; 
+                
+                setTimeout(() => {
+                    cardEl.classList.add('revealed');
+                }, delayCounter);
+                
+                delayCounter += STAGGER_MS;
+            } else {
+                // If locked, ensure it stays visible
+                cardEl.classList.add('revealed');
+                cardEl.classList.add('instant-reveal');
+            }
+        });
 
-        resultCards.forEach(card => card.classList.add('revealed'));
-
-        // Update Inspiration Button
+        // Update Ninja Link
         if(typeof updatePoeNinjaLink === "function") {
-            updatePoeNinjaLink(chosenAsc.name, chosenSkill.name);
+            updatePoeNinjaLink(
+                document.getElementById('res-asc-name').innerText, 
+                document.getElementById('res-skill-name').innerText
+            );
         }
 
-        // 2. Reveal Buttons (Wait 700ms total)
+        // Show buttons after last card
         setTimeout(() => {
-            document.getElementById('resetBtn').classList.remove('hidden');
+            document.getElementById('resetBtn').closest('.btn-group-vertical').classList.remove('hidden');
             document.getElementById('inspireBtn').classList.remove('hidden');
-        }, 700); 
+            
+            const currentState = getCurrentState();
+            updateUrlState(currentState);
+            addToHistory(currentState);
+            
+        }, delayCounter + 200); 
 
-    }, 300); // Wait for initial deal
+    }, 300);
 }
 
-// RESET DECK
 function resetDeck() {
     const deck = document.getElementById('deck-container');
     const exchangeZone = document.querySelector('.exchange-zone');
     const resultCards = document.querySelectorAll('.fate-card');
-    const resetBtn = document.getElementById('resetBtn');
+    const btnGroup = document.getElementById('resetBtn').closest('.btn-group-vertical');
     const inspireBtn = document.getElementById('inspireBtn');
 
-    resultCards.forEach(card => card.classList.remove('revealed'));
-    resetBtn.classList.add('hidden');
+    // HIDE only cards that are NOT locked
+    resultCards.forEach(card => {
+        if (!card.classList.contains('fractured')) {
+            card.classList.remove('revealed');
+            card.classList.remove('instant-reveal');
+        }
+    });
+
+    btnGroup.classList.add('hidden');
     inspireBtn.classList.add('hidden');
 
-    // 3. Reset Deck Return Time (400ms)
     setTimeout(() => {
         exchangeZone.classList.remove('collapsed');
         deck.classList.remove('dealing');
     }, 400);
 }
 
-// REROLL (Resets + Deals Automatically)
 function rerollFate() {
     resetDeck();
-    // 4. Wait for reset animation (600ms)
     setTimeout(() => {
         castFate();
     }, 600); 
 }
+
+window.addEventListener('load', checkUrlParams);
