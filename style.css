@@ -6,7 +6,7 @@
     --gold: #c8aa6e;
     --fractured-gold: #a38d6d;
     --fractured-bg: rgba(163, 141, 109, 0.15);
-    --fractured-overlay: rgba(163, 141, 109, 0.08); /* New overlay color */
+    --fractured-overlay: rgba(163, 141, 109, 0.08);
     --gold-glow: #ebdcb2;
     --void-purple: #9b59b6;
     --border-purple-muted: #5a4a6e;
@@ -62,12 +62,16 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     align-items: center; 
     margin: 0 auto 2.5rem auto; 
     box-shadow: 0 5px 20px rgba(0,0,0,0.5); 
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(5px);
+    
+    /* FIX: Ensure it doesn't overflow on mobile */
+    max-width: 100%;
+    box-sizing: border-box;
 }
 .config-row { display: flex; align-items: center; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap; }
 .config-label { font-family: 'Alegreya SC', serif; color: var(--gold); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; min-width: 130px; text-align: right; line-height: 1.6; }
 
-.radio-group, .checkbox-group { display: flex; gap: 15px; }
+.radio-group, .checkbox-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
 .radio-group label, .checkbox-group label { cursor: pointer; display: flex; align-items: center; gap: 8px; position: relative; user-select: none; }
 .radio-group input, .checkbox-group input { position: absolute; opacity: 0; cursor: pointer; }
 
@@ -127,8 +131,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
 /* Revealed State: Plays Animation */
 .fate-card.revealed { 
     display: flex; 
-    /* Increased distance and added rotation for natural feel */
-    animation: deal-card 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; 
+    animation: deal-card 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; 
 }
 
 /* Instant Reveal for URL Loading - bypasses animation */
@@ -137,7 +140,6 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     opacity: 1 !important; 
     transform: none !important; 
     animation: none !important; 
-    transition: none !important;
 }
 
 @keyframes deal-card { 
@@ -168,7 +170,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     align-items: center;
     position: relative; 
     transition: background 0.3s, color 0.3s;
-    z-index: 2; /* Keep text above overlay */
+    z-index: 2; 
 }
 
 /* LOCK ICON */
@@ -185,7 +187,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     justify-content: center;
     border-radius: 50%;
     transition: 0.2s;
-    color: #888; /* Brightened Grey */
+    color: #888; 
     opacity: 0.8;
 }
 
@@ -202,7 +204,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     color: #aaa;
 }
 
-/* FRACTURED STATE (LOCKED) */
+/* FRACTURED STATE */
 .fate-card.fractured {
     border-color: var(--fractured-gold);
     box-shadow: 0 0 10px rgba(163, 141, 109, 0.2);
@@ -229,7 +231,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: var(--fractured-overlay);
-    pointer-events: none; /* Click through */
+    pointer-events: none;
     z-index: 1;
 }
 
@@ -243,7 +245,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
     text-align: center;      
     flex-grow: 1; 
     position: relative;
-    z-index: 2; /* Keep above overlay */
+    z-index: 2; 
 }
 
 .fate-card.highlight { box-shadow: 0 0 25px rgba(155, 89, 182, 0.15); }
@@ -251,7 +253,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
 .fate-value { font-family: 'Alegreya SC', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-parchment); margin: 10px 0 2px 0; line-height: 1.2; transition: color 0.3s; width: 100%; }
 .fate-sub { color: var(--text-dim); font-size: 1rem; }
 
-/* Image Alignment & Hover */
+/* Image Alignment */
 .icon-frame { 
     width: 64px; height: 64px; 
     margin: 0 auto 15px auto; 
@@ -299,7 +301,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
 
 .ninja-btn, .reset-btn, .share-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Alegreya SC', serif; font-size: 1.2rem; cursor: pointer; transition: 0.3s; opacity: 1; pointer-events: auto; }
 
-/* Ninja Button (Fixed Border) */
+/* Ninja Button */
 .ninja-btn { 
     background: linear-gradient(180deg, #1a1a20, #0d0d10); 
     border: 1px solid #333; 
@@ -338,9 +340,11 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
 .history-tab-item:hover { border-color: var(--gold); background: #16161d; color: var(--text-parchment); transform: translateY(-3px); }
 .h-tab-class { color: var(--gold); font-weight: 700; font-family: 'Alegreya SC', serif; }
 
-/* TOAST/MODAL (Unchanged) */
+/* TOAST */
 .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--void-purple); color: #fff; padding: 10px 30px; border-radius: 4px; font-family: 'Alegreya SC', serif; box-shadow: 0 0 20px rgba(155, 89, 182, 0.5); z-index: 3000; transition: opacity 0.3s; opacity: 1; }
 .toast.hidden { opacity: 0; pointer-events: none; }
+
+/* Modal */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
 .modal-overlay.visible { opacity: 1; pointer-events: auto; }
 .modal-content { background: #111116; border: 1px solid var(--gold); padding: 30px; width: 90%; max-width: 450px; box-shadow: 0 0 50px rgba(0,0,0,0.9); display: flex; flex-direction: column; gap: 20px; text-align: center; }
@@ -361,6 +365,7 @@ a { color: inherit; text-decoration: none; transition: 0.2s; }
 @media (max-width: 850px) {
     .fate-grid { flex-direction: column; align-items: center; gap: 25px; }
     .fate-card { width: 100%; max-width: 340px; }
-    .config-panel { flex-direction: column; gap: 1rem; }
+    /* FIX: Ensure config panel fits */
+    .config-panel { width: 100%; padding: 15px 15px; gap: 1rem; }
     .config-label { text-align: left; min-width: auto; }
 }
