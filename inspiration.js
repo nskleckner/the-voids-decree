@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const CURRENT_LEAGUE = "keepers"; 
+const CURRENT_LEAGUE = "mirage"; 
 
 // 1. Open the Config Modal
 function openSearchConfig() {
